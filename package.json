@@ -8,7 +8,7 @@
     "dev:client": "vite --config client/vite.config.ts",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "build": "vite build --config client/vite.config.ts",
-    "start": "node --loader tsx server/index.ts",
+    "start": "node --import tsx server/index.ts",
     "render:build": "npm install --include=dev && npm run build"
   },
   "dependencies": {
