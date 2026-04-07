@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
+import type { DiscordUser } from '../discord';
 
 interface HomeProps {
   onCreateRoom: (name: string) => void;
   onCreateRoomAsAdmin: () => void;
   onJoinRoom: (code: string, name: string) => void;
   error: string | null;
+  discordUser?: DiscordUser | null;
 }
 
-export default function Home({ onCreateRoom, onCreateRoomAsAdmin, onJoinRoom, error }: HomeProps) {
-  const [name, setName] = useState('');
+export default function Home({ onCreateRoom, onCreateRoomAsAdmin, onJoinRoom, error, discordUser }: HomeProps) {
+  const [name, setName] = useState(discordUser?.globalName || discordUser?.username || '');
   const [roomCode, setRoomCode] = useState('');
   const [mode, setMode] = useState<'menu' | 'create' | 'join'>('menu');
 
