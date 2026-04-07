@@ -68,6 +68,8 @@ export default function App() {
     onSubmitEstimate={game.submitEstimate}
     onBet={game.bet}
     onNextRound={game.nextRound}
+    onAddBot={game.addBot}
+    onRemoveBot={game.removeBot}
     onLeave={game.leaveRoom}
     error={game.error}
   />;

@@ -45,6 +45,8 @@ interface GameRoomProps {
   onSubmitEstimate: (estimate: number) => void;
   onBet: (action: string, amount?: number) => void;
   onNextRound: () => void;
+  onAddBot: () => void;
+  onRemoveBot: (botId: string) => void;
   onLeave: () => void;
   error: string | null;
 }
@@ -56,6 +58,8 @@ export default function GameRoom({
   onSubmitEstimate,
   onBet,
   onNextRound,
+  onAddBot,
+  onRemoveBot,
   onLeave,
   error,
 }: GameRoomProps) {
@@ -220,6 +224,25 @@ export default function GameRoom({
                     {copiedLobby ? 'Kopiert!' : 'KLICK ZUM KOPIEREN'}
                   </div>
                 </div>
+                {/* Bot controls for host */}
+                {isHost && (
+                  <div className="glass rounded-xl p-4 mb-6 text-left">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-white/30 text-[10px] font-bold tracking-[0.15em]">BOTS</span>
+                      <button onClick={onAddBot} disabled={players.length >= 8}
+                        className="px-3 py-1.5 bg-chip-blue/20 hover:bg-chip-blue/30 text-chip-blue text-xs font-bold rounded-lg transition-all disabled:opacity-30 border border-chip-blue/20">
+                        + Bot
+                      </button>
+                    </div>
+                    {players.filter(p => p.isBot).map(bot => (
+                      <div key={bot.id} className="flex items-center justify-between bg-white/[0.03] rounded-lg px-4 py-2 mb-1.5 border border-white/5">
+                        <span className="text-white text-sm">🤖 {bot.name}</span>
+                        <button onClick={() => onRemoveBot(bot.id)} className="text-red-400/40 hover:text-red-400 text-xs">✕</button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 <p className="text-white/20 text-sm mb-6">
                   {players.length} Spieler im Raum (min. 2)
                 </p>
