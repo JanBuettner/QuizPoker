@@ -1,0 +1,869 @@
+import {
+  GamePhase,
+  BettingAction,
+  Player,
+  VisiblePlayer,
+  VisibleGameState,
+  RoomConfig,
+  Question,
+  DEFAULT_CONFIG,
+} from '../shared/types.js';
+import { getShuffledQuestions } from './QuestionBank.js';
+
+export class GameRoom {
+  code: string;
+  players: Map<string, Player> = new Map();
+  phase: GamePhase = GamePhase.LOBBY;
+  pot = 0;
+  roundNumber = 0;
+  config: RoomConfig;
+  currentQuestion: Question | null = null;
+  currentTurnIndex = 0;
+  currentBetLevel = 0;
+  minRaise: number;
+  dealerIndex = 0;
+  winnerId: string | null = null;
+  adminId: string | null = null;
+  adminConnected = false;
+  private questions: Question[] = [];
+  private questionIndex = 0;
+  private timer: ReturnType<typeof setTimeout> | null = null;
+  private timerEnd = 0;
+  private onStateChange: () => void;
+  private playerRoundBets: Map<string, number> = new Map();
+  private lastRaiserId: string | null = null;
+  private actedThisRound: Set<string> = new Set();
+  private botCounter = 0;
+  private actionLog: string[] = [];
+  private static BOT_NAMES = ['Alice', 'Bob', 'Charlie', 'Diana', 'Erik', 'Fiona', 'Gustav', 'Hanna'];
+
+  constructor(code: string, config: Partial<RoomConfig> = {}, onStateChange: () => void) {
+    this.code = code;
+    this.config = { ...DEFAULT_CONFIG, ...config };
+    this.minRaise = this.config.bigBlind;
+    this.onStateChange = onStateChange;
+  }
+
+  addPlayer(id: string, name: string, isHost: boolean): Player {
+    const player: Player = {
+      id,
+      name,
+      chips: this.config.startingChips,
+      currentEstimate: null,
+      hasSubmittedEstimate: false,
+      hasFolded: false,
+      isEliminated: false,
+      isConnected: true,
+      currentBet: 0,
+      isHost,
+      isBot: false,
+    };
+    this.players.set(id, player);
+    return player;
+  }
+
+  addBot(): Player | null {
+    if (this.phase !== GamePhase.LOBBY) return null;
+    if (this.players.size >= 8) return null;
+
+    const name = GameRoom.BOT_NAMES[this.botCounter % GameRoom.BOT_NAMES.length];
+    this.botCounter++;
+    const id = `bot_${this.botCounter}_${Date.now()}`;
+
+    const player: Player = {
+      id,
+      name: `${name} (Bot)`,
+      chips: this.config.startingChips,
+      currentEstimate: null,
+      hasSubmittedEstimate: false,
+      hasFolded: false,
+      isEliminated: false,
+      isConnected: true,
+      currentBet: 0,
+      isHost: false,
+      isBot: true,
+    };
+    this.players.set(id, player);
+    return player;
+  }
+
+  removeBot(botId: string): boolean {
+    const player = this.players.get(botId);
+    if (!player?.isBot) return false;
+    this.players.delete(botId);
+    return true;
+  }
+
+  removePlayer(id: string): void {
+    this.players.delete(id);
+  }
+
+  setAdmin(id: string): void {
+    this.adminId = id;
+    this.adminConnected = true;
+  }
+
+  disconnectAdmin(): void {
+    this.adminConnected = false;
+  }
+
+  reconnectAdmin(newId: string): void {
+    this.adminId = newId;
+    this.adminConnected = true;
+  }
+
+  isAdmin(id: string): boolean {
+    return this.adminId === id;
+  }
+
+  getAdminState(): VisibleGameState {
+    const players: VisiblePlayer[] = [...this.players.values()].map(p => ({
+      id: p.id,
+      name: p.name,
+      chips: p.chips,
+      hasSubmittedEstimate: p.hasSubmittedEstimate,
+      hasFolded: p.hasFolded,
+      isEliminated: p.isEliminated,
+      isConnected: p.isConnected,
+      currentBet: p.currentBet,
+      isHost: p.isHost,
+      isBot: p.isBot,
+      estimate: p.currentEstimate,
+    }));
+
+    const currentTurn = this.getCurrentTurnPlayer();
+
+    return {
+      roomCode: this.code,
+      phase: this.phase,
+      players,
+      pot: this.pot,
+      currentQuestion: this.currentQuestion?.question ?? null,
+      hint: this.currentQuestion?.hint ?? null,
+      hint2: this.currentQuestion?.hint2 ?? null,
+      actualAnswer: this.currentQuestion?.answer ?? null,
+      roundNumber: this.roundNumber,
+      totalRounds: this.config.maxRounds,
+      currentTurnPlayerId: currentTurn?.id ?? null,
+      currentBetLevel: this.currentBetLevel,
+      minRaise: this.minRaise,
+      yourEstimate: null,
+      timeRemaining: this.timerEnd > 0 ? Math.max(0, Math.ceil((this.timerEnd - Date.now()) / 1000)) : 0,
+      config: this.config,
+      winnerId: this.winnerId,
+      dealerIndex: this.dealerIndex,
+      isAdmin: true,
+      actionLog: [...this.actionLog],
+    };
+  }
+
+  disconnectPlayer(id: string): void {
+    const player = this.players.get(id);
+    if (player) {
+      player.isConnected = false;
+      // Don't auto-fold, give them a chance to reconnect
+      // They'll be auto-folded by the bet timer if it's their turn
+    }
+  }
+
+  reconnectPlayer(id: string): void {
+    const player = this.players.get(id);
+    if (player) player.isConnected = true;
+  }
+
+  private activePlayers(): Player[] {
+    return [...this.players.values()].filter(p => !p.isEliminated && !p.hasFolded);
+  }
+
+  private nonEliminatedPlayers(): Player[] {
+    return [...this.players.values()].filter(p => !p.isEliminated);
+  }
+
+  private turnOrder(): Player[] {
+    const nePlayers = this.nonEliminatedPlayers();
+    if (nePlayers.length === 0) return [];
+    const startIdx = (this.dealerIndex + 1) % nePlayers.length;
+    return [...nePlayers.slice(startIdx), ...nePlayers.slice(0, startIdx)];
+  }
+
+  private bettingOrder(): Player[] {
+    return this.turnOrder().filter(p => !p.hasFolded);
+  }
+
+  startGame(): boolean {
+    if (this.phase !== GamePhase.LOBBY) return false;
+    if (this.players.size < 2) return false;
+
+    this.questions = getShuffledQuestions();
+    this.questionIndex = 0;
+    this.roundNumber = 0;
+    this.dealerIndex = 0;
+
+    this.startNewRound();
+    return true;
+  }
+
+  private startNewRound(): void {
+    this.roundNumber++;
+    this.pot = 0;
+    this.winnerId = null;
+    this.currentBetLevel = 0;
+    this.minRaise = this.config.bigBlind;
+    this.playerRoundBets.clear();
+
+    if (this.questionIndex >= this.questions.length) {
+      this.questions = getShuffledQuestions();
+      this.questionIndex = 0;
+    }
+    this.currentQuestion = this.questions[this.questionIndex++];
+
+    // Eliminate broke players from previous round
+    for (const player of this.players.values()) {
+      if (player.chips <= 0 && !player.isEliminated) {
+        player.isEliminated = true;
+      }
+    }
+
+    // Reset player state for new round
+    for (const player of this.players.values()) {
+      player.currentEstimate = null;
+      player.hasSubmittedEstimate = false;
+      player.hasFolded = player.isEliminated;
+      player.currentBet = 0;
+    }
+
+    this.phase = GamePhase.ESTIMATING;
+    this.startTimer(this.config.estimateTimeSec, () => this.onEstimateTimeout());
+    this.onStateChange();
+  }
+
+  // FIX: Blinds are now posted at start of betting, not before estimating
+  private postBlinds(): void {
+    const nePlayers = this.nonEliminatedPlayers().filter(p => !p.hasFolded);
+    if (nePlayers.length < 2) return;
+
+    // FIX: Heads-up rules - dealer posts SB, other posts BB
+    let sbIndex: number;
+    let bbIndex: number;
+    if (nePlayers.length === 2) {
+      sbIndex = this.dealerIndex % nePlayers.length;
+      bbIndex = (this.dealerIndex + 1) % nePlayers.length;
+    } else {
+      sbIndex = (this.dealerIndex + 1) % nePlayers.length;
+      bbIndex = (this.dealerIndex + 2) % nePlayers.length;
+    }
+
+    const sbPlayer = nePlayers[sbIndex];
+    const bbPlayer = nePlayers[bbIndex];
+
+    const sbAmount = Math.min(this.config.smallBlind, sbPlayer.chips);
+    sbPlayer.chips -= sbAmount;
+    sbPlayer.currentBet = sbAmount;
+    this.pot += sbAmount;
+    this.playerRoundBets.set(sbPlayer.id, sbAmount);
+
+    const bbAmount = Math.min(this.config.bigBlind, bbPlayer.chips);
+    bbPlayer.chips -= bbAmount;
+    bbPlayer.currentBet = bbAmount;
+    this.pot += bbAmount;
+    this.playerRoundBets.set(bbPlayer.id, bbAmount);
+
+    this.currentBetLevel = this.config.bigBlind;
+  }
+
+  submitEstimate(playerId: string, estimate: number): boolean {
+    if (this.phase !== GamePhase.ESTIMATING) return false;
+    const player = this.players.get(playerId);
+    if (!player || player.isEliminated) return false;
+    if (player.hasSubmittedEstimate) return false;
+
+    player.currentEstimate = estimate;
+    player.hasSubmittedEstimate = true;
+
+    const waiting = this.nonEliminatedPlayers().filter(p => !p.hasSubmittedEstimate);
+    if (waiting.length === 0) {
+      this.clearTimer();
+      this.startHint1();
+    }
+
+    this.onStateChange();
+    return true;
+  }
+
+  private onEstimateTimeout(): void {
+    for (const player of this.nonEliminatedPlayers()) {
+      if (!player.hasSubmittedEstimate) {
+        player.hasFolded = true;
+      }
+    }
+    this.startHint1();
+  }
+
+  private startHint1(): void {
+    this.phase = GamePhase.HINT_1;
+    this.clearTimer();
+    if (!this.adminId) {
+      this.startTimer(8, () => this.startBetting1());
+    }
+    this.onStateChange();
+  }
+
+  // FIX: Post blinds at start of first betting round, not before estimating
+  private startBetting1(): void {
+    this.phase = GamePhase.BETTING_1;
+    this.actedThisRound.clear();
+    this.lastRaiserId = null;
+    this.playerRoundBets.clear();
+
+    // Reset bets and post blinds
+    for (const player of this.nonEliminatedPlayers()) {
+      player.currentBet = 0;
+    }
+    this.currentBetLevel = 0;
+    this.minRaise = this.config.bigBlind;
+
+    this.postBlinds();
+
+    // First to act is after BB
+    const active = this.bettingOrder();
+    if (active.length <= 1) {
+      this.resolveRound();
+      return;
+    }
+
+    // Find first player to act (after BB)
+    const nePlayers = this.nonEliminatedPlayers().filter(p => !p.hasFolded);
+    const bbPlayerIndex = nePlayers.length === 2
+      ? (this.dealerIndex + 1) % nePlayers.length
+      : (this.dealerIndex + 2) % nePlayers.length;
+    const firstToAct = (bbPlayerIndex + 1) % nePlayers.length;
+
+    // Map to nonEliminatedPlayers index
+    const allNe = this.nonEliminatedPlayers();
+    const firstPlayer = nePlayers[firstToAct];
+    if (firstPlayer) {
+      this.currentTurnIndex = allNe.findIndex(p => p.id === firstPlayer.id);
+    }
+
+    this.onStateChange();
+    this.startBetTimer();
+  }
+
+  private startBetting2(): void {
+    this.phase = GamePhase.BETTING_2;
+    this.resetBettingRound();
+    this.onStateChange();
+
+    if (this.activePlayers().length <= 1) {
+      this.resolveRound();
+      return;
+    }
+
+    this.startBetTimer();
+  }
+
+  private startBetting3(): void {
+    this.phase = GamePhase.BETTING_3;
+    this.resetBettingRound();
+    this.onStateChange();
+
+    if (this.activePlayers().length <= 1) {
+      this.resolveRound();
+      return;
+    }
+
+    this.startBetTimer();
+  }
+
+  private resetBettingRound(): void {
+    this.actedThisRound.clear();
+    this.lastRaiserId = null;
+    this.currentBetLevel = 0;
+    this.minRaise = this.config.bigBlind;
+    this.playerRoundBets.clear();
+
+    for (const player of this.nonEliminatedPlayers()) {
+      player.currentBet = 0;
+    }
+
+    const order = this.bettingOrder();
+    if (order.length > 0) {
+      this.currentTurnIndex = this.nonEliminatedPlayers().findIndex(p => p.id === order[0].id);
+    }
+  }
+
+  private startBetTimer(): void {
+    this.startTimer(this.config.betTimeSec, () => this.onBetTimeout());
+  }
+
+  private onBetTimeout(): void {
+    const current = this.getCurrentTurnPlayer();
+    if (current) {
+      this.executeBet(current.id, BettingAction.FOLD);
+    }
+  }
+
+  getCurrentTurnPlayer(): Player | null {
+    const active = this.bettingOrder();
+    if (active.length === 0) return null;
+    const nePlayers = this.nonEliminatedPlayers();
+    if (nePlayers.length === 0) return null;
+    const idx = this.currentTurnIndex % nePlayers.length;
+    const player = nePlayers[idx];
+    if (!player || player.hasFolded || player.isEliminated) {
+      return this.findNextActivePlayer();
+    }
+    return player;
+  }
+
+  private findNextActivePlayer(): Player | null {
+    const nePlayers = this.nonEliminatedPlayers();
+    if (nePlayers.length === 0) return null;
+    for (let i = 0; i < nePlayers.length; i++) {
+      const idx = (this.currentTurnIndex + i) % nePlayers.length;
+      const p = nePlayers[idx];
+      if (!p.hasFolded) {
+        this.currentTurnIndex = idx;
+        return p;
+      }
+    }
+    return null;
+  }
+
+  bet(playerId: string, action: BettingAction, amount?: number): boolean {
+    if (this.phase !== GamePhase.BETTING_1 && this.phase !== GamePhase.BETTING_2 && this.phase !== GamePhase.BETTING_3) return false;
+
+    const current = this.getCurrentTurnPlayer();
+    if (!current || current.id !== playerId) return false;
+
+    return this.executeBet(playerId, action, amount);
+  }
+
+  private logAction(msg: string): void {
+    this.actionLog.push(msg);
+    if (this.actionLog.length > 5) {
+      this.actionLog = this.actionLog.slice(-5);
+    }
+  }
+
+  executeBet(playerId: string, action: BettingAction, amount?: number): boolean {
+    const player = this.players.get(playerId)!;
+
+    switch (action) {
+      case BettingAction.FOLD:
+        this.clearTimer();
+        player.hasFolded = true;
+        this.logAction(`${player.name} foldet`);
+        break;
+
+      case BettingAction.CHECK:
+        // FIX: Don't clear timer before validation
+        if (player.currentBet < this.currentBetLevel) {
+          // Invalid check - restart timer, don't hang
+          return false;
+        }
+        this.clearTimer();
+        this.logAction(`${player.name} checkt`);
+        break;
+
+      case BettingAction.CALL: {
+        this.clearTimer();
+        const toCall = this.currentBetLevel - player.currentBet;
+        const actualCall = Math.min(toCall, player.chips);
+        player.chips -= actualCall;
+        player.currentBet += actualCall;
+        this.pot += actualCall;
+        const prev = this.playerRoundBets.get(player.id) || 0;
+        this.playerRoundBets.set(player.id, prev + actualCall);
+        this.logAction(`${player.name} callt ${actualCall}`);
+        break;
+      }
+
+      case BettingAction.RAISE: {
+        const raiseAmount = amount ?? this.config.bigBlind;
+        // FIX: Validate raise amount
+        if (raiseAmount < this.minRaise) return false;
+
+        const totalBet = this.currentBetLevel + raiseAmount;
+        const needed = totalBet - player.currentBet;
+
+        // FIX: Player must have enough chips to raise
+        if (player.chips < needed) return false;
+
+        this.clearTimer();
+        player.chips -= needed;
+        player.currentBet += needed;
+        this.pot += needed;
+        this.currentBetLevel = player.currentBet;
+        this.minRaise = raiseAmount;
+        this.lastRaiserId = player.id;
+        this.actedThisRound.clear();
+        const prev = this.playerRoundBets.get(player.id) || 0;
+        this.playerRoundBets.set(player.id, prev + needed);
+        this.logAction(`${player.name} raist auf ${player.currentBet}`);
+        break;
+      }
+
+      case BettingAction.ALL_IN: {
+        this.clearTimer();
+        const allIn = player.chips;
+        player.chips = 0;
+        player.currentBet += allIn;
+        this.pot += allIn;
+        if (player.currentBet > this.currentBetLevel) {
+          this.currentBetLevel = player.currentBet;
+          this.lastRaiserId = player.id;
+          this.actedThisRound.clear();
+        }
+        const prevA = this.playerRoundBets.get(player.id) || 0;
+        this.playerRoundBets.set(player.id, prevA + allIn);
+        this.logAction(`${player.name} geht All-In! (${allIn})`);
+        break;
+      }
+    }
+
+    this.actedThisRound.add(playerId);
+    this.advanceTurn();
+    return true;
+  }
+
+  private advanceTurn(): void {
+    if (this.activePlayers().length <= 1) {
+      this.resolveRound();
+      return;
+    }
+
+    const allMatched = this.activePlayers().every(
+      p => p.currentBet === this.currentBetLevel || p.chips === 0
+    );
+    const allActed = this.activePlayers().every(p => this.actedThisRound.has(p.id));
+
+    if (allMatched && allActed) {
+      this.endBettingRound();
+      return;
+    }
+
+    const nePlayers = this.nonEliminatedPlayers();
+    for (let i = 1; i <= nePlayers.length; i++) {
+      const idx = (this.currentTurnIndex + i) % nePlayers.length;
+      const p = nePlayers[idx];
+      if (!p.hasFolded && (p.chips > 0 || p.currentBet < this.currentBetLevel)) {
+        this.currentTurnIndex = idx;
+        this.startBetTimer();
+        this.onStateChange();
+        return;
+      }
+    }
+
+    this.endBettingRound();
+  }
+
+  private endBettingRound(): void {
+    if (this.phase === GamePhase.BETTING_1) {
+      // After BETTING_1 -> show HINT_2
+      this.phase = GamePhase.HINT_2;
+      this.clearTimer();
+      if (!this.adminId) {
+        this.startTimer(8, () => this.startBetting2());
+      }
+      this.onStateChange();
+    } else if (this.phase === GamePhase.BETTING_2) {
+      // After BETTING_2 -> REVEAL answer
+      this.phase = GamePhase.REVEAL;
+      this.clearTimer();
+      if (!this.adminId) {
+        this.startTimer(8, () => this.startBetting3());
+      }
+      this.onStateChange();
+    } else {
+      // After BETTING_3 -> resolve
+      this.resolveRound();
+    }
+  }
+
+  private resolveRound(): void {
+    this.clearTimer();
+    this.phase = GamePhase.SHOWDOWN;
+
+    const active = this.activePlayers();
+
+    if (active.length === 0) {
+      // FIX: Everyone folded - give pot to last player who folded (or split among all)
+      // In practice give to first non-eliminated player
+      const nePlayers = this.nonEliminatedPlayers();
+      if (nePlayers.length > 0) {
+        this.winnerId = nePlayers[0].id;
+        nePlayers[0].chips += this.pot;
+      }
+    } else if (active.length === 1) {
+      this.winnerId = active[0].id;
+      active[0].chips += this.pot;
+    } else {
+      // FIX: Handle ties - split pot among tied players
+      const answer = this.currentQuestion!.answer;
+      let closestDiff = Infinity;
+      const winners: Player[] = [];
+
+      for (const player of active) {
+        if (player.currentEstimate !== null) {
+          const diff = Math.abs(player.currentEstimate - answer);
+          if (diff < closestDiff) {
+            closestDiff = diff;
+            winners.length = 0;
+            winners.push(player);
+          } else if (diff === closestDiff) {
+            winners.push(player);
+          }
+        }
+      }
+
+      if (winners.length === 1) {
+        this.winnerId = winners[0].id;
+        winners[0].chips += this.pot;
+      } else if (winners.length > 1) {
+        // Split pot evenly
+        const share = Math.floor(this.pot / winners.length);
+        const remainder = this.pot - share * winners.length;
+        for (let i = 0; i < winners.length; i++) {
+          winners[i].chips += share + (i === 0 ? remainder : 0);
+        }
+        this.winnerId = winners[0].id; // Show first as winner
+      }
+    }
+
+    this.pot = 0;
+    this.onStateChange();
+
+    if (!this.adminId) {
+      this.startTimer(8, () => this.checkGameOver());
+    }
+  }
+
+  private checkGameOver(): void {
+    // Eliminate broke players
+    for (const player of this.players.values()) {
+      if (player.chips <= 0 && !player.isEliminated) {
+        player.isEliminated = true;
+      }
+    }
+
+    const alive = this.nonEliminatedPlayers();
+
+    if (alive.length <= 1 || this.roundNumber >= this.config.maxRounds) {
+      this.phase = GamePhase.GAME_OVER;
+
+      let maxChips = -1;
+      for (const player of this.players.values()) {
+        if (player.chips > maxChips) {
+          maxChips = player.chips;
+          this.winnerId = player.id;
+        }
+      }
+
+      this.onStateChange();
+    } else {
+      // FIX: Clamp dealerIndex before rotating to prevent drift from eliminations
+      this.dealerIndex = (this.dealerIndex % alive.length + 1) % alive.length;
+      this.phase = GamePhase.ROUND_END;
+      this.onStateChange();
+    }
+  }
+
+  triggerNextRound(): void {
+    if (this.phase === GamePhase.ROUND_END) {
+      this.startNewRound();
+    }
+  }
+
+  advancePhase(): void {
+    this.clearTimer();
+    switch (this.phase) {
+      case GamePhase.ESTIMATING:
+        for (const player of this.nonEliminatedPlayers()) {
+          if (!player.hasSubmittedEstimate) {
+            player.hasFolded = true;
+          }
+        }
+        this.startHint1();
+        break;
+      case GamePhase.HINT_1:
+        this.startBetting1();
+        break;
+      case GamePhase.BETTING_1:
+        this.endBettingRound();
+        break;
+      case GamePhase.HINT_2:
+        this.startBetting2();
+        break;
+      case GamePhase.BETTING_2:
+        this.endBettingRound();
+        break;
+      case GamePhase.REVEAL:
+        this.startBetting3();
+        break;
+      case GamePhase.BETTING_3:
+        this.endBettingRound();
+        break;
+      case GamePhase.SHOWDOWN:
+        this.checkGameOver();
+        break;
+      case GamePhase.ROUND_END:
+        this.startNewRound();
+        break;
+    }
+  }
+
+  // FIX: Use ?? instead of || so estimate=0 works correctly
+  getVisibleState(forPlayerId: string): VisibleGameState {
+    const players: VisiblePlayer[] = [...this.players.values()].map(p => ({
+      id: p.id,
+      name: p.name,
+      chips: p.chips,
+      hasSubmittedEstimate: p.hasSubmittedEstimate,
+      hasFolded: p.hasFolded,
+      isEliminated: p.isEliminated,
+      isConnected: p.isConnected,
+      currentBet: p.currentBet,
+      isHost: p.isHost,
+      isBot: p.isBot,
+      estimate:
+        this.phase === GamePhase.SHOWDOWN || this.phase === GamePhase.ROUND_END || this.phase === GamePhase.GAME_OVER
+          ? p.currentEstimate
+          : null,
+    }));
+
+    const currentPlayer = this.players.get(forPlayerId);
+    const currentTurn = this.getCurrentTurnPlayer();
+
+    // hint is visible from HINT_1 onwards
+    const hintVisible =
+      this.phase === GamePhase.HINT_1 ||
+      this.phase === GamePhase.BETTING_1 ||
+      this.phase === GamePhase.HINT_2 ||
+      this.phase === GamePhase.BETTING_2 ||
+      this.phase === GamePhase.REVEAL ||
+      this.phase === GamePhase.BETTING_3 ||
+      this.phase === GamePhase.SHOWDOWN ||
+      this.phase === GamePhase.ROUND_END ||
+      this.phase === GamePhase.GAME_OVER;
+
+    // hint2 is visible from HINT_2 onwards
+    const hint2Visible =
+      this.phase === GamePhase.HINT_2 ||
+      this.phase === GamePhase.BETTING_2 ||
+      this.phase === GamePhase.REVEAL ||
+      this.phase === GamePhase.BETTING_3 ||
+      this.phase === GamePhase.SHOWDOWN ||
+      this.phase === GamePhase.ROUND_END ||
+      this.phase === GamePhase.GAME_OVER;
+
+    // actualAnswer is visible from REVEAL onwards
+    const answerVisible =
+      this.phase === GamePhase.REVEAL ||
+      this.phase === GamePhase.BETTING_3 ||
+      this.phase === GamePhase.SHOWDOWN ||
+      this.phase === GamePhase.ROUND_END ||
+      this.phase === GamePhase.GAME_OVER;
+
+    return {
+      roomCode: this.code,
+      phase: this.phase,
+      players,
+      pot: this.pot,
+      currentQuestion: this.currentQuestion?.question ?? null,
+      hint: hintVisible ? (this.currentQuestion?.hint ?? null) : null,
+      hint2: hint2Visible ? (this.currentQuestion?.hint2 ?? null) : null,
+      actualAnswer: answerVisible ? (this.currentQuestion?.answer ?? null) : null,
+      roundNumber: this.roundNumber,
+      totalRounds: this.config.maxRounds,
+      currentTurnPlayerId: currentTurn?.id ?? null,
+      currentBetLevel: this.currentBetLevel,
+      minRaise: this.minRaise,
+      yourEstimate: currentPlayer?.currentEstimate ?? null,
+      timeRemaining: this.timerEnd > 0 ? Math.max(0, Math.ceil((this.timerEnd - Date.now()) / 1000)) : 0,
+      config: this.config,
+      winnerId: this.winnerId,
+      dealerIndex: this.dealerIndex,
+      actionLog: [...this.actionLog],
+    };
+  }
+
+  private startTimer(seconds: number, callback: () => void): void {
+    this.clearTimer();
+    this.timerEnd = Date.now() + seconds * 1000;
+    this.timer = setTimeout(callback, seconds * 1000);
+  }
+
+  private clearTimer(): void {
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = null;
+    }
+    this.timerEnd = 0;
+  }
+
+  // --- Bot AI ---
+
+  tickBots(): void {
+    if (this.phase === GamePhase.ESTIMATING) {
+      this.botEstimate();
+    } else if (this.phase === GamePhase.BETTING_1 || this.phase === GamePhase.BETTING_2 || this.phase === GamePhase.BETTING_3) {
+      this.botBet();
+    }
+  }
+
+  private botEstimate(): void {
+    if (!this.currentQuestion) return;
+    const answer = this.currentQuestion.answer;
+
+    for (const player of this.nonEliminatedPlayers()) {
+      if (!player.isBot || player.hasSubmittedEstimate) continue;
+
+      const deviation = 0.1 + Math.random() * 0.4;
+      const direction = Math.random() > 0.5 ? 1 : -1;
+      const estimate = Math.round(answer * (1 + direction * deviation));
+      this.submitEstimate(player.id, Math.max(0, estimate));
+    }
+  }
+
+  private botBet(): void {
+    const current = this.getCurrentTurnPlayer();
+    if (!current?.isBot) return;
+
+    const toCall = this.currentBetLevel - current.currentBet;
+    const answer = this.currentQuestion?.answer || 0;
+    const diff = current.currentEstimate !== null ? Math.abs(current.currentEstimate - answer) : Infinity;
+
+    const relativeError = answer > 0 ? diff / answer : 1;
+    const confidence = Math.max(0, 1 - relativeError);
+    const roll = Math.random();
+
+    if (toCall === 0) {
+      if (confidence > 0.7 && roll > 0.6 && current.chips > this.minRaise) {
+        const raiseAmt = this.minRaise * (1 + Math.floor(Math.random() * 3));
+        this.executeBet(current.id, BettingAction.RAISE, Math.min(raiseAmt, current.chips));
+      } else {
+        this.executeBet(current.id, BettingAction.CHECK);
+      }
+    } else if (toCall >= current.chips) {
+      if (confidence > 0.7 && roll > 0.5) {
+        this.executeBet(current.id, BettingAction.ALL_IN);
+      } else {
+        this.executeBet(current.id, BettingAction.FOLD);
+      }
+    } else {
+      if (confidence > 0.7 && roll > 0.7 && current.chips > toCall + this.minRaise) {
+        const raiseAmt = this.minRaise * (1 + Math.floor(Math.random() * 2));
+        this.executeBet(current.id, BettingAction.RAISE, Math.min(raiseAmt, current.chips - toCall));
+      } else if (confidence > 0.4 && roll > 0.4) {
+        this.executeBet(current.id, BettingAction.CALL);
+      } else {
+        this.executeBet(current.id, BettingAction.FOLD);
+      }
+    }
+  }
+
+  destroy(): void {
+    this.clearTimer();
+  }
+}
