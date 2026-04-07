@@ -1,482 +1,802 @@
 [
   {
     "id": 1,
-    "question": "Wie viele Knochen hat ein erwachsener Mensch?",
-    "answer": 206,
-    "hint": "Mehr als die Anzahl der UN-Mitgliedstaaten (193), aber weniger als die Folgen von 'Friends'",
-    "hint2": "Ungefaehr so viele wie die Anzahl der Laender der Welt minus Frankreich, Spanien und Portugal... okay, fast genau die Anzahl der Laender minus null",
-    "category": "Wissenschaft"
+    "question": "Wie viele Etappen hat die Tour de France?",
+    "answer": 21,
+    "hint": "Frueher gab es Etappen, die laenger als ein ganzer Arbeitstag dauerten - das Rennen wurde seitdem massiv verkuerzt und strukturiert.",
+    "hint2": "Die Etappenzahl ist dieselbe wie die Anzahl der Punkte auf einem Wuerfel - wenn man alle sechs Seiten zusammenzaehlt.",
+    "category": "Sport"
   },
   {
     "id": 2,
-    "question": "Wie viele Länder gibt es auf der Welt (UN-Mitgliedstaaten)?",
-    "answer": 193,
-    "hint": "Weniger als die Knochen im menschlichen Koerper, aber mehr als die Pokemon der ersten Generation (151)",
-    "hint2": "Wenn du alle Tasten eines Klaviers doppelt zaehlst und dann 17 Gaeste rauswirfst, bist du da",
-    "category": "Geografie"
+    "question": "Wie viele Minuten dauerte das laengste Tennismatch aller Zeiten (Isner vs. Mahut, Wimbledon 2010)?",
+    "answer": 665,
+    "hint": "Es erstreckte sich ueber drei Tage - die Veranstalter hatten noch nie zuvor ein Match unterbrechen und am naechsten Tag fortsetzen muessen.",
+    "hint2": "Allein der fuenfte Satz dauerte laenger als die meisten kompletten Grand-Slam-Matches.",
+    "category": "Sport"
   },
   {
     "id": 3,
-    "question": "In welchem Jahr wurde die Berliner Mauer gebaut?",
-    "answer": 1961,
-    "hint": "Juri Gagarin flog im selben Jahr als erster Mensch ins All - ein bewegtes Jahr!",
-    "hint2": "Kennedy war gerade frisch im Amt und die Beatles hatten noch keinen Hit - ein Jahr nach den Olympischen Spielen in Rom",
-    "category": "Geschichte"
+    "question": "Wie viele Kilometer betraegt die Gesamtdistanz beim Ironman-Triathlon?",
+    "answer": 226,
+    "hint": "Der Laufanteil allein entspricht einem kompletten Marathon - und der kommt am Ende, nach allem anderen.",
+    "hint2": "Die Strecke waere kuerzer als die Entfernung von Frankfurt nach Muenchen, aber kein normaler Mensch schafft das an einem Tag.",
+    "category": "Sport"
   },
   {
     "id": 4,
-    "question": "Wie viele Tasten hat ein Standard-Klavier?",
-    "answer": 88,
-    "hint": "Genau so viele wie offiziell anerkannte Sternbilder am Himmel, und weniger als ein Fussballspiel in Minuten dauert",
-    "hint2": "Genau so viele wie Michael Jordans Rueckennummer... mal 4",
-    "category": "Alltag"
+    "question": "Wie viele Seiten hat ein handelsueblicher Fussball?",
+    "answer": 32,
+    "hint": "Die zwei verschiedenen Vieleckarten kommen auch in der Natur vor - bei Bienenwaben und Bleistiftquerschnitten.",
+    "hint2": "Die schwarzen Felder haben immer eine Ecke mehr als die weissen.",
+    "category": "Sport"
   },
   {
     "id": 5,
-    "question": "Wie hoch ist der Mount Everest in Metern?",
-    "answer": 8849,
-    "hint": "Etwa so hoch wie 25 Eiffeltuerne uebereinander gestapelt",
-    "hint2": "Wenn du den Marianengraben fuellen wuerdest, brauchtest du noch gut 2000 Meter mehr Wasser als der Everest hoch ist",
-    "category": "Geografie"
+    "question": "Wie viele Goldmedaillen hat Deutschland bei den Olympischen Sommerspielen 2021 in Tokio gewonnen?",
+    "answer": 10,
+    "hint": "Deutschland landete damit im Medaillenspiegel hinter den USA, China und Grossbritannien.",
+    "hint2": "Im Vergleich zu Rio 2016 war das eine deutliche Verschlechterung - damals holte Deutschland fast doppelt so viele Goldmedaillen.",
+    "category": "Sport"
   },
   {
     "id": 6,
-    "question": "Wie viele Zähne hat ein erwachsener Mensch (inkl. Weisheitszähne)?",
-    "answer": 32,
-    "hint": "Genau so viele wie die Felder auf einer Schachbrett-Haelfte",
-    "hint2": "Ein Kartenspiel ohne Joker hat 20 mehr als du Zaehne hast",
-    "category": "Wissenschaft"
+    "question": "Wie schnell schlaegt ein professioneller Boxer in km/h zu?",
+    "answer": 60,
+    "hint": "Das ist schneller als ein Fahrradfahrer bergab, aber langsamer als ein Auto auf der Landstrasse.",
+    "hint2": "Die Faust braucht fuer die Strecke von der Schulter bis zum Gegner weniger als eine Zehntelsekunde.",
+    "category": "Sport"
   },
   {
     "id": 7,
-    "question": "In welchem Jahr fanden die ersten modernen Olympischen Spiele statt?",
-    "answer": 1896,
-    "hint": "Im selben Jahrzehnt, in dem auch Roentgenstrahlen entdeckt wurden und das erste Auto gebaut wurde",
-    "hint2": "4 Jahre vor der Jahrhundertwende, im selben Jahr in dem in Athen Geschichte geschrieben wurde - logisch, denn dort fanden sie statt!",
+    "question": "Wie viele Kilometer legt ein Fussballspieler durchschnittlich in einem Bundesligaspiel zurueck?",
+    "answer": 12,
+    "hint": "Das ist mehr als ein Halbmarathon - und das bei 90 Minuten mit Sprints, Stopps und Richtungswechseln.",
+    "hint2": "Mittelfeldspieler legen die weiteste Strecke zurueck, Stuermer und Torhueter die kuerzeste.",
     "category": "Sport"
   },
   {
     "id": 8,
-    "question": "Wie viele Folgen hat die Serie 'Friends' insgesamt?",
-    "answer": 236,
-    "hint": "Mehr als Knochen im menschlichen Koerper (206), aber weniger als Tage in einem Jahr",
-    "hint2": "Wenn du jeden Tag eine Folge schaust, bist du nach etwa 8 Monaten durch - aber nicht ganz",
-    "category": "Popkultur"
+    "question": "Wie viele Teilnehmer starteten beim ersten Berliner Marathon 1974?",
+    "answer": 286,
+    "hint": "Heute ist das Rennen eines der groessten der Welt - die Teilnehmerzahl hat sich mehr als hundertfach gesteigert.",
+    "hint2": "Damals fand der Marathon noch komplett im Tiergarten statt - durch die ganze Stadt durfte er erst spaeter laufen.",
+    "category": "Sport"
   },
   {
     "id": 9,
-    "question": "Wie viele Elemente stehen im Periodensystem (Stand 2024)?",
-    "answer": 118,
-    "hint": "Mehr als die Anzahl der Tasten auf einem Klavier (88), aber weniger als ein Gepard km/h schafft",
-    "hint2": "Zwei weniger als die Folgen der ersten Staffel Pokemon (120)",
-    "category": "Wissenschaft"
+    "question": "Wie viele Punkte bekommt man beim Darts fuer einen perfekten 9-Darter?",
+    "answer": 501,
+    "hint": "Der Name verraet alles - aber die Gesamtpunktzahl kennen die wenigsten auswendig.",
+    "hint2": "Man muss mit genau drei Triples und einem Double beginnen - und mit einem Double enden.",
+    "category": "Sport"
   },
   {
     "id": 10,
-    "question": "Wie viele Bundesländer hat Deutschland?",
-    "answer": 16,
-    "hint": "Mehr als die Anzahl der Spieler einer Fussballmannschaft, aber weniger als die Zaehne deiner Katze",
-    "hint2": "So viele wie die Figuren auf einer Seite des Schachbretts zu Spielbeginn",
-    "category": "Geografie"
+    "question": "Wie schnell war der schnellste jemals gemessene Tennisaufschlag in km/h?",
+    "answer": 263,
+    "hint": "Auf deutschen Autobahnen waere das noch knapp erlaubt - aber kein Serienfahrzeug erreicht das ohne Tuning problemlos.",
+    "hint2": "Der Ball ist dabei fuer das menschliche Auge kaum zu verfolgen - Reaktionszeit fast null.",
+    "category": "Sport"
   },
   {
     "id": 11,
-    "question": "Wie lang ist der Amazonas in Kilometern (ungefähr)?",
-    "answer": 6400,
-    "hint": "Laenger als die Entfernung von Berlin nach New York per Luftlinie (ca. 6380 km) - knapp!",
-    "hint2": "Wenn du mit dem Auto bei Tempo 100 fahren wuerdest, brauchst du fast 3 Tage ohne Pause",
-    "category": "Geografie"
+    "question": "Wie viele Schritte macht ein Mensch beim Laufen eines Marathons durchschnittlich?",
+    "answer": 40000,
+    "hint": "Die Anzahl haengt stark von der Koerpergroesse ab - Grosse machen weniger Schritte als Kleine.",
+    "hint2": "Das entspricht ungefaehr der Schrittzahl von vier durchschnittlichen Arbeitstagen am Stueck.",
+    "category": "Sport"
   },
   {
     "id": 12,
-    "question": "Wie viele Spieler stehen beim American Football pro Team auf dem Feld?",
-    "answer": 11,
-    "hint": "Genau so viele wie bei einem anderen sehr beliebten Sport, der mit dem Fuss gespielt wird",
-    "hint2": "So viele wie die Zahl, die in 'Ocean's Eleven' im Titel steht",
+    "question": "Wie viele Laender nahmen an der Fussball-WM 2022 in Katar teil?",
+    "answer": 32,
+    "hint": "Ab der WM 2026 wird das Turnier deutlich groesser - die Zahl der Teilnehmer steigt erheblich.",
+    "hint2": "Diese Zahl ist dieselbe wie die Temperaturdifferenz zwischen dem Gefrierpunkt und der Koerpertemperatur in Grad Fahrenheit.",
     "category": "Sport"
   },
   {
     "id": 13,
-    "question": "In welchem Jahr wurde das iPhone erstmals vorgestellt?",
-    "answer": 2007,
-    "hint": "Im selben Jahr erschien auch der letzte Harry-Potter-Band und der erste 'Transformers'-Film",
-    "hint2": "Ein Jahr nachdem die Fussball-WM in Deutschland stattfand und Pluto zum Zwergplaneten degradiert wurde",
-    "category": "Technik"
+    "question": "Wie viele Laender haben eine gemeinsame Grenze mit Deutschland?",
+    "answer": 9,
+    "hint": "Mehr Nachbarlaender hat in Europa nur Russland - und das ist flaechenmaessig der groesste Staat der Erde.",
+    "hint2": "Einer dieser Nachbarn existierte vor 1990 noch gar nicht als eigenstaendiger Staat.",
+    "category": "Geografie"
   },
   {
     "id": 14,
-    "question": "Wie viele Herzen hat ein Oktopus?",
-    "answer": 3,
-    "hint": "Mehr als ein Mensch, aber weniger als ein Regenwurm (der hat 5)",
-    "hint2": "So viele wie Medaillenfarben bei Olympia: Gold, Silber, Bronze",
-    "category": "Natur"
+    "question": "Auf wie viel Meter ueber dem Meeresspiegel liegt Mexiko-Stadt?",
+    "answer": 2240,
+    "hint": "Laeufer aus dem Flachland brauchen dort deutlich laenger zur Erholung - die Luft ist spuerbar duenner.",
+    "hint2": "Die Stadt liegt hoeher als jeder Berggipfel in Deutschland.",
+    "category": "Geografie"
   },
   {
     "id": 15,
-    "question": "Wie hoch ist der Eiffelturm in Metern (ohne Antenne)?",
+    "question": "Wie viele Meter misst der Eiffelturm mitsamt Antenne?",
     "answer": 330,
-    "hint": "Hoeher als die Freiheitsstatue (93m), aber niedriger als das Empire State Building (443m)",
-    "hint2": "Ungefaehr so hoch wie ein 110-stoeckiges Wohnhaus - oder 3 Fussballfelder hintereinander aufgestellt",
+    "hint": "Bei seiner Fertigstellung war er das hoechste Bauwerk der Welt - dieser Titel hielt sich ueber 40 Jahre.",
+    "hint2": "Im Sommer ist er wegen der Waermeausdehnung des Stahls messbar groesser als im Winter.",
     "category": "Geografie"
   },
   {
     "id": 16,
-    "question": "Wie viele WM-Titel hat Brasilien im Fußball gewonnen (bis 2022)?",
-    "answer": 5,
-    "hint": "So viele wie Finger an einer Hand oder Ringe bei den Olympischen Spielen",
-    "hint2": "Genau so viele wie Staffeln von 'Breaking Bad'",
-    "category": "Sport"
+    "question": "Wie tief ist der tiefste Punkt des Bodensees in Metern?",
+    "answer": 254,
+    "hint": "Das Wasser dort unten hat das ganze Jahr fast dieselbe Temperatur - egal wie heiss der Sommer ist.",
+    "hint2": "Der Bodensee ist tiefer als der Eiffelturm hoch ist.",
+    "category": "Geografie"
   },
   {
     "id": 17,
-    "question": "Wie viele Chromosomen hat ein Mensch?",
-    "answer": 46,
-    "hint": "Weniger als ein Kartenspiel Karten hat (52), aber mehr als die Punkte auf zwei Wuerfeln (42)",
-    "hint2": "Genau so viele wie die Anzahl der US-Praesidenten von Washington bis Biden (46.)",
-    "category": "Wissenschaft"
+    "question": "Wie viele Einwohner hat Island ungefaehr?",
+    "answer": 370000,
+    "hint": "Weniger Menschen leben dort als in Bielefeld - auf einer Insel so gross wie Bulgarien.",
+    "hint2": "Die Hauptstadt Reykjavik beherbergt mehr als die Haelfte der Gesamtbevoelkerung.",
+    "category": "Geografie"
   },
   {
     "id": 18,
-    "question": "In welchem Jahr landeten die ersten Menschen auf dem Mond?",
-    "answer": 1969,
-    "hint": "Im selben Jahr fand auch Woodstock statt - Hippies auf der Erde, Astronauten im All",
-    "hint2": "Das beruehmte 'Summer of 69' von Bryan Adams - ob er DEN Sommer meinte?",
-    "category": "Geschichte"
+    "question": "Wie lang ist der Rhein von der Quelle bis zur Muendung in Kilometern?",
+    "answer": 1230,
+    "hint": "Man koennte ihn nicht an einem Tag mit dem Auto abfahren, ohne Pausen zu machen.",
+    "hint2": "Er durchquert sechs Laender - und ist damit einer der internationalsten Fluesse Europas.",
+    "category": "Geografie"
   },
   {
     "id": 19,
-    "question": "Wie viele Streifen hat die US-amerikanische Flagge?",
-    "answer": 13,
-    "hint": "So viele wie ein Baecker Broeztchen in ein 'Baeckerdutzend' packt",
-    "hint2": "Genau so viele wie die urspruenglichen Kolonien - und wie Buchstaben im hawaiianischen Alphabet!",
+    "question": "Wie viele Inseln hat Griechenland ungefaehr?",
+    "answer": 6000,
+    "hint": "Die meisten davon sind so klein, dass kein Mensch dauerhaft darauf lebt.",
+    "hint2": "Wuerde man jeden Tag eine andere Insel besuchen, braeuchte man ueber 16 Jahre fuer alle.",
     "category": "Geografie"
   },
   {
     "id": 20,
-    "question": "Wie viele Minuten dauert ein Standardfußballspiel (ohne Nachspielzeit)?",
-    "answer": 90,
-    "hint": "Laenger als eine Schulstunde (45 Min) - aber genau zwei davon hintereinander!",
-    "hint2": "So viele Minuten wie Grad in einem rechten Winkel",
-    "category": "Sport"
+    "question": "Wie viele Kilometer ist die Strecke von Berlin nach Sydney (Luftlinie)?",
+    "answer": 16100,
+    "hint": "Ein Direktflug - sofern er existierte - wuerde fast 17 Stunden dauern.",
+    "hint2": "Es ist fast die halbe Erdumrundung - etwas weiter und man waere kuerzer um die andere Seite geflogen.",
+    "category": "Geografie"
   },
   {
     "id": 21,
-    "question": "Wie viele Harry-Potter-Bücher gibt es in der Hauptreihe?",
-    "answer": 7,
-    "hint": "So viele wie Zwerge bei Schneewittchen oder Tage in einer Woche",
-    "hint2": "Genau so viele wie Dragonballs man sammeln muss fuer einen Wunsch",
-    "category": "Popkultur"
+    "question": "Wie viele Stufen fuehren hinauf auf den Koelner Dom (Suedturm)?",
+    "answer": 533,
+    "hint": "Wer das schafft, hat in etwa so viel Hoehe zurueckgelegt wie beim Erklimmen des Frankfurter Messeturms.",
+    "hint2": "Der Dom war beim Bau voruebergehend das hoechste Gebaeude der Welt.",
+    "category": "Geografie"
   },
   {
     "id": 22,
-    "question": "Wie schnell ist Lichtgeschwindigkeit in km/s (ungefähr)?",
-    "answer": 300000,
-    "hint": "In einer Sekunde koenntest du damit 7,5 Mal um die Erde reisen",
-    "hint2": "Eine schoene runde Zahl mit fuenf Nullen - wie dreimal hunderttausend",
-    "category": "Wissenschaft"
+    "question": "Wie viele Kilometer misst die Kuestenlinie Norwegens (inklusive Fjorde und Inseln)?",
+    "answer": 100000,
+    "hint": "Das ist mehr als zweimal der Erdumfang - die Fjorde allein machen den groessten Teil aus.",
+    "hint2": "Kein anderes Land in Europa hat eine laengere Kueste, obwohl Norwegen flaechenmaessig nicht das groesste ist.",
+    "category": "Geografie"
   },
   {
     "id": 23,
-    "question": "In welchem Jahr begann der Zweite Weltkrieg?",
-    "answer": 1939,
-    "hint": "Im selben Jahr kam 'Der Zauberer von Oz' und 'Vom Winde verweht' ins Kino",
-    "hint2": "Ein Jahr vor der Olympiade, die dann wegen des Krieges ausfiel (1940), und im selben Jahr wie Batmans erster Comic-Auftritt",
-    "category": "Geschichte"
+    "question": "Wie viele Stunden schlaeft eine Katze pro Tag durchschnittlich?",
+    "answer": 16,
+    "hint": "Sie verbringt damit mehr Zeit schlafend als nahezu jedes andere Haustier.",
+    "hint2": "In 20 Lebensjahren waere eine Katze rechnerisch nur etwa 5 Jahre lang wach gewesen.",
+    "category": "Natur"
   },
   {
     "id": 24,
-    "question": "Wie viele Punkte sind auf einem Standard-Würfelpaar insgesamt?",
-    "answer": 42,
-    "hint": "Laut 'Per Anhalter durch die Galaxis' ist das die Antwort auf alles!",
-    "hint2": "Douglas Adams kannte wohl diesen Wuerfel-Fakt: Die Antwort auf die grosse Frage des Lebens, des Universums und des ganzen Rests",
-    "category": "Alltag"
+    "question": "Wie schnell kann ein Gepard in km/h rennen?",
+    "answer": 120,
+    "hint": "Auf deutschen Schnellstrassen waere er innerorts verboten, ausserorts gerade noch erlaubt.",
+    "hint2": "Er erreicht seine Hoechstgeschwindigkeit in weniger als 3 Sekunden - schneller als die meisten Sportwagen.",
+    "category": "Natur"
   },
   {
     "id": 25,
-    "question": "Wie viele Meter tief ist der Marianengraben ungefähr?",
-    "answer": 11034,
-    "hint": "Tiefer als der Mount Everest hoch ist (8849m) - du koenntest den Everest reinwerfen und er wuerde komplett versinken!",
-    "hint2": "Etwa 2200 Meter tiefer als der Everest hoch ist - stell dir vor, ueber dem versunkenen Gipfel waeren noch ueber 2 km Wasser",
-    "category": "Geografie"
+    "question": "Wie viele Eier legt eine Henne pro Jahr durchschnittlich?",
+    "answer": 300,
+    "hint": "Wer taeglich Eier isst, schafft damit gerade mal ein Drittel der Jahresproduktion einer einzigen Henne.",
+    "hint2": "Das wildlebende Huhn legt nur einen Bruchteil davon - Zuechtung hat die Zahl massiv gesteigert.",
+    "category": "Natur"
   },
   {
     "id": 26,
-    "question": "Wie viele Kalorien hat ein Liter Cola ungefähr?",
-    "answer": 420,
-    "hint": "Ungefaehr so viel Kalorien wie eine ganze Tafel Schokolade - fuer eine Fluessigkeit ganz schoen heftig",
-    "hint2": "Fast so viele Kalorien wie Gramm in einem Pfund (500) - aber nicht ganz",
-    "category": "Alltag"
+    "question": "Wie viele Kilometer legt eine Biene zurueck, um ein Glas Honig zu produzieren (Kolonie gesamt)?",
+    "answer": 40000,
+    "hint": "Eine einzelne Biene erzeugt in ihrem gesamten Leben nur etwa einen Teeloeffel Honig.",
+    "hint2": "Die gesamte Flugstrecke entspricht ungefaehr dem Erdumfang.",
+    "category": "Natur"
   },
   {
     "id": 27,
-    "question": "Wie viele Oscars hat der Film 'Titanic' gewonnen?",
-    "answer": 11,
-    "hint": "So viele wie Spieler in einer Fussballmannschaft auf dem Feld stehen",
-    "hint2": "Genau so viele wie Spieler beim American Football pro Team - und teilt sich den Rekord mit 'Ben Hur' und 'Herr der Ringe 3'",
-    "category": "Popkultur"
+    "question": "Wie viele Herzen hat ein Tintenfisch?",
+    "answer": 3,
+    "hint": "Sein Blut ist blau, nicht rot - wegen eines kupferhaltigen Proteins statt Haemoglobin.",
+    "hint2": "Zwei dieser Herzen pumpen nur zur Lunge, eines versorgt den Rest des Koerpers.",
+    "category": "Natur"
   },
   {
     "id": 28,
-    "question": "Wie alt wurde die älteste jemals dokumentierte Person (in Jahren)?",
-    "answer": 122,
-    "hint": "Aelter als ein Riesenschildkroeten-Durchschnitt, aber juenger als manche Groenlandhaie werden",
-    "hint2": "Jeanne Calment aus Frankreich ueberlebte sogar den Eiffelturm fast - sie war aelter als das Periodensystem Elemente hat (118)",
-    "category": "Wissenschaft"
+    "question": "Wie alt kann ein Groenlandhai werden (in Jahren)?",
+    "answer": 400,
+    "hint": "Ein heute lebender Groenlandhai koennte zu Shakespeares Lebzeiten geboren worden sein.",
+    "hint2": "Er ist das langlebigste bekannte Wirbeltier der Erde - und waechst nur etwa 1 cm pro Jahr.",
+    "category": "Natur"
   },
   {
     "id": 29,
-    "question": "Wie viele Meter beträgt die Flügelspannweite eines Airbus A380?",
-    "answer": 80,
-    "hint": "Breiter als ein Fussballfeld lang ist? Nein, knapp nicht - aber nah dran an einem kompletten Spielfeld!",
-    "hint2": "Ungefaehr so breit wie die Laenge von 8 Reisebussen hintereinander",
-    "category": "Technik"
+    "question": "Wie viele Kilogramm Bambus frisst ein Pandabaer pro Tag?",
+    "answer": 25,
+    "hint": "Er verbringt fast die gesamte Wachzeit mit Fressen - bis zu 14 Stunden taeglich.",
+    "hint2": "Bambus hat so wenig Naehrstoffe, dass der Panda enorme Mengen braucht, um Energie zu gewinnen.",
+    "category": "Natur"
   },
   {
     "id": 30,
-    "question": "In welchem Jahr wurde WhatsApp gegründet?",
-    "answer": 2009,
-    "hint": "Im selben Jahr wurde Barack Obama als US-Praesident vereidigt und Michael Jackson starb",
-    "hint2": "Zwei Jahre nach dem ersten iPhone - die Gruender waren uebrigens Ex-Yahoo-Mitarbeiter",
-    "category": "Technik"
+    "question": "Wie viele Augen hat eine Spinne normalerweise?",
+    "answer": 8,
+    "hint": "Die meisten sind auf die Seiten verteilt, um ein breites Sichtfeld zu haben - nicht nach vorne gerichtet wie beim Menschen.",
+    "hint2": "Trotz der vielen Augen sind die meisten Spinnen nicht besonders scharf sehend - Bewegung nehmen sie aber sehr gut wahr.",
+    "category": "Natur"
   },
   {
     "id": 31,
-    "question": "Wie viele Inseln gehören zu den Philippinen (ungefähr)?",
-    "answer": 7641,
-    "hint": "Mehr Inseln als Tage in 20 Jahren! Wenn du jeden Tag eine Insel besuchen wuerdest, brauchst du ueber 20 Jahre",
-    "hint2": "Etwa 7 mal so viele wie Tage in 3 Jahren - da kannst du lange Inselhopping machen",
-    "category": "Geografie"
+    "question": "Wie viele Zentimeter hoch kann ein Floh springen?",
+    "answer": 30,
+    "hint": "Fuer einen Menschen waere das ein Sprung ueber ein 30-stoeckiges Hochhaus.",
+    "hint2": "Der Floh beschleunigt dabei staerker als ein Raumschiff beim Start - relativ gesehen.",
+    "category": "Natur"
   },
   {
     "id": 32,
-    "question": "Wie schwer ist ein Fußball in Gramm (Mindestgewicht nach FIFA)?",
-    "answer": 410,
-    "hint": "Ungefaehr so schwer wie eine Dose Ravioli - ja, wirklich!",
-    "hint2": "Etwas leichter als ein Liter Cola Kalorien hat - und ziemlich genau so schwer wie 4 Tafeln Schokolade",
-    "category": "Sport"
+    "question": "Wie viele Meter pro Stunde schafft eine Schnecke ungefaehr?",
+    "answer": 75,
+    "hint": "Um einen Kilometer zurueckzulegen, braeuchte sie ueber 10 Stunden - ohne Pause.",
+    "hint2": "Ein Mensch im Schlaf, der sich im Bett dreht, bewegt sich rechnerisch fast schneller.",
+    "category": "Natur"
   },
   {
     "id": 33,
-    "question": "Wie viele Spielkarten enthält ein Standard-Pokerdeck?",
-    "answer": 52,
-    "hint": "So viele wie Wochen in einem Jahr!",
-    "hint2": "Genau so viele wie Wochen im Jahr - 4 Farben mal 13 Werte, fuer Mathematiker",
-    "category": "Alltag"
+    "question": "Wie viele Knochen hat ein Erwachsener im Koerper?",
+    "answer": 206,
+    "hint": "Als Saeugling hat man deutlich mehr - viele verschmelzen im Laufe des Lebens miteinander.",
+    "hint2": "Allein im Fuss steckt fast ein Viertel aller Knochen des gesamten Koerpers.",
+    "category": "Wissenschaft"
   },
   {
     "id": 34,
-    "question": "Wie viele Kilometer ist die Erde von der Sonne entfernt (in Millionen)?",
-    "answer": 150,
-    "hint": "Ungefaehr so viele Millionen km wie ein Blauwal Tonnen wiegt - kosmischer Zufall!",
-    "hint2": "Eine schoene runde Zahl - Licht braucht etwa 8 Minuten fuer diese Strecke",
+    "question": "Wie viele Liter Blut pumpt das menschliche Herz pro Tag?",
+    "answer": 7500,
+    "hint": "Das Herz schlaegt rund 100.000 Mal am Tag - und pumpt dabei jedes Mal eine Tasse voller Blut.",
+    "hint2": "In einem Jahr kaeme genug zusammen, um einen mittelgrossen Swimmingpool zu fuellen.",
     "category": "Wissenschaft"
   },
   {
     "id": 35,
-    "question": "Wie viele Steinlagen hat die Cheops-Pyramide?",
-    "answer": 203,
-    "hint": "Ungefaehr so viele wie Knochen im menschlichen Koerper - die alten Aegypter hatten wohl einen Plan",
-    "hint2": "Knapp ueber 200, aber weniger als Knochen im Koerper (206) - die Pyramide ist also fast ein Skelett aus Stein",
-    "category": "Geschichte"
-  },
-  {
-    "id": 36,
-    "question": "Wie viele Filme gibt es in der 'Fast & Furious'-Hauptreihe (bis 2023)?",
-    "answer": 10,
-    "hint": "So viele wie Finger an beiden Haenden - Vin Diesel braucht alle zum Zaehlen",
-    "hint2": "Genau so viele wie Gebote in der Bibel - du sollst nicht zu langsam fahren waere sicher dabei",
-    "category": "Popkultur"
-  },
-  {
-    "id": 37,
-    "question": "Wie hoch kann ein Känguru in Metern springen?",
-    "answer": 3,
-    "hint": "Hoeher als die meisten Menschen gross sind, aber nicht hoch genug fuer einen Basketballkorb (3,05m)",
-    "hint2": "Knapp unter Basketballkorb-Hoehe - ein Kaenguru koennte fast dunken!",
-    "category": "Natur"
-  },
-  {
-    "id": 38,
-    "question": "Wie viele Quadratkilometer hat Deutschland ungefähr?",
-    "answer": 357588,
-    "hint": "Kleiner als Japan (378.000 km²), aber groesser als Vietnam - stell dir ein Land in der Mitte Europas vor",
-    "hint2": "Etwas kleiner als Japan, aber groesser als die Republik Kongo - stell dir 50 Millionen Fussballfelder vor",
-    "category": "Geografie"
-  },
-  {
-    "id": 39,
-    "question": "Wie viele Saisontore schoss Gerd Müller in der Bundesliga-Saison 1971/72?",
-    "answer": 40,
-    "hint": "So viele wie Ali Baba Raeuber hatte - ein ebenso maerchenhafter Rekord!",
-    "hint2": "Eine schoene runde Zahl - exakt doppelt so viele wie Spieler in beiden Fussballmannschaften zusammen auf dem Feld",
-    "category": "Sport"
-  },
-  {
-    "id": 40,
-    "question": "In welchem Jahr wurde Wikipedia gegründet?",
-    "answer": 2001,
-    "hint": "Im selben Jahr wie der erste Harry-Potter-Film und ein gewisser Anschlag, der die Welt veraenderte",
-    "hint2": "Kubricks '2001: Odyssee im Weltraum' wurde im Titel prophetisch - das Internet bekam sein Lexikon",
-    "category": "Technik"
-  },
-  {
-    "id": 41,
-    "question": "Wie viele Einwohner hat die Praefektur Tokio in Millionen (ungefaehr)?",
-    "answer": 14,
-    "hint": "Mehr Menschen als in ganz Bayern leben und fast so viele wie in den gesamten Niederlanden",
-    "hint2": "So viele Millionen wie Tage in zwei Wochen - und mehr als ganz Belgien Einwohner hat",
-    "category": "Geografie"
-  },
-  {
-    "id": 42,
-    "question": "Wie viele Staffeln hat die Serie 'Breaking Bad'?",
-    "answer": 5,
-    "hint": "So viele wie Brasiliens Fussball-WM-Titel oder olympische Ringe",
-    "hint2": "So viele wie Finger an einer Hand - Walter White hatte fuer jede Staffel einen Finger am Abzug",
-    "category": "Popkultur"
-  },
-  {
-    "id": 43,
-    "question": "Wie viele Kilometer pro Stunde kann ein Gepard maximal erreichen?",
-    "answer": 120,
-    "hint": "So schnell wie man auf der Autobahn in vielen Laendern maximal fahren darf",
-    "hint2": "Genau das Tempolimit, ueber das Deutschland seit Jahrzehnten diskutiert - der Gepard haelt sich also an Richtgeschwindigkeit!",
-    "category": "Natur"
-  },
-  {
-    "id": 44,
-    "question": "Wie viele Pixel hatte die Kamera des ersten iPhones (in Megapixeln)?",
-    "answer": 2,
-    "hint": "Weniger Megapixel als ein Oktopus Herzen hat (3) - heute undenkbar!",
-    "hint2": "So viele wie Augen im Gesicht - Steve Jobs fand das damals voellig ausreichend",
-    "category": "Technik"
-  },
-  {
-    "id": 45,
-    "question": "Wie viele Stunden dauert ein Flug von Frankfurt nach New York ungefähr?",
-    "answer": 9,
-    "hint": "Laenger als ein Arbeitstag (8 Stunden), aber kuerzer als eine Nacht Schlaf fuer Langschlaefer",
-    "hint2": "So viele Stunden wie Laender an Deutschland grenzen",
-    "category": "Alltag"
-  },
-  {
-    "id": 46,
-    "question": "In welchem Jahr wurde die Titanic gebaut (Stapellauf)?",
-    "answer": 1911,
-    "hint": "Ein Jahr bevor sie auf tragische Weise beruehmt wurde - die Titanic schwamm nicht lange",
-    "hint2": "Im selben Jahr erreichte Roald Amundsen den Suedpol - auch eine kalte Angelegenheit",
-    "category": "Geschichte"
-  },
-  {
-    "id": 47,
-    "question": "Wie viele Zacken hat ein Schneeflocken-Kristall typischerweise?",
-    "answer": 6,
-    "hint": "So viele wie Seiten eines Wuerfels oder Saiten auf einer Gitarre",
-    "hint2": "Halb so viele wie Spinnen Beine haben - die Natur liebt Symmetrie!",
-    "category": "Natur"
-  },
-  {
-    "id": 48,
-    "question": "Wie viele Grand-Slam-Titel hat Roger Federer gewonnen?",
-    "answer": 20,
-    "hint": "So viele wie Finger und Zehen zusammen - eine runde Sache fuer den Maestro",
-    "hint2": "Genau so viele wie Milchzaehne ein Kind hat - und zwei weniger als Nadal Grand Slams gewann (22)",
-    "category": "Sport"
-  },
-  {
-    "id": 49,
-    "question": "Wie viele Tonnen wiegt ein ausgewachsener Blauwal ungefähr?",
-    "answer": 150,
-    "hint": "So schwer wie etwa 30 ausgewachsene Elefanten! Stell dir das mal im Zoo vor",
-    "hint2": "Zufaellig genau so viele Tonnen wie die Erde Millionen Kilometer von der Sonne entfernt ist",
-    "category": "Natur"
-  },
-  {
-    "id": 50,
-    "question": "In welchem Jahr wurde die Mona Lisa von Leonardo da Vinci begonnen?",
-    "answer": 1503,
-    "hint": "Etwa ein Jahrzehnt nachdem Kolumbus Amerika entdeckte (1492)",
-    "hint2": "Drei Jahre nachdem die Jahreszahl eine 1 und eine 5 vorne bekam - Leonardo war gerade 51 Jahre alt",
-    "category": "Geschichte"
-  },
-  {
-    "id": 51,
-    "question": "Wie viele Länder grenzen an Deutschland?",
-    "answer": 9,
-    "hint": "Mehr als die Wochentage (7), aber weniger als Spieler beim Fussball (11)",
-    "hint2": "So viele wie Planeten im Sonnensystem (wenn man Pluto nicht mitzaehlt) - Deutschland ist halt beliebt bei den Nachbarn",
-    "category": "Geografie"
-  },
-  {
-    "id": 52,
-    "question": "Wie viele Monde hat der Jupiter (bestätigte, Stand 2024)?",
-    "answer": 95,
-    "hint": "Fast so viele wie Tasten auf einem Klavier (88) - Jupiter sammelt Monde wie andere Planeten Staub",
-    "hint2": "Mehr als ein Fussballspiel Minuten hat (90), aber weniger als Stockwerke im Empire State Building (102)",
+    "question": "Wie viele Gramm Zucker enthaelt eine Dose Cola (330 ml)?",
+    "answer": 35,
+    "hint": "Das entspricht ungefaehr sieben Zuckerwuerfeln - mehr als die WHO als Tageshoechstmenge empfiehlt.",
+    "hint2": "Wegen der Kohlensaeure und Saeure schmeckt man die Suesse weniger stark als bei gleichem Zuckergehalt in Saft.",
     "category": "Wissenschaft"
   },
   {
-    "id": 53,
-    "question": "Wie viele Buchstaben hat das hawaiianische Alphabet?",
-    "answer": 13,
-    "hint": "So viele wie Streifen auf der US-Flagge oder eine Unglueckszahl im Aufzug",
-    "hint2": "Halb so viele wie das deutsche Alphabet (ohne Umlaute, 26) - Aloha reicht eben mit weniger Buchstaben!",
-    "category": "Alltag"
+    "id": 36,
+    "question": "Wie viele Millionen Tonnen Hausmmuell produziert Deutschland pro Jahr?",
+    "answer": 55,
+    "hint": "Im EU-Vergleich liegt Deutschland beim Pro-Kopf-Muell im oberen Drittel - trotz Pfandsystem.",
+    "hint2": "Jeder Deutsche erzeugt im Schnitt sein eigenes Koerpergewicht an Muell - mehrmals im Jahr.",
+    "category": "Wissenschaft"
   },
   {
-    "id": 54,
-    "question": "Wie viele Stockwerke hat das Empire State Building?",
-    "answer": 102,
-    "hint": "Mehr als die Anzahl der Dalmatiner im Film (101) - und das ist kein Zufall, es ist genau eins mehr!",
-    "hint2": "King Kong kletterte genau ein Stockwerk mehr als Dalmatiner im Film rannten - die Zahl ist dreistellig und beginnt mit 10",
-    "category": "Geografie"
+    "id": 37,
+    "question": "Wie lange dauert es in Jahren, bis eine Plastikflasche in der Natur abgebaut ist?",
+    "answer": 450,
+    "hint": "Eine Flasche, die heute weggeworfen wird, ist erst im Jahr 2475 vollstaendig verschwunden.",
+    "hint2": "Plastik existiert als Material erst seit etwa 100 Jahren - keine einzige Flasche ist bisher vollstaendig zerfallen.",
+    "category": "Wissenschaft"
   },
   {
-    "id": 55,
-    "question": "Wie viele Tasten hat eine Standard-PC-Tastatur?",
-    "answer": 105,
-    "hint": "Mehr als ein Fussballfeld Meter lang ist (100-110m) und mehr als die Dalmatiner im Film (101)",
-    "hint2": "Etwas mehr als das Empire State Building Stockwerke hat (102) - deine Tastatur ist hoeher als King Kongs Kletterturm!",
+    "id": 38,
+    "question": "Wie hoch ist die Schallgeschwindigkeit in Luft (km/h)?",
+    "answer": 1235,
+    "hint": "Ein Ueberschallflugzeug muss schneller fliegen - und erzeugt dabei einen Knall, den man am Boden hoert.",
+    "hint2": "Bei einem Gewitter kann man damit grob ausrechnen, wie weit der Blitz entfernt war.",
+    "category": "Wissenschaft"
+  },
+  {
+    "id": 39,
+    "question": "Wie viele Zaehne hat ein erwachsener Mensch (mit Weisheitszaehnen)?",
+    "answer": 32,
+    "hint": "Viele Menschen haben diese Zahl nie erreicht - weil ihre Weisheitszaehne operativ entfernt wurden.",
+    "hint2": "Als Kind hatte man deutlich weniger - das Milchgebiss kommt mit 20 Zaehnen aus.",
+    "category": "Wissenschaft"
+  },
+  {
+    "id": 40,
+    "question": "Wie viele Milliarden Neuronen hat das menschliche Gehirn ungefaehr?",
+    "answer": 86,
+    "hint": "Wenn man jede Sekunde eine Nervenzelle zaehlen wuerde, braeuchte man fast 3.000 Jahre.",
+    "hint2": "Jedes Neuron kann mit Tausenden anderen verbunden sein - die Gesamtzahl der Verbindungen uebersteigt die Sternenzahl der Milchstrasse.",
+    "category": "Wissenschaft"
+  },
+  {
+    "id": 41,
+    "question": "Wie heiss ist die Oberflaeche der Sonne in Grad Celsius?",
+    "answer": 5500,
+    "hint": "Der Kern ist um ein Vielfaches heisser - die Oberflaeche ist tatsaechlich die kuehlste Schicht der Sonne.",
+    "hint2": "Kein bekanntes Material der Erde koennte bei dieser Temperatur fest bleiben.",
+    "category": "Wissenschaft"
+  },
+  {
+    "id": 42,
+    "question": "Wie viele Billionen Kilometer ist ein Lichtjahr lang?",
+    "answer": 9,
+    "hint": "Das Licht braucht fuer diese Strecke genau ein Jahr - mit 300.000 km pro Sekunde.",
+    "hint2": "Das naechste Sternsystem (Alpha Centauri) ist ueber 4 Lichtjahre entfernt - mit heutigen Raketen braeuchte man Jahrtausende.",
+    "category": "Wissenschaft"
+  },
+  {
+    "id": 43,
+    "question": "Wie viel Prozent der Erde sind mit Wasser bedeckt?",
+    "answer": 71,
+    "hint": "Trotzdem ist Trinkwasser knapp - der allergroesste Teil davon ist Salzwasser.",
+    "hint2": "Betrachtet man die Erde von bestimmten Blickwinkeln aus dem Weltall, sieht man fast nur Wasser - kein Land.",
+    "category": "Wissenschaft"
+  },
+  {
+    "id": 44,
+    "question": "Wie viele Mal schlaegt ein Kolibri seine Fluegel pro Sekunde?",
+    "answer": 65,
+    "hint": "Das ist so schnell, dass man mit blossem Auge nur ein Summen wahrnimmt - die Fluegel sind unsichtbar.",
+    "hint2": "Kein anderer Vogel schlaegt seine Fluegel schneller - dieser Rekord ist in der Vogelwelt unerreicht.",
+    "category": "Wissenschaft"
+  },
+  {
+    "id": 45,
+    "question": "Wie viele Kilometer Schienennetz gibt es in Deutschland?",
+    "answer": 33000,
+    "hint": "Man koennte damit die Erde am Aequator fast viermal umrunden.",
+    "hint2": "In den 1990ern war das Netz noch deutlich laenger - viele Strecken wurden seitdem stillgelegt.",
     "category": "Technik"
   },
   {
+    "id": 46,
+    "question": "Wie viele Satelliten umkreisen derzeit aktiv die Erde (Stand 2024)?",
+    "answer": 8000,
+    "hint": "Allein ein einziges Unternehmen hat in den letzten Jahren mehr Satelliten gestartet als alle Laender in den Jahrzehnten davor zusammen.",
+    "hint2": "Der erste Satellit flog 1957 - seitdem hat sich die Zahl in Schueben explosionsartig erhoeht.",
+    "category": "Technik"
+  },
+  {
+    "id": 47,
+    "question": "Wie viele Milliarden E-Mails werden weltweit pro Tag verschickt?",
+    "answer": 325,
+    "hint": "Der Grossteil davon ist Spam - ungefaehr die Haelfte aller E-Mails kommt unerwuenscht an.",
+    "hint2": "Das entspricht pro Sekunde mehr Nachrichten als es Menschen auf der Erde gibt.",
+    "category": "Technik"
+  },
+  {
+    "id": 48,
+    "question": "Wie viele Milliarden Transistoren passen auf einen modernen Prozessorchip?",
+    "answer": 48,
+    "hint": "In den 1970ern hatten Chips einige Tausend Transistoren - die Zahl hat sich alle zwei Jahre etwa verdoppelt.",
+    "hint2": "Sie sind so klein, dass ein menschliches Haar mehrere Tausend davon bedecken wuerde.",
+    "category": "Technik"
+  },
+  {
+    "id": 49,
+    "question": "Wie viele Monate dauerte die Entwicklung des ersten iPhones von Ankuendigung bis Marktstart?",
+    "answer": 6,
+    "hint": "Steve Jobs zeigte es der Welt, bevor es fertig war - das Team arbeitete unter extremem Druck.",
+    "hint2": "Die Software war bei der Ankuendigung noch so instabil, dass eine Demo fast schiefgegangen waere.",
+    "category": "Technik"
+  },
+  {
+    "id": 50,
+    "question": "Wie viele Seiten hat die Bibel in einer typischen Standardausgabe?",
+    "answer": 1300,
+    "hint": "Das Alte Testament allein macht etwa drei Viertel des Gesamtumfangs aus.",
+    "hint2": "Obwohl ueber Jahrhunderte von unzaehligen Autoren geschrieben, wird sie heute als ein einzelnes Buch gedruckt.",
+    "category": "Technik"
+  },
+  {
+    "id": 51,
+    "question": "Wie viel Prozent der weltweiten Internetnutzer verwendet Google als Suchmaschine?",
+    "answer": 91,
+    "hint": "Alle anderen Suchmaschinen zusammen teilen sich den Rest - keiner kommt auch nur annaehernd heran.",
+    "hint2": "In China ist Google weitgehend gesperrt - dennoch haelt es diesen Marktanteil global.",
+    "category": "Technik"
+  },
+  {
+    "id": 52,
+    "question": "Wie viele Millionen Apps gibt es im Apple App Store (ungefaehr)?",
+    "answer": 2,
+    "hint": "Google Play hat noch mehr - obwohl Apple strenger bei der Zulassung ist.",
+    "hint2": "Die allermeisten davon werden kaum genutzt - ein kleiner Bruchteil macht den Grossteil aller Downloads aus.",
+    "category": "Technik"
+  },
+  {
+    "id": 53,
+    "question": "Wie viele Woerter hat die deutsche Sprache ungefaehr (im Duden)?",
+    "answer": 400000,
+    "hint": "Ein gebildeter Muttersprachler nutzt im Alltag aktiv vielleicht 12.000 bis 16.000 davon.",
+    "hint2": "Das Englische hat schaetzungsweise drei- bis viermal so viele - vor allem wegen der vielen Lehnwoerter.",
+    "category": "Geschichte"
+  },
+  {
+    "id": 54,
+    "question": "Wie lang war die Berliner Mauer in Kilometern?",
+    "answer": 155,
+    "hint": "Die Mauer war laenger als die Entfernung von Berlin nach Magdeburg.",
+    "hint2": "Nur ein kleiner Teil verlief mitten durch die Stadt - der Rest umschloss West-Berlin ringsum.",
+    "category": "Geschichte"
+  },
+  {
+    "id": 55,
+    "question": "Wie viele Filme wurden in der offiziellen James-Bond-Reihe produziert (bis 2021)?",
+    "answer": 25,
+    "hint": "Die Reihe laeuft seit ueber 60 Jahren - das entspricht mehr Filmen als die meisten Menschen Urlaubswochen im Leben haben.",
+    "hint2": "Sechs verschiedene Schauspieler haben die Hauptrolle gespielt - zwei davon sind bereits gestorben.",
+    "category": "Geschichte"
+  },
+  {
     "id": 56,
-    "question": "Wie viele Staffeln hat 'Game of Thrones'?",
-    "answer": 8,
-    "hint": "So viele wie Planeten im Sonnensystem (mit Pluto waeren es 9 gewesen, aber Pluto wurde degradiert wie Cersei)",
-    "hint2": "So viele wie Beine einer Spinne - und das Ende war genauso gruselig",
-    "category": "Popkultur"
+    "question": "Wie viele Sprachen gibt es auf der Welt ungefaehr?",
+    "answer": 7000,
+    "hint": "Ein grosser Teil davon hat weniger als 1.000 Sprecher und droht in den naechsten Jahrzehnten auszusterben.",
+    "hint2": "Der Kontinent mit der hoechsten Sprachenvielfalt ist nicht Europa, sondern Afrika.",
+    "category": "Geschichte"
   },
   {
     "id": 57,
-    "question": "In welchem Jahr erschien das erste 'Super Mario'-Spiel?",
-    "answer": 1985,
-    "hint": "Im selben Jahr wurde Boris Becker juengster Wimbledon-Sieger - beide wurden Legenden!",
-    "hint2": "Back to the Future kam im selben Jahr ins Kino - Mario und Marty McFly sind also gleich alt",
-    "category": "Popkultur"
+    "question": "Wie viele Buecher hat Harry-Potter-Autorin J. K. Rowling in der Hauptreihe geschrieben?",
+    "answer": 7,
+    "hint": "Die Reihe spielt ueber sieben Schuljahre - jedes Buch entspricht einem davon.",
+    "hint2": "Das letzte Buch erschien zehn Jahre nach dem ersten - und brach weltweit Verkaufsrekorde.",
+    "category": "Geschichte"
   },
   {
     "id": 58,
-    "question": "Wie viele Jahre kann eine Galapagos-Riesenschildkroete alt werden?",
-    "answer": 175,
-    "hint": "Aelter als die aelteste dokumentierte Person (122 Jahre) - Schildkroeten lachen ueber menschliche Lebensspannen",
-    "hint2": "Etwa so viele Jahre wie die USA unabhaengig waren, als sie ihren 175. Geburtstag feierten (1951) - ungefaehr 3 Menschenleben!",
-    "category": "Natur"
+    "question": "In welchem Jahr wurde das erste Mobiltelefon der Oeffentlichkeit vorgestellt?",
+    "answer": 1973,
+    "hint": "Es hatte kein Display, keine SMS-Funktion und wog fast ein Kilogramm.",
+    "hint2": "Bis es kaeuflich zu erwerben war, dauerte es noch ueber zehn Jahre.",
+    "category": "Geschichte"
   },
   {
     "id": 59,
-    "question": "Wie viele Hai-Arten gibt es ungefaehr?",
+    "question": "Wie viele Stunden Videomaterial werden pro Minute auf YouTube hochgeladen?",
     "answer": 500,
-    "hint": "So viele wie ein Fiat-Auto im Namen traegt - oder wie Briefpapier im Standardpaket",
-    "hint2": "Eine schoene runde Zahl - genau die Haelfte von 1000. In 'Findet Nemo' haben sie nur einen gezeigt!",
-    "category": "Natur"
+    "hint": "Selbst wenn man aufhoeren wuerde, neue Videos hochzuladen, wuerde es Jahrzehnte dauern, alles anzuschauen.",
+    "hint2": "Das entspricht pro Tag etwa 700.000 Stunden neuem Content - taeglich.",
+    "category": "Geschichte"
   },
   {
     "id": 60,
-    "question": "Wie viele Jahre dauerte der Hundertjaehrige Krieg?",
-    "answer": 116,
-    "hint": "Die groesste Luege der Geschichtsschreibung: Er dauerte NICHT hundert Jahre, sondern laenger!",
-    "hint2": "Zwei weniger als die Elemente im Periodensystem (118)",
+    "question": "Wie viele Millionen Besucher zaehlt der Louvre pro Jahr (vor Corona)?",
+    "answer": 10,
+    "hint": "Er ist das meistbesuchte Museum der Welt - mehr als das Metropolitan Museum in New York und das British Museum zusammen.",
+    "hint2": "Die Mona Lisa allein zieht einen grossen Teil dieser Besucher an - obwohl das Bild selbst ueberraschend klein ist.",
     "category": "Geschichte"
+  },
+  {
+    "id": 61,
+    "question": "Wie viele Seiten hat Tolstois Krieg und Frieden?",
+    "answer": 1300,
+    "hint": "Der Roman hat ueber 500 Figuren - allein die Liste der Charaktere wuerde ein Notizbuch fuellen.",
+    "hint2": "Es dauert durchschnittlich 36 Stunden, das Buch am Stueck zu lesen - also mehrere Wochen bei normalem Lesetempo.",
+    "category": "Geschichte"
+  },
+  {
+    "id": 62,
+    "question": "Wie viele Millionen Einwohner hatte das Roemische Reich auf seinem Hoehepunkt ungefaehr?",
+    "answer": 55,
+    "hint": "Das entsprach damals etwa einem Viertel der gesamten Weltbevoelkerung.",
+    "hint2": "Viele Bewohner waren Sklaven - schaetzungsweise ein Fuenftel der Gesamtbevoelkerung.",
+    "category": "Geschichte"
+  },
+  {
+    "id": 63,
+    "question": "Wie viele Liter Wasser trinkt ein Mensch durchschnittlich im Leben?",
+    "answer": 70000,
+    "hint": "Das entspricht dem Inhalt von etwa 280 Badewannen.",
+    "hint2": "Wenn man das Wasser in Flaschen kaufen wuerde, kaeme man auf mehrere Zehntausend Euro Ausgaben im Leben.",
+    "category": "Alltag"
+  },
+  {
+    "id": 64,
+    "question": "Wie viele Scheiben Brot isst ein Deutscher pro Jahr im Durchschnitt?",
+    "answer": 750,
+    "hint": "Das sind im Schnitt zwei Scheiben pro Tag - und das gilt als Grundlage vieler Mahlzeiten.",
+    "hint2": "Deutschland hat mehr Brotsorten als jedes andere Land der Welt - ueber 3.200 eingetragene Sorten.",
+    "category": "Alltag"
+  },
+  {
+    "id": 65,
+    "question": "Wie viele Kilogramm Fleisch isst ein Deutscher pro Jahr im Durchschnitt?",
+    "answer": 54,
+    "hint": "Das ist weniger als frueher - der Konsum ist in den letzten Jahren leicht gesunken.",
+    "hint2": "Amerika liegt noch deutlich darueber - Deutschland gehoert aber weltweit noch zu den Top-Konsumenten.",
+    "category": "Alltag"
+  },
+  {
+    "id": 66,
+    "question": "Wie viele Millionen Liter Bier werden beim Oktoberfest pro Jahr ungefaehr ausgeschenkt?",
+    "answer": 7,
+    "hint": "Das reicht, um einen olympischen Swimmingpool fast dreimal zu fuellen.",
+    "hint2": "Die Masskruege, die dabei benutzt werden, wiegen leer schon fast ein Kilogramm.",
+    "category": "Alltag"
+  },
+  {
+    "id": 67,
+    "question": "Wie viele Kalorien hat ein Big Mac?",
+    "answer": 550,
+    "hint": "Das entspricht ungefaehr einem Viertel des taeglichen Kalorienbedarfs eines durchschnittlichen Erwachsenen.",
+    "hint2": "Mit Pommes und Cola kommt man auf eine komplette Tagesration - in einer einzigen Mahlzeit.",
+    "category": "Alltag"
+  },
+  {
+    "id": 68,
+    "question": "Wie viele Tassen Kaffee trinkt ein Deutscher pro Jahr im Schnitt?",
+    "answer": 550,
+    "hint": "Das sind mehr als eine Tasse pro Tag - Kaffee ist das meistkonsumierte Heissgetraenk in Deutschland.",
+    "hint2": "Deutschland ist einer der groessten Kaffeekonsumenten weltweit - obwohl dort kein einziges Kaffeeboehnchen waechst.",
+    "category": "Alltag"
+  },
+  {
+    "id": 69,
+    "question": "Wie kalt war es am kaeltesten jemals gemessenen Ort auf der Erde (in Grad Celsius)?",
+    "answer": -89,
+    "hint": "Bei dieser Temperatur gefriert ausgeatmeter Atem sofort - Metall wird sproede wie Glas.",
+    "hint2": "Selbst das kaelteste bewohnte Dorf der Erde (Oimjakon) ist noch ueber 30 Grad waermer.",
+    "category": "Rekorde"
+  },
+  {
+    "id": 70,
+    "question": "Wie tief ist der Marianengraben (tiefster Punkt der Erde) in Metern?",
+    "answer": 11000,
+    "hint": "Der Mount Everest wuerde darin versinken - und es waeren noch knapp 2 km Wasser darueber.",
+    "hint2": "Dort herrscht ein Druck, der einem Gewicht von mehreren Tonnen pro Quadratzentimeter entspricht.",
+    "category": "Rekorde"
+  },
+  {
+    "id": 71,
+    "question": "Wie alt wurde der aelteste jemals bestaetigte Mensch (Jeanne Calment) in Jahren?",
+    "answer": 122,
+    "hint": "Sie war bei Ausbruch des Ersten Weltkriegs schon ueber 40 - und erlebte noch das Internet-Zeitalter.",
+    "hint2": "Als junges Maedchen hatte sie angeblich persoenlichen Kontakt zu Vincent van Gogh.",
+    "category": "Rekorde"
+  },
+  {
+    "id": 72,
+    "question": "Wie hoch ist der hoechste Wasserfall der Welt (Angel Falls, Venezuela) in Metern?",
+    "answer": 979,
+    "hint": "So hoch, dass das Wasser auf dem Weg nach unten teilweise zu Nebel wird, bevor es unten ankommt.",
+    "hint2": "Der Wasserfall ist fast dreimal so hoch wie der Eiffelturm.",
+    "category": "Rekorde"
+  },
+  {
+    "id": 73,
+    "question": "Wie viele Tonnen wiegt das schwerste jemals gefangene Tier (Blauwal)?",
+    "answer": 190,
+    "hint": "Sein Herz allein ist so gross wie ein kleines Auto und wiegt mehrere hundert Kilogramm.",
+    "hint2": "Sein Zungenbein, also die Zungenstruktur, wiegt mehr als ein ausgewachsener Elefant.",
+    "category": "Rekorde"
+  },
+  {
+    "id": 74,
+    "question": "Wie viele Stunden hat der Rekord fuer Schlafentzug betragen (Randy Gardner 1964)?",
+    "answer": 264,
+    "hint": "Ab Tag drei beginnen die meisten Menschen Halluzinationen zu erleben - der Koerper schlaeft stellenweise mit offenen Augen.",
+    "hint2": "Die WHO stuft Schlafentzug offiziell als Folterinstrument ein.",
+    "category": "Rekorde"
+  },
+  {
+    "id": 75,
+    "question": "Wie schnell dreht sich die Erde an ihrem Aequator in km/h?",
+    "answer": 1670,
+    "hint": "Das ist schneller als Schallgeschwindigkeit - wir merken es nur deshalb nicht, weil sich alles um uns gleichmaessig mitbewegt.",
+    "hint2": "An den Polen betraegt die Rotationsgeschwindigkeit fast null - Astronomen machen sich das zunutze.",
+    "category": "Rekorde"
+  },
+  {
+    "id": 76,
+    "question": "Wie viele Milliarden Euro gibt Deutschland pro Jahr fuer Verteidigung aus (Bundeswehr-Etat ca. 2023)?",
+    "answer": 50,
+    "hint": "Das ist noch immer weniger als das NATO-Ziel von 2% des BIP verlangt.",
+    "hint2": "Die USA geben mehr fuer Verteidigung aus als die naechsten zehn Laender zusammen.",
+    "category": "Wirtschaft"
+  },
+  {
+    "id": 77,
+    "question": "Wie viele Millionen Autos werden in Deutschland pro Jahr produziert?",
+    "answer": 4,
+    "hint": "Deutschland ist einer der groessten Autoproduzenten der Welt - aber China hat es laengst ueberholt.",
+    "hint2": "Der Export macht den groessten Anteil aus - die meisten deutschen Autos verlassen das Land.",
+    "category": "Wirtschaft"
+  },
+  {
+    "id": 78,
+    "question": "Wie viele Milliarden Euro Umsatz macht Amazon in Deutschland pro Jahr (ca.)?",
+    "answer": 33,
+    "hint": "Deutschland ist Amazons zweitgroesster Markt weltweit - nur die USA sind groesser.",
+    "hint2": "Das entspricht mehr als dem BIP einiger kleiner europaeischer Laender.",
+    "category": "Wirtschaft"
+  },
+  {
+    "id": 79,
+    "question": "Wie viel kostet ein Barrel Oel ungefaehr in US-Dollar (2023)?",
+    "answer": 83,
+    "hint": "In der Corona-Krise fiel der Preis kurzzeitig in den negativen Bereich - Produzenten zahlten dafuer, dass man ihnen das Oel abnimmt.",
+    "hint2": "Ein Barrel entspricht 159 Litern - daraus werden aber viele verschiedene Produkte, nicht nur Benzin.",
+    "category": "Wirtschaft"
+  },
+  {
+    "id": 80,
+    "question": "Wie viele Millionen Menschen sind weltweit Millionaere (in USD)?",
+    "answer": 60,
+    "hint": "Das klingt nach viel - aber das sind weniger als 1% der Weltbevoelkerung.",
+    "hint2": "Die USA haben die meisten Millionaere, gefolgt von China und Deutschland.",
+    "category": "Wirtschaft"
+  },
+  {
+    "id": 81,
+    "question": "Wie viele Tausend Quadratkilometer Regenwald werden pro Jahr weltweit abgeholzt?",
+    "answer": 125,
+    "hint": "Das entspricht etwa der Flaeche Griechenlands - jedes Jahr aufs Neue.",
+    "hint2": "Der groesste Teil des Holzes wird nicht fuer Moebel verwendet, sondern fuer Brandrodung zur Landgewinnung.",
+    "category": "Umwelt"
+  },
+  {
+    "id": 82,
+    "question": "Wie viel Grad Celsius hat sich die Erde seit der Industrialisierung erwaermt?",
+    "answer": 1,
+    "hint": "Das klingt wenig - aber selbst 0,5 Grad mehr wuerden Meeresspiegel und Extremwetter dramatisch verschaerfen.",
+    "hint2": "Das Pariser Klimaabkommen versucht, die Erwaermung unter 1,5 Grad zu halten - wir sind schon nah dran.",
+    "category": "Umwelt"
+  },
+  {
+    "id": 83,
+    "question": "Wie viele Plastikflaschen werden pro Minute weltweit verbraucht?",
+    "answer": 1000000,
+    "hint": "In der Zeit, die man braucht, um diese Frage zu beantworten, sind mehrere Tausend neue Flaschen verbraucht worden.",
+    "hint2": "Weniger als die Haelfte davon wird recycelt - der Rest landet in Deponien oder der Natur.",
+    "category": "Umwelt"
+  },
+  {
+    "id": 84,
+    "question": "Wie viele Zentimeter ist der Meeresspiegel seit 1900 gestiegen?",
+    "answer": 23,
+    "hint": "Der Anstieg beschleunigt sich - die Haelfte davon passierte in den letzten 30 Jahren.",
+    "hint2": "Fuer viele Inselstaaten im Pazifik ist selbst dieser Anstieg bereits existenzbedrohend.",
+    "category": "Umwelt"
+  },
+  {
+    "id": 85,
+    "question": "Wie viele Milliarden Baeume werden weltweit pro Jahr gepflanzt (ungefaehr)?",
+    "answer": 17,
+    "hint": "Gleichzeitig werden aber jaehrlich noch mehr Baeume gefaellt - das Netto-Ergebnis ist ein Verlust.",
+    "hint2": "Fuer jeden Menschen auf der Erde stehen statistisch ueber 400 Baeume - die meisten davon im Norden Russlands.",
+    "category": "Umwelt"
+  },
+  {
+    "id": 86,
+    "question": "Wie viele Abgeordnete hat der Deutsche Bundestag ungefaehr (nach Wahl 2021)?",
+    "answer": 736,
+    "hint": "Der Bundestag ist damit einer der groessten nationalen Parlamente der Welt.",
+    "hint2": "Die regulaere Anzahl waere 598 - Ueberhang- und Ausgleichsmandate treiben die Zahl nach oben.",
+    "category": "Politik"
+  },
+  {
+    "id": 87,
+    "question": "Wie viele Laender sind Mitglied der Vereinten Nationen?",
+    "answer": 193,
+    "hint": "Fast jeder Staat der Erde ist dabei - nur sehr wenige Gebiete sind nicht Mitglied.",
+    "hint2": "Die UNO wurde kurz nach dem Zweiten Weltkrieg gegruendet - damals mit deutlich weniger Mitgliedern.",
+    "category": "Politik"
+  },
+  {
+    "id": 88,
+    "question": "Wie viele Millionen Menschen leben in der Europaeischen Union (ungefaehr)?",
+    "answer": 450,
+    "hint": "Damit ist die EU bevoelkerungsreicher als die USA - aber kleiner als China oder Indien.",
+    "hint2": "Nach dem Brexit hat die EU mehrere Millionen Einwohner verloren.",
+    "category": "Politik"
+  },
+  {
+    "id": 89,
+    "question": "Wie viele Arbeitstage Urlaub hat ein deutscher Arbeitnehmer gesetzlich mindestens pro Jahr?",
+    "answer": 20,
+    "hint": "Das ist der gesetzliche Mindestanspruch - die meisten Tarifvertraege liegen deutlich darueber.",
+    "hint2": "Im internationalen Vergleich liegt Deutschland damit im oberen Mittelfeld - die USA haben keinen gesetzlichen Mindesturlaubsanspruch.",
+    "category": "Politik"
+  },
+  {
+    "id": 90,
+    "question": "Wie viele Millionen Fluechtlinge gibt es weltweit (ca. 2023)?",
+    "answer": 110,
+    "hint": "Das ist der hoechste Stand seit dem Zweiten Weltkrieg - und die Zahl steigt weiter.",
+    "hint2": "Der groesste Teil bleibt in den Nachbarlaendern des Herkunftslandes - nicht in Europa oder Nordamerika.",
+    "category": "Politik"
+  },
+  {
+    "id": 91,
+    "question": "Wie viele Studioalben hat Michael Jackson solo veroeffentlicht?",
+    "answer": 10,
+    "hint": "Eines davon ist das meistverkaufte Album aller Zeiten - Thriller mit ueber 66 Millionen Exemplaren.",
+    "hint2": "Seinen ersten Nummer-1-Hit hatte er bereits als Kind - mit dem Jackson 5.",
+    "category": "Popkultur"
+  },
+  {
+    "id": 92,
+    "question": "Wie viele Milliarden Streams hatte Blinding Lights von The Weeknd auf Spotify (ungefaehr)?",
+    "answer": 4,
+    "hint": "Es war jahrelang das meistgestreamte Lied auf Spotify - bis es von neueren Songs ueberholt wurde.",
+    "hint2": "In Stunden umgerechnet waere das mehr Hoerzeit, als die Menschheit seit dem Mittelalter Lebenszeit hatte.",
+    "category": "Popkultur"
+  },
+  {
+    "id": 93,
+    "question": "Wie viele Staffeln hatte die Serie Game of Thrones?",
+    "answer": 8,
+    "hint": "Die ersten Staffeln gelten als Meisterwerke - die letzte wurde von Fans und Kritikern gleichermassen zerrissen.",
+    "hint2": "Die Buecher, auf denen die Serie basiert, sind bis heute nicht vollstaendig erschienen.",
+    "category": "Popkultur"
+  },
+  {
+    "id": 94,
+    "question": "Wie viele Grammys hat Beyonce insgesamt gewonnen (Stand 2023)?",
+    "answer": 32,
+    "hint": "Sie ist die Kuenstlerin mit den meisten Grammy-Gewinnen aller Zeiten.",
+    "hint2": "Trotzdem hat sie Album des Jahres bisher nie gewonnen - was zu einem laufenden Diskurs fuehrt.",
+    "category": "Popkultur"
+  },
+  {
+    "id": 95,
+    "question": "Wie viele Folgen hat die Serie Simpsons ungefaehr (Stand 2024)?",
+    "answer": 750,
+    "hint": "Die Show laeuft seit 1989 - viele Schauspieler sind in dieser Zeit gestorben oder ausgeschieden.",
+    "hint2": "Kein anderes Animationsprogramm in den USA hat mehr Folgen produziert.",
+    "category": "Popkultur"
+  },
+  {
+    "id": 96,
+    "question": "Eins zu wie vielen Millionen ist die Wahrscheinlichkeit, im deutschen Lotto (6 aus 49) den Jackpot zu knacken?",
+    "answer": 140,
+    "hint": "Man koennte jeden Tag seines Lebens spielen und trotzdem mit hoher Wahrscheinlichkeit nie gewinnen.",
+    "hint2": "Die Wahrscheinlichkeit, zweimal hintereinander vom Blitz getroffen zu werden, ist statistisch nicht viel kleiner.",
+    "category": "Wissenschaft"
+  },
+  {
+    "id": 97,
+    "question": "Wie viele Stellen hat die Shannon-Zahl (theoretisch moegliche Schachzuege)?",
+    "answer": 120,
+    "hint": "Das uebersteigt die Anzahl der Atome im beobachtbaren Universum um ein Vielfaches.",
+    "hint2": "Kein Computer kann deshalb alle Zuege durchrechnen - selbst die staerksten KIs spielen auf Basis von Heuristiken.",
+    "category": "Wissenschaft"
+  },
+  {
+    "id": 98,
+    "question": "Wie viele Prozent des menschlichen Genoms teilen wir mit einer Banane?",
+    "answer": 55,
+    "hint": "Das klingt schockierend - aber es zeigt, wie grundlegend manche biologischen Mechanismen sind, die alle Lebewesen teilen.",
+    "hint2": "Mit einem Schimpansen teilen wir ueber 98% - der Unterschied zu uns liegt oft in der Genregulation, nicht den Genen selbst.",
+    "category": "Wissenschaft"
+  },
+  {
+    "id": 99,
+    "question": "Wie viele Mal muesste man ein Blatt Papier falten, um die Dicke der Strecke Erde-Mond zu erreichen?",
+    "answer": 42,
+    "hint": "Jede Faltung verdoppelt die Dicke - nach 10 Faltungen ist das Papier bereits dicker als ein Buch.",
+    "hint2": "In der Praxis kann man ein Blatt Papier nur etwa 7-8 Mal falten - danach ist der Widerstand zu gross.",
+    "category": "Wissenschaft"
+  },
+  {
+    "id": 100,
+    "question": "Wie viele Milliarden Mal hat das menschliche Herz bis zum 70. Geburtstag geschlagen?",
+    "answer": 3,
+    "hint": "Das Herz macht dabei keine einzige Pause - es schlaegt von der 4. Schwangerschaftswoche bis zum Tod.",
+    "hint2": "Trotzdem nutzt es sich kaum ab - die meisten Herzprobleme entstehen durch aeussere Faktoren wie Ernaehrung und Stress.",
+    "category": "Wissenschaft"
   }
 ]
