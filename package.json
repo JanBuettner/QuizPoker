@@ -9,7 +9,7 @@
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "build": "vite build --config client/vite.config.ts",
     "start": "node --loader tsx server/index.ts",
-    "render:build": "npm install && npm run build"
+    "render:build": "npm install --include=dev && npm run build"
   },
   "dependencies": {
     "@discord/embedded-app-sdk": "^2.4.1",
