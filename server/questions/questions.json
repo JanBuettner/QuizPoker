@@ -3,480 +3,480 @@
     "id": 1,
     "question": "Wie viele Knochen hat ein erwachsener Mensch?",
     "answer": 206,
-    "hint": "Es sind mehr als 150, aber weniger als 250.",
-    "hint2": "Es ist eine gerade Zahl zwischen 200 und 210.",
+    "hint": "Mehr als die Anzahl der UN-Mitgliedstaaten (193), aber weniger als die Folgen von 'Friends'",
+    "hint2": "Ungefaehr so viele wie die Anzahl der Laender der Welt minus Frankreich, Spanien und Portugal... okay, fast genau die Anzahl der Laender minus null",
     "category": "Wissenschaft"
   },
   {
     "id": 2,
     "question": "Wie viele Länder gibt es auf der Welt (UN-Mitgliedstaaten)?",
     "answer": 193,
-    "hint": "Es sind mehr als 180, aber weniger als 200.",
-    "hint2": "Es ist eine ungerade Zahl zwischen 190 und 196.",
+    "hint": "Weniger als die Knochen im menschlichen Koerper, aber mehr als die Pokemon der ersten Generation (151)",
+    "hint2": "Wenn du alle Tasten eines Klaviers doppelt zaehlst und dann 17 Gaeste rauswirfst, bist du da",
     "category": "Geografie"
   },
   {
     "id": 3,
     "question": "In welchem Jahr wurde die Berliner Mauer gebaut?",
     "answer": 1961,
-    "hint": "Es war in den frühen 1960er Jahren.",
-    "hint2": "Es war ein ungerades Jahr zwischen 1960 und 1963.",
+    "hint": "Juri Gagarin flog im selben Jahr als erster Mensch ins All - ein bewegtes Jahr!",
+    "hint2": "Kennedy war gerade frisch im Amt und die Beatles hatten noch keinen Hit - ein Jahr nach den Olympischen Spielen in Rom",
     "category": "Geschichte"
   },
   {
     "id": 4,
     "question": "Wie viele Tasten hat ein Standard-Klavier?",
     "answer": 88,
-    "hint": "Es sind mehr als 70, aber weniger als 100.",
-    "hint2": "Es ist eine gerade Zahl zwischen 85 und 92.",
+    "hint": "Mehr als die Anzahl der Constellations (Sternbilder) am Himmel, aber weniger als ein Fussballspiel in Minuten dauert",
+    "hint2": "Genau so viele wie Michael Jordans Rueckennummer... mal 4",
     "category": "Alltag"
   },
   {
     "id": 5,
     "question": "Wie hoch ist der Mount Everest in Metern?",
     "answer": 8849,
-    "hint": "Er ist zwischen 8500 und 9000 Meter hoch.",
-    "hint2": "Er ist zwischen 8830 und 8860 Meter hoch.",
+    "hint": "Etwa so hoch wie 25 Eiffeltuerne uebereinander gestapelt",
+    "hint2": "Wenn du den Marianengraben fuellen wuerdest, brauchtest du noch gut 2000 Meter mehr Wasser als der Everest hoch ist",
     "category": "Geografie"
   },
   {
     "id": 6,
     "question": "Wie viele Zähne hat ein erwachsener Mensch (inkl. Weisheitszähne)?",
     "answer": 32,
-    "hint": "Es sind mehr als 25, aber weniger als 40.",
-    "hint2": "Es ist eine gerade Zahl zwischen 30 und 36.",
+    "hint": "Genau so viele wie die Felder auf einer Schachbrett-Haelfte",
+    "hint2": "Ein Kartenspiel ohne Joker hat 20 mehr als du Zaehne hast",
     "category": "Wissenschaft"
   },
   {
     "id": 7,
     "question": "In welchem Jahr fanden die ersten modernen Olympischen Spiele statt?",
     "answer": 1896,
-    "hint": "Es war gegen Ende des 19. Jahrhunderts.",
-    "hint2": "Es war ein Schaltjahr in den 1890er Jahren.",
+    "hint": "Im selben Jahrzehnt, in dem auch Roentgenstrahlen entdeckt wurden und das erste Auto gebaut wurde",
+    "hint2": "4 Jahre vor der Jahrhundertwende, im selben Jahr in dem in Athen Geschichte geschrieben wurde - logisch, denn dort fanden sie statt!",
     "category": "Sport"
   },
   {
     "id": 8,
     "question": "Wie viele Folgen hat die Serie 'Friends' insgesamt?",
     "answer": 236,
-    "hint": "Es sind mehr als 200, aber weniger als 260.",
-    "hint2": "Es ist eine gerade Zahl zwischen 230 und 240.",
+    "hint": "Mehr als Knochen im menschlichen Koerper (206), aber weniger als Tage in einem Jahr",
+    "hint2": "Wenn du jeden Tag eine Folge schaust, bist du nach etwa 8 Monaten durch - aber nicht ganz",
     "category": "Popkultur"
   },
   {
     "id": 9,
     "question": "Wie viele Elemente stehen im Periodensystem (Stand 2024)?",
     "answer": 118,
-    "hint": "Es sind mehr als 100, aber weniger als 130.",
-    "hint2": "Es ist eine gerade Zahl zwischen 115 und 120.",
+    "hint": "Mehr als die Anzahl der Tasten auf einem Klavier (88), aber weniger als ein Gepard km/h schafft",
+    "hint2": "Ziemlich genau die Anzahl der Folgen von 'Seinfeld' geteilt durch 1.5",
     "category": "Wissenschaft"
   },
   {
     "id": 10,
     "question": "Wie viele Bundesländer hat Deutschland?",
     "answer": 16,
-    "hint": "Es sind mehr als 10, aber weniger als 20.",
-    "hint2": "Es ist eine gerade Zahl zwischen 14 und 18.",
+    "hint": "Mehr als die Anzahl der Spieler einer Fussballmannschaft, aber weniger als die Zaehne deiner Katze",
+    "hint2": "So viele wie die Figuren auf einer Seite des Schachbretts zu Spielbeginn",
     "category": "Geografie"
   },
   {
     "id": 11,
     "question": "Wie lang ist der Amazonas in Kilometern (ungefähr)?",
     "answer": 6400,
-    "hint": "Er ist zwischen 6000 und 7000 Kilometer lang.",
-    "hint2": "Er ist zwischen 6300 und 6500 Kilometer lang.",
+    "hint": "Laenger als die Entfernung von Berlin nach New York per Luftlinie (ca. 6380 km) - knapp!",
+    "hint2": "Wenn du mit dem Auto bei Tempo 100 fahren wuerdest, brauchst du fast 3 Tage ohne Pause",
     "category": "Geografie"
   },
   {
     "id": 12,
     "question": "Wie viele Spieler stehen beim American Football pro Team auf dem Feld?",
     "answer": 11,
-    "hint": "Es sind mehr als 8, aber weniger als 15.",
-    "hint2": "Es ist eine ungerade Zahl zwischen 10 und 13.",
+    "hint": "Genau so viele wie bei einem anderen sehr beliebten Sport, der mit dem Fuss gespielt wird",
+    "hint2": "So viele wie die Zahl, die in 'Ocean's Eleven' im Titel steht",
     "category": "Sport"
   },
   {
     "id": 13,
     "question": "In welchem Jahr wurde das iPhone erstmals vorgestellt?",
     "answer": 2007,
-    "hint": "Es war in der zweiten Hälfte der 2000er Jahre.",
-    "hint2": "Es war ein ungerades Jahr zwischen 2005 und 2009.",
+    "hint": "Im selben Jahr erschien auch der letzte Harry-Potter-Band und der erste 'Transformers'-Film",
+    "hint2": "Ein Jahr nachdem die Fussball-WM in Deutschland stattfand und Pluto zum Zwergplaneten degradiert wurde",
     "category": "Technik"
   },
   {
     "id": 14,
     "question": "Wie viele Herzen hat ein Oktopus?",
     "answer": 3,
-    "hint": "Es sind mehr als 1, aber weniger als 5.",
-    "hint2": "Es ist eine ungerade Zahl zwischen 2 und 4.",
+    "hint": "Mehr als ein Mensch, aber weniger als ein Regenwurm (der hat 5)",
+    "hint2": "So viele wie Medaillenfarben bei Olympia: Gold, Silber, Bronze",
     "category": "Natur"
   },
   {
     "id": 15,
     "question": "Wie hoch ist der Eiffelturm in Metern (ohne Antenne)?",
     "answer": 330,
-    "hint": "Er ist zwischen 300 und 360 Meter hoch.",
-    "hint2": "Er ist zwischen 325 und 335 Meter hoch.",
+    "hint": "Hoeher als die Freiheitsstatue (93m), aber niedriger als das Empire State Building (443m)",
+    "hint2": "Ungefaehr so hoch wie ein 110-stoeckiges Wohnhaus - oder 3 Fussballfelder hintereinander aufgestellt",
     "category": "Geografie"
   },
   {
     "id": 16,
     "question": "Wie viele WM-Titel hat Brasilien im Fußball gewonnen (bis 2022)?",
     "answer": 5,
-    "hint": "Es sind mehr als 3, aber weniger als 7.",
-    "hint2": "Es ist eine ungerade Zahl zwischen 4 und 6.",
+    "hint": "So viele wie Finger an einer Hand oder Ringe bei den Olympischen Spielen",
+    "hint2": "Genau so viele wie Staffeln von 'Breaking Bad'",
     "category": "Sport"
   },
   {
     "id": 17,
     "question": "Wie viele Chromosomen hat ein Mensch?",
     "answer": 46,
-    "hint": "Es sind mehr als 40, aber weniger als 50.",
-    "hint2": "Es ist eine gerade Zahl zwischen 44 und 48.",
+    "hint": "Weniger als ein Kartenspiel Karten hat (52), aber mehr als die Punkte auf zwei Wuerfeln (42)",
+    "hint2": "Genau so viele wie die Anzahl der US-Praesidenten von Washington bis Biden (46.)",
     "category": "Wissenschaft"
   },
   {
     "id": 18,
     "question": "In welchem Jahr landeten die ersten Menschen auf dem Mond?",
     "answer": 1969,
-    "hint": "Es war in den späten 1960er Jahren.",
-    "hint2": "Es war ein ungerades Jahr zwischen 1967 und 1970.",
+    "hint": "Im selben Jahr fand auch Woodstock statt - Hippies auf der Erde, Astronauten im All",
+    "hint2": "Das beruehmte 'Summer of 69' von Bryan Adams - ob er DEN Sommer meinte?",
     "category": "Geschichte"
   },
   {
     "id": 19,
     "question": "Wie viele Streifen hat die US-amerikanische Flagge?",
     "answer": 13,
-    "hint": "Es sind mehr als 10, aber weniger als 16.",
-    "hint2": "Es ist eine ungerade Zahl zwischen 12 und 15.",
+    "hint": "So viele wie ein Baecker Broeztchen in ein 'Baeckerdutzend' packt",
+    "hint2": "Genau so viele wie die urspruenglichen Kolonien - und wie Buchstaben im hawaiianischen Alphabet!",
     "category": "Geografie"
   },
   {
     "id": 20,
     "question": "Wie viele Minuten dauert ein Standardfußballspiel (ohne Nachspielzeit)?",
     "answer": 90,
-    "hint": "Es sind mehr als 60, aber weniger als 120.",
-    "hint2": "Es ist eine runde Zahl zwischen 80 und 100.",
+    "hint": "Laenger als eine Schulstunde (45 Min) - aber genau zwei davon hintereinander!",
+    "hint2": "So viele Minuten wie Grad in einem rechten Winkel",
     "category": "Sport"
   },
   {
     "id": 21,
     "question": "Wie viele Harry-Potter-Bücher gibt es in der Hauptreihe?",
     "answer": 7,
-    "hint": "Es sind mehr als 5, aber weniger als 10.",
-    "hint2": "Es ist eine ungerade Zahl zwischen 6 und 9.",
+    "hint": "So viele wie Zwerge bei Schneewittchen oder Tage in einer Woche",
+    "hint2": "Genau so viele wie Dragonballs man sammeln muss fuer einen Wunsch",
     "category": "Popkultur"
   },
   {
     "id": 22,
     "question": "Wie schnell ist Lichtgeschwindigkeit in km/s (ungefähr)?",
     "answer": 300000,
-    "hint": "Es sind zwischen 250.000 und 350.000 km/s.",
-    "hint2": "Es ist eine runde Zahl zwischen 295.000 und 305.000 km/s.",
+    "hint": "In einer Sekunde koenntest du damit 7,5 Mal um die Erde reisen",
+    "hint2": "Eine schoene runde Zahl mit fuenf Nullen - wie dreimal hunderttausend",
     "category": "Wissenschaft"
   },
   {
     "id": 23,
     "question": "In welchem Jahr begann der Zweite Weltkrieg?",
     "answer": 1939,
-    "hint": "Es war gegen Ende der 1930er Jahre.",
-    "hint2": "Es war ein ungerades Jahr zwischen 1937 und 1940.",
+    "hint": "Im selben Jahr kam 'Der Zauberer von Oz' und 'Vom Winde verweht' ins Kino",
+    "hint2": "Ein Jahr vor der Olympiade, die dann wegen des Krieges ausfiel (1940), und im selben Jahr wie Batmans erster Comic-Auftritt",
     "category": "Geschichte"
   },
   {
     "id": 24,
     "question": "Wie viele Punkte sind auf einem Standard-Würfelpaar insgesamt?",
     "answer": 42,
-    "hint": "Es sind mehr als 35, aber weniger als 50.",
-    "hint2": "Es ist eine gerade Zahl zwischen 40 und 44.",
+    "hint": "Laut 'Per Anhalter durch die Galaxis' ist das die Antwort auf alles!",
+    "hint2": "Douglas Adams kannte wohl diesen Wuerfel-Fakt: Die Antwort auf die grosse Frage des Lebens, des Universums und des ganzen Rests",
     "category": "Alltag"
   },
   {
     "id": 25,
     "question": "Wie viele Meter tief ist der Marianengraben ungefähr?",
     "answer": 11034,
-    "hint": "Er ist zwischen 10.000 und 12.000 Meter tief.",
-    "hint2": "Er ist zwischen 10.900 und 11.100 Meter tief.",
+    "hint": "Tiefer als der Mount Everest hoch ist (8849m) - du koenntest den Everest reinwerfen und er wuerde komplett versinken!",
+    "hint2": "Etwa 2200 Meter tiefer als der Everest hoch ist - stell dir vor, ueber dem versunkenen Gipfel waeren noch ueber 2 km Wasser",
     "category": "Geografie"
   },
   {
     "id": 26,
     "question": "Wie viele Kalorien hat ein Liter Cola ungefähr?",
     "answer": 420,
-    "hint": "Es sind zwischen 350 und 500 Kalorien.",
-    "hint2": "Es ist eine Zahl zwischen 400 und 440, teilbar durch 10.",
+    "hint": "Ungefaehr so viel Kalorien wie eine ganze Tafel Schokolade - fuer eine Fluessigkeit ganz schoen heftig",
+    "hint2": "So viele wie die Entfernung in Metern, die ein Fussballer mindestens an Ball-Gewicht in Gramm mitbringt (FIFA-Mindestgewicht!)",
     "category": "Alltag"
   },
   {
     "id": 27,
     "question": "Wie viele Oscars hat der Film 'Titanic' gewonnen?",
     "answer": 11,
-    "hint": "Es sind mehr als 8, aber weniger als 14.",
-    "hint2": "Es ist eine ungerade Zahl zwischen 10 und 13.",
+    "hint": "So viele wie Spieler in einer Fussballmannschaft auf dem Feld stehen",
+    "hint2": "Genau so viele wie Spieler beim American Football pro Team - und teilt sich den Rekord mit 'Ben Hur' und 'Herr der Ringe 3'",
     "category": "Popkultur"
   },
   {
     "id": 28,
     "question": "Wie alt wurde die älteste jemals dokumentierte Person (in Jahren)?",
     "answer": 122,
-    "hint": "Sie wurde zwischen 110 und 130 Jahre alt.",
-    "hint2": "Es ist eine gerade Zahl zwischen 120 und 125.",
+    "hint": "Aelter als ein Riesenschildkroeten-Durchschnitt, aber juenger als manche Groenlandhaie werden",
+    "hint2": "Jeanne Calment aus Frankreich ueberlebte sogar den Eiffelturm fast - sie war aelter als das Periodensystem Elemente hat (118)",
     "category": "Wissenschaft"
   },
   {
     "id": 29,
     "question": "Wie viele Meter beträgt die Flügelspannweite eines Airbus A380?",
     "answer": 80,
-    "hint": "Sie ist zwischen 60 und 90 Meter.",
-    "hint2": "Es ist eine runde Zahl zwischen 75 und 85 Metern.",
+    "hint": "Breiter als ein Fussballfeld lang ist? Nein, knapp nicht - aber nah dran an einem kompletten Spielfeld!",
+    "hint2": "Ungefaehr so breit wie die Laenge von 8 Reisebussen hintereinander",
     "category": "Technik"
   },
   {
     "id": 30,
     "question": "In welchem Jahr wurde WhatsApp gegründet?",
     "answer": 2009,
-    "hint": "Es war zwischen 2007 und 2011.",
-    "hint2": "Es war ein ungerades Jahr zwischen 2008 und 2010.",
+    "hint": "Im selben Jahr wurde Barack Obama als US-Praesident vereidigt und Michael Jackson starb",
+    "hint2": "Zwei Jahre nach dem ersten iPhone - die Gruender waren uebrigens Ex-Yahoo-Mitarbeiter",
     "category": "Technik"
   },
   {
     "id": 31,
     "question": "Wie viele Inseln gehören zu den Philippinen (ungefähr)?",
     "answer": 7641,
-    "hint": "Es sind zwischen 7000 und 8000 Inseln.",
-    "hint2": "Es sind zwischen 7500 und 7700 Inseln.",
+    "hint": "Mehr Inseln als Tage in 20 Jahren! Wenn du jeden Tag eine Insel besuchen wuerdest, brauchst du ueber 20 Jahre",
+    "hint2": "Etwa 7 mal so viele wie Tage in 3 Jahren - da kannst du lange Inselhopping machen",
     "category": "Geografie"
   },
   {
     "id": 32,
     "question": "Wie schwer ist ein Fußball in Gramm (Mindestgewicht nach FIFA)?",
     "answer": 410,
-    "hint": "Er wiegt zwischen 350 und 450 Gramm.",
-    "hint2": "Es ist eine Zahl zwischen 400 und 420, teilbar durch 10.",
+    "hint": "Ungefaehr so schwer wie eine Dose Ravioli - ja, wirklich!",
+    "hint2": "Etwas leichter als ein Liter Cola Kalorien hat - und ziemlich genau so schwer wie 4 Tafeln Schokolade",
     "category": "Sport"
   },
   {
     "id": 33,
     "question": "Wie viele Spielkarten enthält ein Standard-Pokerdeck?",
     "answer": 52,
-    "hint": "Es sind mehr als 40, aber weniger als 60.",
-    "hint2": "Es ist eine gerade Zahl zwischen 50 und 55.",
+    "hint": "So viele wie Wochen in einem Jahr!",
+    "hint2": "Genau so viele wie Wochen im Jahr - 4 Farben mal 13 Werte, fuer Mathematiker",
     "category": "Alltag"
   },
   {
     "id": 34,
     "question": "Wie viele Kilometer ist die Erde von der Sonne entfernt (in Millionen)?",
     "answer": 150,
-    "hint": "Es sind zwischen 130 und 170 Millionen Kilometer.",
-    "hint2": "Es ist eine runde Zahl zwischen 145 und 155 Millionen.",
+    "hint": "Ungefaehr so viele Millionen km wie ein Blauwal Tonnen wiegt - kosmischer Zufall!",
+    "hint2": "Eine schoene runde Zahl - Licht braucht etwa 8 Minuten fuer diese Strecke",
     "category": "Wissenschaft"
   },
   {
     "id": 35,
     "question": "Wie viele Steinlagen hat die Cheops-Pyramide?",
     "answer": 203,
-    "hint": "Es sind zwischen 180 und 220 Stufen.",
-    "hint2": "Es ist eine ungerade Zahl zwischen 200 und 208.",
+    "hint": "Ungefaehr so viele wie Knochen im menschlichen Koerper - die alten Aegypter hatten wohl einen Plan",
+    "hint2": "Knapp ueber 200, aber weniger als Knochen im Koerper (206) - die Pyramide ist also fast ein Skelett aus Stein",
     "category": "Geschichte"
   },
   {
     "id": 36,
     "question": "Wie viele Filme gibt es in der 'Fast & Furious'-Hauptreihe (bis 2023)?",
     "answer": 10,
-    "hint": "Es sind mehr als 7, aber weniger als 13.",
-    "hint2": "Es ist eine gerade Zahl zwischen 9 und 12.",
+    "hint": "So viele wie Finger an beiden Haenden - Vin Diesel braucht alle zum Zaehlen",
+    "hint2": "Genau so viele wie Gebote in der Bibel - du sollst nicht zu langsam fahren waere sicher dabei",
     "category": "Popkultur"
   },
   {
     "id": 37,
     "question": "Wie hoch kann ein Känguru in Metern springen?",
     "answer": 3,
-    "hint": "Es ist zwischen 2 und 5 Metern.",
-    "hint2": "Es ist eine ganze Zahl zwischen 2 und 4.",
+    "hint": "Hoeher als die meisten Menschen gross sind, aber nicht hoch genug fuer einen Basketballkorb (3,05m)",
+    "hint2": "Knapp unter Basketballkorb-Hoehe - ein Kaenguru koennte fast dunken!",
     "category": "Natur"
   },
   {
     "id": 38,
     "question": "Wie viele Quadratkilometer hat Deutschland ungefähr?",
     "answer": 357588,
-    "hint": "Es sind zwischen 300.000 und 400.000 km².",
-    "hint2": "Es sind zwischen 350.000 und 365.000 km².",
+    "hint": "Kleiner als Japan (378.000 km²), aber groesser als die Nordsee (ca. 575.000 km²)... warte, andersrum: groesser als Vietnam!",
+    "hint2": "Etwas kleiner als Japan, aber groesser als die Republik Kongo - stell dir 50 Millionen Fussballfelder vor",
     "category": "Geografie"
   },
   {
     "id": 39,
     "question": "Wie viele Saisontore schoss Gerd Müller in der Bundesliga-Saison 1971/72?",
     "answer": 40,
-    "hint": "Es sind zwischen 35 und 45 Tore.",
-    "hint2": "Es ist eine runde Zahl zwischen 38 und 42.",
+    "hint": "So viele wie Ali Baba Raeuber hatte - ein ebenso maerchenhafter Rekord!",
+    "hint2": "Eine schoene runde Zahl - exakt doppelt so viele wie Spieler in beiden Fussballmannschaften zusammen auf dem Feld",
     "category": "Sport"
   },
   {
     "id": 40,
     "question": "In welchem Jahr wurde Wikipedia gegründet?",
     "answer": 2001,
-    "hint": "Es war ganz am Anfang des 21. Jahrhunderts.",
-    "hint2": "Es war ein ungerades Jahr zwischen 2000 und 2003.",
+    "hint": "Im selben Jahr wie der erste Harry-Potter-Film und ein gewisser Anschlag, der die Welt veraenderte",
+    "hint2": "Kubricks '2001: Odyssee im Weltraum' wurde im Titel prophetisch - das Internet bekam sein Lexikon",
     "category": "Technik"
   },
   {
     "id": 41,
     "question": "Wie viele Einwohner hat die Praefektur Tokio in Millionen (ungefaehr)?",
     "answer": 14,
-    "hint": "Es sind zwischen 10 und 18 Millionen.",
-    "hint2": "Es ist eine gerade Zahl zwischen 13 und 16.",
+    "hint": "Mehr Menschen als in ganz Bayern leben und fast so viele wie in den gesamten Niederlanden",
+    "hint2": "So viele Millionen wie Tage in zwei Wochen - und mehr als ganz Belgien Einwohner hat",
     "category": "Geografie"
   },
   {
     "id": 42,
     "question": "Wie viele Staffeln hat die Serie 'Breaking Bad'?",
     "answer": 5,
-    "hint": "Es sind weniger als 8, aber mehr als 3.",
-    "hint2": "Es ist eine ungerade Zahl zwischen 4 und 7.",
+    "hint": "So viele wie Brasiliens Fussball-WM-Titel oder olympische Ringe",
+    "hint2": "So viele wie Finger an einer Hand - Walter White hatte fuer jede Staffel einen Finger am Abzug",
     "category": "Popkultur"
   },
   {
     "id": 43,
     "question": "Wie viele Kilometer pro Stunde kann ein Gepard maximal erreichen?",
     "answer": 120,
-    "hint": "Es sind zwischen 100 und 140 km/h.",
-    "hint2": "Es ist eine runde Zahl zwischen 115 und 125 km/h.",
+    "hint": "So schnell wie man auf der Autobahn in vielen Laendern maximal fahren darf",
+    "hint2": "Genau das Tempolimit, ueber das Deutschland seit Jahrzehnten diskutiert - der Gepard haelt sich also an Richtgeschwindigkeit!",
     "category": "Natur"
   },
   {
     "id": 44,
     "question": "Wie viele Pixel hatte die Kamera des ersten iPhones (in Megapixeln)?",
     "answer": 2,
-    "hint": "Es war weniger als 5 Megapixel.",
-    "hint2": "Es ist eine gerade Zahl zwischen 1 und 4.",
+    "hint": "Weniger Megapixel als ein Oktopus Herzen hat (3) - heute undenkbar!",
+    "hint2": "So viele wie Augen im Gesicht - Steve Jobs fand das damals voellig ausreichend",
     "category": "Technik"
   },
   {
     "id": 45,
     "question": "Wie viele Stunden dauert ein Flug von Frankfurt nach New York ungefähr?",
     "answer": 9,
-    "hint": "Es sind zwischen 7 und 11 Stunden.",
-    "hint2": "Es ist eine ungerade Zahl zwischen 8 und 10.",
+    "hint": "Laenger als ein Arbeitstag (8 Stunden), aber kuerzer als eine Nacht Schlaf fuer Langschlaefer",
+    "hint2": "So viele Stunden wie Laender an Deutschland grenzen",
     "category": "Alltag"
   },
   {
     "id": 46,
     "question": "In welchem Jahr wurde die Titanic gebaut (Stapellauf)?",
     "answer": 1911,
-    "hint": "Es war kurz vor dem Ersten Weltkrieg.",
-    "hint2": "Es war ein ungerades Jahr zwischen 1909 und 1913.",
+    "hint": "Ein Jahr bevor sie auf tragische Weise beruehmt wurde - die Titanic schwamm nicht lange",
+    "hint2": "Im selben Jahr erreichte Roald Amundsen den Suedpol - auch eine kalte Angelegenheit",
     "category": "Geschichte"
   },
   {
     "id": 47,
     "question": "Wie viele Zacken hat ein Schneeflocken-Kristall typischerweise?",
     "answer": 6,
-    "hint": "Es sind weniger als 10, aber mehr als 4.",
-    "hint2": "Es ist eine gerade Zahl zwischen 5 und 8.",
+    "hint": "So viele wie Seiten eines Wuerfels oder Saiten auf einer Gitarre",
+    "hint2": "Halb so viele wie Spinnen Beine haben - die Natur liebt Symmetrie!",
     "category": "Natur"
   },
   {
     "id": 48,
     "question": "Wie viele Grand-Slam-Titel hat Roger Federer gewonnen?",
     "answer": 20,
-    "hint": "Es sind zwischen 15 und 25 Titel.",
-    "hint2": "Es ist eine runde Zahl zwischen 18 und 22.",
+    "hint": "So viele wie Finger und Zehen zusammen - eine runde Sache fuer den Maestro",
+    "hint2": "Genau so viele wie Milchzaehne ein Kind hat - und zwei weniger als Nadal Grand Slams gewann (22)",
     "category": "Sport"
   },
   {
     "id": 49,
     "question": "Wie viele Tonnen wiegt ein ausgewachsener Blauwal ungefähr?",
     "answer": 150,
-    "hint": "Es sind zwischen 100 und 200 Tonnen.",
-    "hint2": "Es ist eine runde Zahl zwischen 140 und 160 Tonnen.",
+    "hint": "So schwer wie etwa 30 ausgewachsene Elefanten! Stell dir das mal im Zoo vor",
+    "hint2": "Zufaellig genau so viele Tonnen wie die Erde Millionen Kilometer von der Sonne entfernt ist",
     "category": "Natur"
   },
   {
     "id": 50,
     "question": "In welchem Jahr wurde die Mona Lisa von Leonardo da Vinci begonnen?",
     "answer": 1503,
-    "hint": "Es war ganz am Anfang des 16. Jahrhunderts.",
-    "hint2": "Es war ein ungerades Jahr zwischen 1500 und 1506.",
+    "hint": "Etwa ein Jahrzehnt nachdem Kolumbus Amerika entdeckte (1492)",
+    "hint2": "Drei Jahre nachdem die Jahreszahl eine 1 und eine 5 vorne bekam - Leonardo war gerade 51 Jahre alt",
     "category": "Geschichte"
   },
   {
     "id": 51,
     "question": "Wie viele Länder grenzen an Deutschland?",
     "answer": 9,
-    "hint": "Es sind mehr als 7, aber weniger als 12.",
-    "hint2": "Es ist eine ungerade Zahl zwischen 8 und 11.",
+    "hint": "Mehr als die Wochentage (7), aber weniger als Spieler beim Fussball (11)",
+    "hint2": "So viele wie Planeten im Sonnensystem (wenn man Pluto nicht mitzaehlt) - Deutschland ist halt beliebt bei den Nachbarn",
     "category": "Geografie"
   },
   {
     "id": 52,
     "question": "Wie viele Monde hat der Jupiter (bestätigte, Stand 2024)?",
     "answer": 95,
-    "hint": "Es sind zwischen 80 und 100 Monde.",
-    "hint2": "Es ist eine ungerade Zahl zwischen 92 und 98.",
+    "hint": "Fast so viele wie Tasten auf einem Klavier (88) - Jupiter sammelt Monde wie andere Planeten Staub",
+    "hint2": "Mehr als ein Fussballspiel Minuten hat (90), aber weniger als Stockwerke im Empire State Building (102)",
     "category": "Wissenschaft"
   },
   {
     "id": 53,
     "question": "Wie viele Buchstaben hat das hawaiianische Alphabet?",
     "answer": 13,
-    "hint": "Es sind weniger als 20, aber mehr als 10.",
-    "hint2": "Es ist eine ungerade Zahl zwischen 12 und 15.",
+    "hint": "So viele wie Streifen auf der US-Flagge oder eine Unglueckszahl im Aufzug",
+    "hint2": "Halb so viele wie das deutsche Alphabet (ohne Umlaute, 26) - Aloha reicht eben mit weniger Buchstaben!",
     "category": "Alltag"
   },
   {
     "id": 54,
     "question": "Wie viele Stockwerke hat das Empire State Building?",
     "answer": 102,
-    "hint": "Es sind zwischen 90 und 110 Stockwerke.",
-    "hint2": "Es ist eine gerade Zahl zwischen 100 und 105.",
+    "hint": "Mehr als die Anzahl der Dalmatiner im Film (101) - und das ist kein Zufall, es ist genau eins mehr!",
+    "hint2": "King Kong kletterte genau ein Stockwerk mehr als Dalmatiner im Film rannten - die Zahl ist dreistellig und beginnt mit 10",
     "category": "Geografie"
   },
   {
     "id": 55,
     "question": "Wie viele Tasten hat eine Standard-PC-Tastatur?",
     "answer": 105,
-    "hint": "Es sind zwischen 90 und 110 Tasten.",
-    "hint2": "Es ist eine ungerade Zahl zwischen 103 und 108.",
+    "hint": "Mehr als ein Fussballfeld Meter lang ist (100-110m) und mehr als die Dalmatiner im Film (101)",
+    "hint2": "Etwas mehr als das Empire State Building Stockwerke hat (102) - deine Tastatur ist hoeher als King Kongs Kletterturm!",
     "category": "Technik"
   },
   {
     "id": 56,
     "question": "Wie viele Staffeln hat 'Game of Thrones'?",
     "answer": 8,
-    "hint": "Es sind weniger als 10, aber mehr als 6.",
-    "hint2": "Es ist eine gerade Zahl zwischen 7 und 9.",
+    "hint": "So viele wie Planeten im Sonnensystem (mit Pluto waeren es 9 gewesen, aber Pluto wurde degradiert wie Cersei)",
+    "hint2": "So viele wie Beine einer Spinne - und das Ende war genauso gruselig",
     "category": "Popkultur"
   },
   {
     "id": 57,
     "question": "In welchem Jahr erschien das erste 'Super Mario'-Spiel?",
     "answer": 1985,
-    "hint": "Es war Mitte der 1980er Jahre.",
-    "hint2": "Es war ein ungerades Jahr zwischen 1983 und 1987.",
+    "hint": "Im selben Jahr wurde Boris Becker juengster Wimbledon-Sieger - beide wurden Legenden!",
+    "hint2": "Back to the Future kam im selben Jahr ins Kino - Mario und Marty McFly sind also gleich alt",
     "category": "Popkultur"
   },
   {
     "id": 58,
     "question": "Wie viele Jahre kann eine Galapagos-Riesenschildkroete alt werden?",
     "answer": 175,
-    "hint": "Sie werden zwischen 150 und 200 Jahre alt.",
-    "hint2": "Es ist eine ungerade Zahl zwischen 170 und 180.",
+    "hint": "Aelter als die aelteste dokumentierte Person (122 Jahre) - Schildkroeten lachen ueber menschliche Lebensspannen",
+    "hint2": "Etwa so viele Jahre wie die USA unabhaengig waren, als sie ihren 175. Geburtstag feierten (1951) - ungefaehr 3 Menschenleben!",
     "category": "Natur"
   },
   {
     "id": 59,
     "question": "Wie viele Hai-Arten gibt es ungefaehr?",
     "answer": 500,
-    "hint": "Es sind zwischen 400 und 600 Arten.",
-    "hint2": "Es ist eine runde Zahl zwischen 480 und 520.",
+    "hint": "So viele wie ein Fiat-Auto im Namen traegt - oder wie Briefpapier im Standardpaket",
+    "hint2": "Eine schoene runde Zahl - genau die Haelfte von 1000. In 'Findet Nemo' haben sie nur einen gezeigt!",
     "category": "Natur"
   },
   {
     "id": 60,
     "question": "Wie viele Jahre dauerte der Hundertjaehrige Krieg?",
     "answer": 116,
-    "hint": "Es waren mehr als 100, aber weniger als 120 Jahre.",
-    "hint2": "Es ist eine gerade Zahl zwischen 114 und 118.",
+    "hint": "Die groesste Luege der Geschichtsschreibung: Er dauerte NICHT hundert Jahre, sondern laenger!",
+    "hint2": "Mehr als die Elemente im Periodensystem (118)... warte, nein, etwas weniger! Knapp drunter",
     "category": "Geschichte"
   }
 ]
