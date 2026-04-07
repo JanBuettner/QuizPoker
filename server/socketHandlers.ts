@@ -39,8 +39,13 @@ function broadcastState(room: GameRoom, io: TypedServer): void {
     const adminState = room.getAdminState();
     io.to(room.adminId).emit('gameState', adminState);
   }
-  // Let bots act with a short delay for natural feel
-  setTimeout(() => room.tickBots(), 800 + Math.random() * 1200);
+  // Let bots act with a short delay - debounce to prevent double ticks
+  const botKey = `bot_${room.code}`;
+  if ((broadcastState as any)[botKey]) clearTimeout((broadcastState as any)[botKey]);
+  (broadcastState as any)[botKey] = setTimeout(() => {
+    delete (broadcastState as any)[botKey];
+    room.tickBots();
+  }, 800 + Math.random() * 1200);
 }
 
 function getRoomForSocket(socketId: string): { room: GameRoom; roomCode: string; isAdmin: boolean } | null {

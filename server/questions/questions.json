@@ -27,7 +27,7 @@
     "id": 4,
     "question": "Wie viele Tasten hat ein Standard-Klavier?",
     "answer": 88,
-    "hint": "Mehr als die Anzahl der Constellations (Sternbilder) am Himmel, aber weniger als ein Fussballspiel in Minuten dauert",
+    "hint": "Genau so viele wie offiziell anerkannte Sternbilder am Himmel, und weniger als ein Fussballspiel in Minuten dauert",
     "hint2": "Genau so viele wie Michael Jordans Rueckennummer... mal 4",
     "category": "Alltag"
   },
@@ -68,7 +68,7 @@
     "question": "Wie viele Elemente stehen im Periodensystem (Stand 2024)?",
     "answer": 118,
     "hint": "Mehr als die Anzahl der Tasten auf einem Klavier (88), aber weniger als ein Gepard km/h schafft",
-    "hint2": "Ziemlich genau die Anzahl der Folgen von 'Seinfeld' geteilt durch 1.5",
+    "hint2": "Zwei weniger als die Folgen der ersten Staffel Pokemon (120)",
     "category": "Wissenschaft"
   },
   {
@@ -204,7 +204,7 @@
     "question": "Wie viele Kalorien hat ein Liter Cola ungefähr?",
     "answer": 420,
     "hint": "Ungefaehr so viel Kalorien wie eine ganze Tafel Schokolade - fuer eine Fluessigkeit ganz schoen heftig",
-    "hint2": "So viele wie die Entfernung in Metern, die ein Fussballer mindestens an Ball-Gewicht in Gramm mitbringt (FIFA-Mindestgewicht!)",
+    "hint2": "Fast so viele Kalorien wie Gramm in einem Pfund (500) - aber nicht ganz",
     "category": "Alltag"
   },
   {
@@ -299,7 +299,7 @@
     "id": 38,
     "question": "Wie viele Quadratkilometer hat Deutschland ungefähr?",
     "answer": 357588,
-    "hint": "Kleiner als Japan (378.000 km²), aber groesser als die Nordsee (ca. 575.000 km²)... warte, andersrum: groesser als Vietnam!",
+    "hint": "Kleiner als Japan (378.000 km²), aber groesser als Vietnam - stell dir ein Land in der Mitte Europas vor",
     "hint2": "Etwas kleiner als Japan, aber groesser als die Republik Kongo - stell dir 50 Millionen Fussballfelder vor",
     "category": "Geografie"
   },
@@ -476,7 +476,7 @@
     "question": "Wie viele Jahre dauerte der Hundertjaehrige Krieg?",
     "answer": 116,
     "hint": "Die groesste Luege der Geschichtsschreibung: Er dauerte NICHT hundert Jahre, sondern laenger!",
-    "hint2": "Mehr als die Elemente im Periodensystem (118)... warte, nein, etwas weniger! Knapp drunter",
+    "hint2": "Zwei weniger als die Elemente im Periodensystem (118)",
     "category": "Geschichte"
   }
 ]

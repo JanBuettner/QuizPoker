@@ -1,17 +1,30 @@
-const audioCtx = typeof window !== 'undefined' ? new (window.AudioContext || (window as any).webkitAudioContext)() : null;
+let audioCtx: AudioContext | null = null;
+
+function getCtx(): AudioContext | null {
+  if (typeof window === 'undefined') return null;
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+  }
+  // Resume if suspended (browser autoplay policy)
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  return audioCtx;
+}
 
 function playTone(frequency: number, duration: number, type: OscillatorType = 'sine', volume = 0.15) {
-  if (!audioCtx) return;
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
+  const ctx = getCtx();
+  if (!ctx) return;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
   osc.type = type;
   osc.frequency.value = frequency;
   gain.gain.value = volume;
-  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
   osc.connect(gain);
-  gain.connect(audioCtx.destination);
+  gain.connect(ctx.destination);
   osc.start();
-  osc.stop(audioCtx.currentTime + duration);
+  osc.stop(ctx.currentTime + duration);
 }
 
 export const sounds = {

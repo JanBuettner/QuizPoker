@@ -511,7 +511,9 @@ export class GameRoom {
         player.currentBet += allIn;
         this.pot += allIn;
         if (player.currentBet > this.currentBetLevel) {
+          const raiseBy = player.currentBet - this.currentBetLevel;
           this.currentBetLevel = player.currentBet;
+          this.minRaise = Math.max(this.minRaise, raiseBy);
           this.lastRaiserId = player.id;
           this.actedThisRound.clear();
         }
@@ -547,7 +549,7 @@ export class GameRoom {
     for (let i = 1; i <= nePlayers.length; i++) {
       const idx = (this.currentTurnIndex + i) % nePlayers.length;
       const p = nePlayers[idx];
-      if (!p.hasFolded && (p.chips > 0 || p.currentBet < this.currentBetLevel)) {
+      if (!p.hasFolded && p.chips > 0 && (!this.actedThisRound.has(p.id) || p.currentBet < this.currentBetLevel)) {
         this.currentTurnIndex = idx;
         this.startBetTimer();
         this.onStateChange();
