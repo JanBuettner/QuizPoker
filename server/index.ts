@@ -58,6 +58,39 @@ app.post('/api/discord/token', async (req, res) => {
   }
 });
 
+// Discord user info proxy (client can't call discord.com directly from iframe)
+app.get('/api/discord/user', async (req, res) => {
+  const auth = req.headers.authorization;
+  if (!auth) {
+    res.status(401).json({ error: 'No authorization header' });
+    return;
+  }
+
+  try {
+    const response = await fetch('https://discord.com/api/v10/users/@me', {
+      headers: { Authorization: auth },
+    });
+
+    if (!response.ok) {
+      res.status(response.status).json({ error: 'Discord API error' });
+      return;
+    }
+
+    const user = await response.json();
+    res.json({
+      id: user.id,
+      username: user.username,
+      globalName: user.global_name || null,
+      avatar: user.avatar
+        ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
+        : null,
+    });
+  } catch (err) {
+    console.error('Discord user fetch error:', err);
+    res.status(500).json({ error: 'Internal error' });
+  }
+});
+
 // Serve static files
 const clientDist = join(__dirname, '..', 'client', 'dist');
 app.use(express.static(clientDist));

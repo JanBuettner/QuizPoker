@@ -7,11 +7,13 @@ export let isDiscordEmbed = false;
 
 // Detect if running inside Discord iframe
 try {
-  if (window.parent !== window && new URLSearchParams(window.location.search).has('frame_id')) {
-    isDiscordEmbed = true;
+  if (window.parent !== window) {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('frame_id') || params.has('instance_id') || params.has('platform')) {
+      isDiscordEmbed = true;
+    }
   }
 } catch {
-  // cross-origin frame access blocked = we're in an iframe
   isDiscordEmbed = true;
 }
 
@@ -29,7 +31,7 @@ export async function initDiscord(): Promise<DiscordUser | null> {
     discordSdk = new DiscordSDK(DISCORD_CLIENT_ID);
     await discordSdk.ready();
 
-    // Authorize with Discord
+    // Authorize
     const { code } = await discordSdk.commands.authorize({
       client_id: DISCORD_CLIENT_ID,
       response_type: 'code',
@@ -39,7 +41,9 @@ export async function initDiscord(): Promise<DiscordUser | null> {
     });
 
     // Exchange code for token via our server
-    const response = await fetch('/api/discord/token', {
+    // Inside Discord, requests to /.proxy/ go through Discord's proxy to our server
+    const tokenUrl = '/.proxy/api/discord/token';
+    const response = await fetch(tokenUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ code }),
@@ -55,8 +59,8 @@ export async function initDiscord(): Promise<DiscordUser | null> {
     // Authenticate with Discord SDK
     await discordSdk.commands.authenticate({ access_token });
 
-    // Get user info
-    const userResponse = await fetch('https://discord.com/api/v10/users/@me', {
+    // Get user info via Discord proxy (can't call discord.com directly from iframe)
+    const userResponse = await fetch('/.proxy/api/discord/user', {
       headers: { Authorization: `Bearer ${access_token}` },
     });
 
@@ -66,10 +70,8 @@ export async function initDiscord(): Promise<DiscordUser | null> {
     return {
       id: user.id,
       username: user.username,
-      avatar: user.avatar
-        ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
-        : null,
-      globalName: user.global_name || null,
+      avatar: user.avatar,
+      globalName: user.globalName,
     };
   } catch (err) {
     console.error('Discord SDK init failed:', err);
