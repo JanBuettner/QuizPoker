@@ -3,7 +3,6 @@ import { GamePhase } from '@shared/types';
 import type { VisibleGameState, Question } from '@shared/types';
 import PlayerSeat from '../components/PlayerSeat';
 import PlayerList from '../components/PlayerList';
-import QuestionCard from '../components/QuestionCard';
 import Showdown from '../components/Showdown';
 import ActionFeed from '../components/ActionFeed';
 import QuestionBrowser from '../components/QuestionBrowser';
@@ -428,7 +427,7 @@ export default function AdminDashboard({ gameState, onStartGame, onNextRound, on
               })}
             </div>
 
-            <Showdown gameState={gameState} playerId="" onNextRound={onNextRound} isHost={true} />
+            <Showdown key={`showdown-${gameState.roundNumber}`} gameState={gameState} playerId="" onNextRound={onNextRound} isHost={true} />
           </div>
         )}
 

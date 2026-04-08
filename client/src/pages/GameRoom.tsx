@@ -4,7 +4,6 @@ import type { VisibleGameState } from '@shared/types';
 import { sounds } from '../hooks/useSound';
 import PlayerSeat from '../components/PlayerSeat';
 import PlayerList from '../components/PlayerList';
-import QuestionCard from '../components/QuestionCard';
 import EstimateInput from '../components/EstimateInput';
 import BettingControls from '../components/BettingControls';
 import Showdown from '../components/Showdown';
@@ -477,6 +476,7 @@ export default function GameRoom({
 
             {/* Showdown details below */}
             <Showdown
+              key={`showdown-${gameState.roundNumber}`}
               gameState={gameState}
               playerId={playerId}
               onNextRound={onNextRound}

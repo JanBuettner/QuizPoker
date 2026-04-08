@@ -14,13 +14,14 @@ export default function Timer({ seconds, maxSeconds }: TimerProps) {
   }, [seconds]);
 
   // Local countdown
+  const isRunning = localSeconds > 0;
   useEffect(() => {
-    if (localSeconds <= 0) return;
+    if (!isRunning) return;
     const interval = setInterval(() => {
       setLocalSeconds(prev => Math.max(0, prev - 1));
     }, 1000);
     return () => clearInterval(interval);
-  }, [localSeconds > 0]); // restart interval when it becomes > 0
+  }, [isRunning]);
 
   if (localSeconds <= 0 && seconds <= 0) return null;
 

@@ -15,6 +15,7 @@ export class GameRoom {
   players: Map<string, Player> = new Map();
   phase: GamePhase = GamePhase.LOBBY;
   pot = 0;
+  lastPot = 0;
   roundNumber = 0;
   config: RoomConfig;
   currentQuestion: Question | null = null;
@@ -133,11 +134,13 @@ export class GameRoom {
 
     const currentTurn = this.getCurrentTurnPlayer();
 
+    const showLastPot = this.phase === GamePhase.SHOWDOWN || this.phase === GamePhase.ROUND_END;
+
     return {
       roomCode: this.code,
       phase: this.phase,
       players,
-      pot: this.pot,
+      pot: showLastPot ? this.lastPot : this.pot,
       currentQuestion: this.currentQuestion?.question ?? null,
       hint: this.currentQuestion?.hint ?? null,
       hint2: this.currentQuestion?.hint2 ?? null,
@@ -633,6 +636,7 @@ export class GameRoom {
       }
     }
 
+    this.lastPot = this.pot;
     this.pot = 0;
     this.onStateChange();
 
@@ -767,11 +771,13 @@ export class GameRoom {
       this.phase === GamePhase.ROUND_END ||
       this.phase === GamePhase.GAME_OVER;
 
+    const showLastPot = this.phase === GamePhase.SHOWDOWN || this.phase === GamePhase.ROUND_END;
+
     return {
       roomCode: this.code,
       phase: this.phase,
       players,
-      pot: this.pot,
+      pot: showLastPot ? this.lastPot : this.pot,
       currentQuestion: this.currentQuestion?.question ?? null,
       hint: hintVisible ? (this.currentQuestion?.hint ?? null) : null,
       hint2: hint2Visible ? (this.currentQuestion?.hint2 ?? null) : null,

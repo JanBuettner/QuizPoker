@@ -17,14 +17,14 @@ export default function Showdown({ gameState, playerId, onNextRound, isHost }: S
   // Sort from WORST (furthest) to BEST (closest) for dramatic reveal
   const sorted = useMemo(() => {
     return [...activePlayers]
-      .filter(p => p.estimate !== null)
+      .filter(p => p.estimate !== null && !p.hasFolded)
       .sort((a, b) => {
         if (actualAnswer === null) return 0;
         return Math.abs(b.estimate! - actualAnswer) - Math.abs(a.estimate! - actualAnswer);
       });
   }, [activePlayers, actualAnswer]);
 
-  const foldedPlayers = activePlayers.filter(p => p.hasFolded && p.estimate === null);
+  const foldedPlayers = activePlayers.filter(p => p.hasFolded);
 
   const [revealStep, setRevealStep] = useState(0);
 
@@ -166,7 +166,7 @@ export default function Showdown({ gameState, playerId, onNextRound, isHost }: S
       )}
 
       {/* Next round button */}
-      {gameState.phase === GamePhase.ROUND_END && revealStep >= finalStep && (
+      {gameState.phase === GamePhase.ROUND_END && (
         <div className="text-center pt-2 animate-fade-in" style={{ animationDelay: '300ms', animationFillMode: 'backwards' }}>
           {isHost ? (
             <button onClick={onNextRound} className="btn-gold py-3 px-10 text-lg">
