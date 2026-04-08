@@ -317,35 +317,47 @@ export default function GameRoom({
                   {/* Betting line */}
                   <div className="poker-betting-line absolute inset-[15%] rounded-[50%] pointer-events-none" />
 
-                  {/* Center content - only pot + answer */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-4 gap-1">
+                  {/* Center content */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-3 gap-1 overflow-hidden">
                     {/* Pot display */}
                     {pot > 0 && (
                       <div className="flex items-center gap-1.5 animate-fade-in">
-                        <div className="w-5 h-5 rounded-full bg-gradient-to-b from-red-400 to-red-600 border-2 border-red-300 shadow-md" />
-                        <span className="text-gold font-black text-2xl sm:text-3xl font-mono drop-shadow-lg">{pot.toLocaleString('de-DE')}</span>
+                        <div className="w-4 h-4 rounded-full bg-gradient-to-b from-red-400 to-red-600 border-2 border-red-300 shadow-md" />
+                        <span className="text-gold font-black text-xl sm:text-2xl font-mono drop-shadow-lg">{pot.toLocaleString('de-DE')}</span>
                       </div>
                     )}
 
-                    {/* Answer card on table */}
-                    {gameState.actualAnswer !== null && answerPhases && (
-                      <div className="poker-card-gold animate-card-deal px-4 py-1.5 mt-1">
-                        <div className="text-[8px] font-bold tracking-wider text-amber-600">ANTWORT</div>
-                        <div className="text-amber-800 font-black text-xl font-mono">{gameState.actualAnswer.toLocaleString('de-DE')}</div>
+                    {/* Community cards row: hints + answer like flop/turn/river */}
+                    {communityCards.length > 0 && (
+                      <div className="flex items-stretch gap-1.5 mt-1">
+                        {communityCards.map((card, i) => (
+                          <div
+                            key={card.label}
+                            className={`animate-card-deal rounded-lg px-2 py-1.5 text-center max-w-[140px] ${card.type === 'answer' ? 'bg-amber-100 border border-amber-400 shadow-lg' : 'bg-white/90 border border-white/50 shadow-md'}`}
+                            style={{ animationDelay: `${i * 200}ms` }}
+                          >
+                            <div className={`text-[7px] font-bold tracking-wider ${card.type === 'answer' ? 'text-amber-600' : 'text-emerald-700/60'}`}>
+                              {card.label}
+                            </div>
+                            <div className={`text-[10px] font-semibold leading-tight mt-0.5 ${card.type === 'answer' ? 'text-amber-800 font-black text-sm' : 'text-gray-700'}`}>
+                              {card.content.length > 50 ? card.content.slice(0, 50) + '...' : card.content}
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     )}
 
                     {/* Status text */}
                     {phase === GamePhase.ESTIMATING && me?.hasSubmittedEstimate && (
-                      <div className="text-white/20 text-xs">Warte auf andere...</div>
+                      <div className="text-white/20 text-[10px]">Warte auf andere...</div>
                     )}
                     {isBettingPhase && !isMyTurn && !me?.hasFolded && (
-                      <div className="text-white/25 text-xs">
+                      <div className="text-white/25 text-[10px]">
                         Warte auf <span className="text-white/50 font-semibold">{players.find(p => p.id === gameState.currentTurnPlayerId)?.name || '...'}</span>
                       </div>
                     )}
                     {me?.hasFolded && isBettingPhase && (
-                      <div className="text-red-400/40 text-xs font-semibold">Gefoldet</div>
+                      <div className="text-red-400/40 text-[10px] font-semibold">Gefoldet</div>
                     )}
                   </div>
                 </div>
@@ -398,19 +410,6 @@ export default function GameRoom({
             {isBettingPhase && gameState.actionLog.length > 0 && (
               <div className="w-full max-w-md px-2">
                 <ActionFeed actionLog={gameState.actionLog} />
-              </div>
-            )}
-
-            {/* Hints below the table as elegant text boxes */}
-            {communityCards.filter(c => c.type === 'hint').length > 0 && (
-              <div className="w-full max-w-2xl px-2 space-y-2">
-                {communityCards.filter(c => c.type === 'hint').map((card, i) => (
-                  <div key={card.label} className="glass rounded-xl p-4 text-center animate-fade-in border border-amber-800/20"
-                    style={{ animationDelay: `${i * 200}ms` }}>
-                    <div className="text-amber-500/40 text-[9px] font-bold tracking-[0.2em] mb-1">{card.label}</div>
-                    <p className="text-amber-200/80 text-sm font-medium leading-relaxed">{card.content}</p>
-                  </div>
-                ))}
               </div>
             )}
 
