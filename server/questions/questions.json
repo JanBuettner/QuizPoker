@@ -51,7 +51,7 @@
     "id": 7,
     "question": "Wie viele Kilometer legt ein Fußballspieler durchschnittlich in einem Bundesligaspiel zurück?",
     "answer": 12,
-    "hint": "Das ist mehr als ein Halbmarathon - und das bei 90 Minuten mit Sprints, Stopps und Richtungswechseln.",
+    "hint": "Ungefähr so weit wie von deiner Haustür zum nächsten Stadion und zurück.",
     "hint2": "Mittelfeldspieler legen die weiteste Strecke zurück, Stürmer und Torhüter die kürzeste.",
     "category": "Sport"
   },
@@ -124,7 +124,7 @@
     "question": "Wie tief ist der tiefste Punkt des Bodensees in Metern?",
     "answer": 254,
     "hint": "Das Wasser dort unten hat das ganze Jahr fast dieselbe Temperatur - egal wie heiß der Sommer ist.",
-    "hint2": "Der Bodensee ist tiefer als der Eiffelturm hoch ist.",
+    "hint2": "Tiefer als der Kölner Dom hoch ist (157m), aber nicht ganz so tief wie der Eiffelturm.",
     "category": "Geografie"
   },
   {
@@ -397,7 +397,7 @@
     "answer": 1300,
     "hint": "Das Alte Testament allein macht etwa drei Viertel des Gesamtumfangs aus.",
     "hint2": "Obwohl über Jahrhunderte von unzähligen Autoren geschrieben, wird sie heute als ein einzelnes Buch gedruckt.",
-    "category": "Technik"
+    "category": "Geschichte"
   },
   {
     "id": 51,
@@ -421,7 +421,7 @@
     "answer": 400000,
     "hint": "Ein gebildeter Muttersprachler nutzt im Alltag aktiv vielleicht 12.000 bis 16.000 davon.",
     "hint2": "Das Englische hat schätzungsweise drei- bis viermal so viele - vor allem wegen der vielen Lehnwörter.",
-    "category": "Geschichte"
+    "category": "Alltag"
   },
   {
     "id": 54,
@@ -437,7 +437,7 @@
     "answer": 25,
     "hint": "Die Reihe läuft seit über 60 Jahren - das entspricht mehr Filmen als die meisten Menschen Urlaubswochen im Leben haben.",
     "hint2": "Sechs verschiedene Schauspieler haben die Hauptrolle gespielt - zwei davon sind bereits gestorben.",
-    "category": "Geschichte"
+    "category": "Popkultur"
   },
   {
     "id": 56,
@@ -469,7 +469,7 @@
     "answer": 500,
     "hint": "Selbst wenn man aufhören würde, neue Videos hochzuladen, würde es Jahrzehnte dauern, alles anzuschauen.",
     "hint2": "Das entspricht pro Tag etwa 700.000 Stunden neuem Content - täglich.",
-    "category": "Geschichte"
+    "category": "Technik"
   },
   {
     "id": 60,

@@ -737,7 +737,6 @@ export class GameRoom {
     this.clearTimer();
     switch (this.phase) {
       case GamePhase.ESTIMATING:
-        // Force-end estimating: fold anyone who hasn't submitted
         for (const player of this.nonEliminatedPlayers()) {
           if (!player.hasSubmittedEstimate) {
             player.hasFolded = true;
@@ -746,19 +745,38 @@ export class GameRoom {
         this.startPreflop();
         break;
       case GamePhase.PREFLOP:
-        // Admin can force-end betting round
+        // End preflop betting → show flop (hint1 revealed, wait for next advance)
         this.endBettingRound();
         break;
       case GamePhase.FLOP:
-        // If betting hasn't started yet (admin paused after reveal), start it
-        // If betting is active, force-end
-        this.endBettingRound();
+        // Two states: just revealed (no betting yet) or betting active
+        // If no one has acted yet, start betting. Otherwise end betting round.
+        if (this.actedThisRound.size === 0) {
+          // Start betting for FLOP
+          if (this.activePlayers().length <= 1) { this.resolveRound(); return; }
+          this.startBetTimer();
+          this.onStateChange();
+        } else {
+          this.endBettingRound();
+        }
         break;
       case GamePhase.TURN:
-        this.endBettingRound();
+        if (this.actedThisRound.size === 0) {
+          if (this.activePlayers().length <= 1) { this.resolveRound(); return; }
+          this.startBetTimer();
+          this.onStateChange();
+        } else {
+          this.endBettingRound();
+        }
         break;
       case GamePhase.RIVER:
-        this.resolveRound();
+        if (this.actedThisRound.size === 0) {
+          if (this.activePlayers().length <= 1) { this.resolveRound(); return; }
+          this.startBetTimer();
+          this.onStateChange();
+        } else {
+          this.resolveRound();
+        }
         break;
       case GamePhase.SHOWDOWN:
         this.checkGameOver();
