@@ -313,23 +313,11 @@ export default function GameRoom({
                     </div>
                   )}
 
-                  {/* Community cards (hints + answer) */}
-                  {communityCards.length > 0 && (
-                    <div className="flex items-center gap-2 flex-wrap justify-center mt-1">
-                      {communityCards.map((card, i) => (
-                        <div
-                          key={card.label}
-                          className={`poker-card animate-card-deal ${card.type === 'answer' ? 'poker-card-gold' : ''}`}
-                          style={{ animationDelay: `${i * 150}ms` }}
-                        >
-                          <div className={`text-[8px] font-bold tracking-wider mb-0.5 ${card.type === 'answer' ? 'text-amber-600' : 'text-purple-500/60'}`}>
-                            {card.label}
-                          </div>
-                          <div className={`text-[11px] font-semibold leading-tight ${card.type === 'answer' ? 'text-amber-800 font-black text-sm' : 'text-gray-700'}`}>
-                            {card.content}
-                          </div>
-                        </div>
-                      ))}
+                  {/* Answer card on table (only when revealed) */}
+                  {gameState.actualAnswer !== null && (phase === GamePhase.REVEAL || phase === GamePhase.BETTING_3 || isShowdown || phase === GamePhase.GAME_OVER) && (
+                    <div className="poker-card-gold animate-card-deal mt-1 px-4 py-2">
+                      <div className="text-[8px] font-bold tracking-wider mb-0.5 text-amber-600">ANTWORT</div>
+                      <div className="text-amber-800 font-black text-lg font-mono">{gameState.actualAnswer.toLocaleString('de-DE')}</div>
                     </div>
                   )}
 
@@ -405,12 +393,30 @@ export default function GameRoom({
               </div>
             )}
 
-            {/* Estimate submitted confirmation */}
-            {phase === GamePhase.ESTIMATING && me?.hasSubmittedEstimate && (
-              <div className="glass rounded-xl p-3 text-center animate-fade-in max-w-sm">
-                <div className="text-white/30 text-[10px] font-bold tracking-[0.2em] mb-1">DEINE SCHÄTZUNG</div>
-                <div className="text-gold font-black text-2xl font-mono">{gameState.yourEstimate?.toLocaleString('de-DE')}</div>
+            {/* Hints below the table as elegant text boxes */}
+            {communityCards.filter(c => c.type === 'hint').length > 0 && (
+              <div className="w-full max-w-2xl px-2 space-y-2">
+                {communityCards.filter(c => c.type === 'hint').map((card, i) => (
+                  <div key={card.label} className="glass rounded-xl p-4 text-center animate-fade-in border border-amber-800/20"
+                    style={{ animationDelay: `${i * 200}ms` }}>
+                    <div className="text-amber-500/40 text-[9px] font-bold tracking-[0.2em] mb-1">{card.label}</div>
+                    <p className="text-amber-200/80 text-sm font-medium leading-relaxed">{card.content}</p>
+                  </div>
+                ))}
               </div>
+            )}
+
+            {/* Your estimate display */}
+            {gameState.yourEstimate !== null && (
+              <div className="glass rounded-xl p-3 text-center animate-fade-in max-w-sm border border-amber-800/20">
+                <div className="text-white/30 text-[10px] font-bold tracking-[0.2em] mb-1">DEINE SCHÄTZUNG</div>
+                <div className="text-gold font-black text-2xl font-mono">{gameState.yourEstimate.toLocaleString('de-DE')}</div>
+              </div>
+            )}
+
+            {/* Estimate submitted waiting */}
+            {phase === GamePhase.ESTIMATING && me?.hasSubmittedEstimate && !gameState.yourEstimate && (
+              <div className="text-white/20 text-xs">Warte auf andere Spieler...</div>
             )}
           </div>
         )}

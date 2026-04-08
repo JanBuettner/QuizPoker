@@ -311,23 +311,11 @@ export default function AdminDashboard({ gameState, onStartGame, onNextRound, on
                     </div>
                   )}
 
-                  {/* Community cards */}
-                  {communityCards.length > 0 && (
-                    <div className="flex items-center gap-2 flex-wrap justify-center mt-1">
-                      {communityCards.map((card, i) => (
-                        <div
-                          key={card.label}
-                          className={`poker-card animate-card-deal ${card.type === 'answer' ? 'poker-card-gold' : ''}`}
-                          style={{ animationDelay: `${i * 150}ms` }}
-                        >
-                          <div className={`text-[8px] font-bold tracking-wider mb-0.5 ${card.type === 'answer' ? 'text-amber-600' : 'text-purple-500/60'}`}>
-                            {card.label}
-                          </div>
-                          <div className={`text-[11px] font-semibold leading-tight ${card.type === 'answer' ? 'text-amber-800 font-black text-sm' : 'text-gray-700'}`}>
-                            {card.content}
-                          </div>
-                        </div>
-                      ))}
+                  {/* Answer card on table */}
+                  {actualAnswer !== null && (phase === GamePhase.REVEAL || phase === GamePhase.BETTING_3 || isShowdown || phase === GamePhase.GAME_OVER) && (
+                    <div className="poker-card-gold animate-card-deal mt-1 px-4 py-2">
+                      <div className="text-[8px] font-bold tracking-wider mb-0.5 text-amber-600">ANTWORT</div>
+                      <div className="text-amber-800 font-black text-lg font-mono">{actualAnswer.toLocaleString('de-DE')}</div>
                     </div>
                   )}
 
