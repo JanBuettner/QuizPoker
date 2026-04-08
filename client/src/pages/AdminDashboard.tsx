@@ -24,27 +24,23 @@ interface AdminDashboardProps {
 const PHASE_LABELS: Record<GamePhase, string> = {
   [GamePhase.LOBBY]: 'Lobby',
   [GamePhase.ESTIMATING]: 'Schätzung',
-  [GamePhase.HINT_1]: 'Hinweis 1',
-  [GamePhase.BETTING_1]: 'Setzrunde 1',
-  [GamePhase.HINT_2]: 'Hinweis 2',
-  [GamePhase.BETTING_2]: 'Setzrunde 2',
-  [GamePhase.REVEAL]: 'Auflösung',
-  [GamePhase.BETTING_3]: 'Setzrunde 3',
+  [GamePhase.PREFLOP]: 'Preflop',
+  [GamePhase.FLOP]: 'Flop',
+  [GamePhase.TURN]: 'Turn',
+  [GamePhase.RIVER]: 'River',
   [GamePhase.SHOWDOWN]: 'Showdown',
   [GamePhase.ROUND_END]: 'Ergebnis',
   [GamePhase.GAME_OVER]: 'Spiel vorbei',
 };
 
 const ADVANCE_LABELS: Partial<Record<GamePhase, string>> = {
-  [GamePhase.ESTIMATING]: 'Weiter -> Hinweis 1',
-  [GamePhase.HINT_1]: 'Weiter -> Setzrunde 1',
-  [GamePhase.BETTING_1]: 'Weiter -> Hinweis 2',
-  [GamePhase.HINT_2]: 'Weiter -> Setzrunde 2',
-  [GamePhase.BETTING_2]: 'Weiter -> Antwort zeigen',
-  [GamePhase.REVEAL]: 'Weiter -> Setzrunde 3',
-  [GamePhase.BETTING_3]: 'Weiter -> Showdown',
-  [GamePhase.SHOWDOWN]: 'Weiter -> Ergebnis',
-  [GamePhase.ROUND_END]: 'Nächste Runde starten',
+  [GamePhase.ESTIMATING]: 'Weiter → Preflop',
+  [GamePhase.PREFLOP]: 'Weiter → Flop',
+  [GamePhase.FLOP]: 'Weiter → Turn',
+  [GamePhase.TURN]: 'Weiter → River',
+  [GamePhase.RIVER]: 'Weiter → Showdown',
+  [GamePhase.SHOWDOWN]: 'Weiter → Ergebnis',
+  [GamePhase.ROUND_END]: 'Nächste Runde',
 };
 
 // Helper to compute dealer/SB/BB ids
@@ -77,27 +73,26 @@ export default function AdminDashboard({ gameState, onStartGame, onNextRound, on
 
   const showBadges = phase !== GamePhase.LOBBY;
   const { dealerId, sbId, bbId } = showBadges ? computePositions(players, gameState.dealerIndex) : { dealerId: null, sbId: null, bbId: null };
-  const isBettingPhase = phase === GamePhase.BETTING_1 || phase === GamePhase.BETTING_2 || phase === GamePhase.BETTING_3;
+  const isBettingPhase = phase === GamePhase.PREFLOP || phase === GamePhase.FLOP || phase === GamePhase.TURN || phase === GamePhase.RIVER;
   const isShowdown = phase === GamePhase.SHOWDOWN || phase === GamePhase.ROUND_END;
   const showTable = phase !== GamePhase.LOBBY && phase !== GamePhase.GAME_OVER;
 
   // Build community cards (whitelist matching game flow)
   const communityCards: { label: string; content: string; type: 'hint' | 'answer' }[] = [];
-  // Hint 1 visible from HINT_1 onwards
-  const hint1Phases = phase === GamePhase.HINT_1 || phase === GamePhase.BETTING_1 ||
-    phase === GamePhase.HINT_2 || phase === GamePhase.BETTING_2 ||
-    phase === GamePhase.REVEAL || phase === GamePhase.BETTING_3 || isShowdown || phase === GamePhase.GAME_OVER;
+  // Hint 1 visible from FLOP onwards
+  const hint1Phases = phase === GamePhase.FLOP || phase === GamePhase.TURN ||
+    phase === GamePhase.RIVER || isShowdown || phase === GamePhase.GAME_OVER;
   if (hint && hint1Phases) {
     communityCards.push({ label: 'HINWEIS 1', content: hint, type: 'hint' });
   }
-  // Hint 2 visible from HINT_2 onwards
-  const hint2Phases = phase === GamePhase.HINT_2 || phase === GamePhase.BETTING_2 ||
-    phase === GamePhase.REVEAL || phase === GamePhase.BETTING_3 || isShowdown || phase === GamePhase.GAME_OVER;
+  // Hint 2 visible from TURN onwards
+  const hint2Phases = phase === GamePhase.TURN || phase === GamePhase.RIVER ||
+    isShowdown || phase === GamePhase.GAME_OVER;
   if (hint2 && hint2Phases) {
     communityCards.push({ label: 'HINWEIS 2', content: hint2, type: 'hint' });
   }
-  // Answer visible from REVEAL onwards
-  const answerPhases = phase === GamePhase.REVEAL || phase === GamePhase.BETTING_3 || isShowdown || phase === GamePhase.GAME_OVER;
+  // Answer visible from RIVER onwards
+  const answerPhases = phase === GamePhase.RIVER || isShowdown || phase === GamePhase.GAME_OVER;
   if (actualAnswer !== null && answerPhases) {
     communityCards.push({ label: 'ANTWORT', content: actualAnswer.toLocaleString('de-DE'), type: 'answer' });
   }
@@ -337,7 +332,7 @@ export default function AdminDashboard({ gameState, onStartGame, onNextRound, on
                   )}
 
                   {/* Answer card on table */}
-                  {actualAnswer !== null && (phase === GamePhase.REVEAL || phase === GamePhase.BETTING_3 || isShowdown || phase === GamePhase.GAME_OVER) && (
+                  {actualAnswer !== null && answerPhases && (
                     <div className="poker-card-gold animate-card-deal mt-1 px-4 py-2">
                       <div className="text-[8px] font-bold tracking-wider mb-0.5 text-amber-600">ANTWORT</div>
                       <div className="text-amber-800 font-black text-lg font-mono">{actualAnswer.toLocaleString('de-DE')}</div>

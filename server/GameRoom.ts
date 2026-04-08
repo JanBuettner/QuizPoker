@@ -164,8 +164,6 @@ export class GameRoom {
     const player = this.players.get(id);
     if (player) {
       player.isConnected = false;
-      // Don't auto-fold, give them a chance to reconnect
-      // They'll be auto-folded by the bet timer if it's their turn
     }
   }
 
@@ -240,12 +238,11 @@ export class GameRoom {
     this.onStateChange();
   }
 
-  // FIX: Blinds are now posted at start of betting, not before estimating
   private postBlinds(): void {
     const nePlayers = this.nonEliminatedPlayers().filter(p => !p.hasFolded);
     if (nePlayers.length < 2) return;
 
-    // FIX: Heads-up rules - dealer posts SB, other posts BB
+    // Heads-up rules: dealer posts SB, other posts BB
     let sbIndex: number;
     let bbIndex: number;
     if (nePlayers.length === 2) {
@@ -286,10 +283,17 @@ export class GameRoom {
     const waiting = this.nonEliminatedPlayers().filter(p => !p.hasSubmittedEstimate);
     if (waiting.length === 0) {
       this.clearTimer();
-      this.startHint1();
+      // All estimates in: go to PREFLOP (admin will advance, or auto-advance for non-admin)
+      if (this.adminId) {
+        // Wait for admin to advance
+        this.onStateChange();
+      } else {
+        this.startPreflop();
+      }
+    } else {
+      this.onStateChange();
     }
 
-    this.onStateChange();
     return true;
   }
 
@@ -299,21 +303,13 @@ export class GameRoom {
         player.hasFolded = true;
       }
     }
-    this.startHint1();
+    this.startPreflop();
   }
 
-  private startHint1(): void {
-    this.phase = GamePhase.HINT_1;
-    this.clearTimer();
-    if (!this.adminId) {
-      this.startTimer(8, () => this.startBetting1());
-    }
-    this.onStateChange();
-  }
+  // --- Texas Hold'em Phase Methods ---
 
-  // FIX: Post blinds at start of first betting round, not before estimating
-  private startBetting1(): void {
-    this.phase = GamePhase.BETTING_1;
+  private startPreflop(): void {
+    this.phase = GamePhase.PREFLOP;
     this.actedThisRound.clear();
     this.lastRaiserId = null;
     this.playerRoundBets.clear();
@@ -352,8 +348,8 @@ export class GameRoom {
     this.startBetTimer();
   }
 
-  private startBetting2(): void {
-    this.phase = GamePhase.BETTING_2;
+  private startFlop(): void {
+    this.phase = GamePhase.FLOP;
     this.resetBettingRound();
     this.onStateChange();
 
@@ -365,8 +361,21 @@ export class GameRoom {
     this.startBetTimer();
   }
 
-  private startBetting3(): void {
-    this.phase = GamePhase.BETTING_3;
+  private startTurn(): void {
+    this.phase = GamePhase.TURN;
+    this.resetBettingRound();
+    this.onStateChange();
+
+    if (this.activePlayers().length <= 1) {
+      this.resolveRound();
+      return;
+    }
+
+    this.startBetTimer();
+  }
+
+  private startRiver(): void {
+    this.phase = GamePhase.RIVER;
     this.resetBettingRound();
     this.onStateChange();
 
@@ -434,7 +443,12 @@ export class GameRoom {
   }
 
   bet(playerId: string, action: BettingAction, amount?: number): boolean {
-    if (this.phase !== GamePhase.BETTING_1 && this.phase !== GamePhase.BETTING_2 && this.phase !== GamePhase.BETTING_3) return false;
+    if (
+      this.phase !== GamePhase.PREFLOP &&
+      this.phase !== GamePhase.FLOP &&
+      this.phase !== GamePhase.TURN &&
+      this.phase !== GamePhase.RIVER
+    ) return false;
 
     const current = this.getCurrentTurnPlayer();
     if (!current || current.id !== playerId) return false;
@@ -460,9 +474,7 @@ export class GameRoom {
         break;
 
       case BettingAction.CHECK:
-        // FIX: Don't clear timer before validation
         if (player.currentBet < this.currentBetLevel) {
-          // Invalid check - restart timer, don't hang
           return false;
         }
         this.clearTimer();
@@ -484,13 +496,11 @@ export class GameRoom {
 
       case BettingAction.RAISE: {
         const raiseAmount = amount ?? this.config.bigBlind;
-        // FIX: Validate raise amount
         if (raiseAmount < this.minRaise) return false;
 
         const totalBet = this.currentBetLevel + raiseAmount;
         const needed = totalBet - player.currentBet;
 
-        // FIX: Player must have enough chips to raise
         if (player.chips < needed) return false;
 
         this.clearTimer();
@@ -564,24 +574,69 @@ export class GameRoom {
   }
 
   private endBettingRound(): void {
-    if (this.phase === GamePhase.BETTING_1) {
-      // After BETTING_1 -> show HINT_2
-      this.phase = GamePhase.HINT_2;
-      this.clearTimer();
-      if (!this.adminId) {
-        this.startTimer(8, () => this.startBetting2());
+    this.clearTimer();
+
+    if (this.phase === GamePhase.PREFLOP) {
+      // PREFLOP -> FLOP (reveal hint1, then betting)
+      if (this.adminId) {
+        // Set phase to FLOP so admin sees hint1; admin clicks "Weiter" to start betting
+        this.phase = GamePhase.FLOP;
+        this.resetBettingRound();
+        this.onStateChange();
+      } else {
+        // Auto-advance: 3s delay to show hint1 before betting starts
+        this.phase = GamePhase.FLOP;
+        this.resetBettingRound();
+        this.onStateChange();
+        this.startTimer(3, () => {
+          if (this.activePlayers().length <= 1) {
+            this.resolveRound();
+            return;
+          }
+          this.startBetTimer();
+          this.onStateChange();
+        });
       }
-      this.onStateChange();
-    } else if (this.phase === GamePhase.BETTING_2) {
-      // After BETTING_2 -> REVEAL answer
-      this.phase = GamePhase.REVEAL;
-      this.clearTimer();
-      if (!this.adminId) {
-        this.startTimer(8, () => this.startBetting3());
+    } else if (this.phase === GamePhase.FLOP) {
+      // FLOP -> TURN (reveal hint2, then betting)
+      if (this.adminId) {
+        this.phase = GamePhase.TURN;
+        this.resetBettingRound();
+        this.onStateChange();
+      } else {
+        this.phase = GamePhase.TURN;
+        this.resetBettingRound();
+        this.onStateChange();
+        this.startTimer(3, () => {
+          if (this.activePlayers().length <= 1) {
+            this.resolveRound();
+            return;
+          }
+          this.startBetTimer();
+          this.onStateChange();
+        });
       }
-      this.onStateChange();
-    } else {
-      // After BETTING_3 -> resolve
+    } else if (this.phase === GamePhase.TURN) {
+      // TURN -> RIVER (reveal answer, then betting)
+      if (this.adminId) {
+        this.phase = GamePhase.RIVER;
+        this.resetBettingRound();
+        this.onStateChange();
+      } else {
+        this.phase = GamePhase.RIVER;
+        this.resetBettingRound();
+        this.onStateChange();
+        this.startTimer(3, () => {
+          if (this.activePlayers().length <= 1) {
+            this.resolveRound();
+            return;
+          }
+          this.startBetTimer();
+          this.onStateChange();
+        });
+      }
+    } else if (this.phase === GamePhase.RIVER) {
+      // RIVER -> resolve
       this.resolveRound();
     }
   }
@@ -593,8 +648,6 @@ export class GameRoom {
     const active = this.activePlayers();
 
     if (active.length === 0) {
-      // FIX: Everyone folded - give pot to last player who folded (or split among all)
-      // In practice give to first non-eliminated player
       const nePlayers = this.nonEliminatedPlayers();
       if (nePlayers.length > 0) {
         this.winnerId = nePlayers[0].id;
@@ -604,7 +657,7 @@ export class GameRoom {
       this.winnerId = active[0].id;
       active[0].chips += this.pot;
     } else {
-      // FIX: Handle ties - split pot among tied players
+      // Closest estimate wins
       const answer = this.currentQuestion!.answer;
       let closestDiff = Infinity;
       const winners: Player[] = [];
@@ -632,7 +685,7 @@ export class GameRoom {
         for (let i = 0; i < winners.length; i++) {
           winners[i].chips += share + (i === 0 ? remainder : 0);
         }
-        this.winnerId = winners[0].id; // Show first as winner
+        this.winnerId = winners[0].id;
       }
     }
 
@@ -668,7 +721,6 @@ export class GameRoom {
 
       this.onStateChange();
     } else {
-      // FIX: Clamp dealerIndex before rotating to prevent drift from eliminations
       this.dealerIndex = (this.dealerIndex % alive.length + 1) % alive.length;
       this.phase = GamePhase.ROUND_END;
       this.onStateChange();
@@ -685,30 +737,28 @@ export class GameRoom {
     this.clearTimer();
     switch (this.phase) {
       case GamePhase.ESTIMATING:
+        // Force-end estimating: fold anyone who hasn't submitted
         for (const player of this.nonEliminatedPlayers()) {
           if (!player.hasSubmittedEstimate) {
             player.hasFolded = true;
           }
         }
-        this.startHint1();
+        this.startPreflop();
         break;
-      case GamePhase.HINT_1:
-        this.startBetting1();
-        break;
-      case GamePhase.BETTING_1:
+      case GamePhase.PREFLOP:
+        // Admin can force-end betting round
         this.endBettingRound();
         break;
-      case GamePhase.HINT_2:
-        this.startBetting2();
-        break;
-      case GamePhase.BETTING_2:
+      case GamePhase.FLOP:
+        // If betting hasn't started yet (admin paused after reveal), start it
+        // If betting is active, force-end
         this.endBettingRound();
         break;
-      case GamePhase.REVEAL:
-        this.startBetting3();
-        break;
-      case GamePhase.BETTING_3:
+      case GamePhase.TURN:
         this.endBettingRound();
+        break;
+      case GamePhase.RIVER:
+        this.resolveRound();
         break;
       case GamePhase.SHOWDOWN:
         this.checkGameOver();
@@ -719,7 +769,6 @@ export class GameRoom {
     }
   }
 
-  // FIX: Use ?? instead of || so estimate=0 works correctly
   getVisibleState(forPlayerId: string): VisibleGameState {
     const players: VisiblePlayer[] = [...this.players.values()].map(p => ({
       id: p.id,
@@ -741,32 +790,26 @@ export class GameRoom {
     const currentPlayer = this.players.get(forPlayerId);
     const currentTurn = this.getCurrentTurnPlayer();
 
-    // hint is visible from HINT_1 onwards
+    // hint (hint1) visible from FLOP onwards
     const hintVisible =
-      this.phase === GamePhase.HINT_1 ||
-      this.phase === GamePhase.BETTING_1 ||
-      this.phase === GamePhase.HINT_2 ||
-      this.phase === GamePhase.BETTING_2 ||
-      this.phase === GamePhase.REVEAL ||
-      this.phase === GamePhase.BETTING_3 ||
+      this.phase === GamePhase.FLOP ||
+      this.phase === GamePhase.TURN ||
+      this.phase === GamePhase.RIVER ||
       this.phase === GamePhase.SHOWDOWN ||
       this.phase === GamePhase.ROUND_END ||
       this.phase === GamePhase.GAME_OVER;
 
-    // hint2 is visible from HINT_2 onwards
+    // hint2 visible from TURN onwards
     const hint2Visible =
-      this.phase === GamePhase.HINT_2 ||
-      this.phase === GamePhase.BETTING_2 ||
-      this.phase === GamePhase.REVEAL ||
-      this.phase === GamePhase.BETTING_3 ||
+      this.phase === GamePhase.TURN ||
+      this.phase === GamePhase.RIVER ||
       this.phase === GamePhase.SHOWDOWN ||
       this.phase === GamePhase.ROUND_END ||
       this.phase === GamePhase.GAME_OVER;
 
-    // actualAnswer is visible from REVEAL onwards
+    // actualAnswer visible from RIVER onwards
     const answerVisible =
-      this.phase === GamePhase.REVEAL ||
-      this.phase === GamePhase.BETTING_3 ||
+      this.phase === GamePhase.RIVER ||
       this.phase === GamePhase.SHOWDOWN ||
       this.phase === GamePhase.ROUND_END ||
       this.phase === GamePhase.GAME_OVER;
@@ -815,7 +858,12 @@ export class GameRoom {
   tickBots(): void {
     if (this.phase === GamePhase.ESTIMATING) {
       this.botEstimate();
-    } else if (this.phase === GamePhase.BETTING_1 || this.phase === GamePhase.BETTING_2 || this.phase === GamePhase.BETTING_3) {
+    } else if (
+      this.phase === GamePhase.PREFLOP ||
+      this.phase === GamePhase.FLOP ||
+      this.phase === GamePhase.TURN ||
+      this.phase === GamePhase.RIVER
+    ) {
       this.botBet();
     }
   }
