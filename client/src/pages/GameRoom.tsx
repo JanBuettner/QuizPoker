@@ -86,6 +86,7 @@ export default function GameRoom({
   const prevPhaseRef = useRef(phase);
   const prevTurnRef = useRef(gameState.currentTurnPlayerId);
   const prevTimeRef = useRef(gameState.timeRemaining);
+  const prevActionLogLenRef = useRef(gameState.actionLog.length);
 
   useEffect(() => {
     if (gameState.currentTurnPlayerId === playerId && prevTurnRef.current !== playerId
@@ -95,6 +96,9 @@ export default function GameRoom({
     prevTurnRef.current = gameState.currentTurnPlayerId;
 
     if (phase !== prevPhaseRef.current) {
+      if (phase === GamePhase.FLOP || phase === GamePhase.TURN || phase === GamePhase.RIVER) {
+        sounds.cardDeal();
+      }
       if (phase === GamePhase.SHOWDOWN) {
         sounds.reveal();
         if (gameState.winnerId === playerId) {
@@ -109,6 +113,20 @@ export default function GameRoom({
       sounds.timerWarning();
     }
     prevTimeRef.current = time;
+
+    // Action log sounds
+    const actionLog = gameState.actionLog;
+    if (actionLog.length > prevActionLogLenRef.current) {
+      const latest = actionLog[actionLog.length - 1];
+      if (latest.includes('foldet')) {
+        sounds.fold();
+      } else if (latest.includes('All-In')) {
+        sounds.allIn();
+      } else {
+        sounds.chipPlace();
+      }
+    }
+    prevActionLogLenRef.current = actionLog.length;
   }, [gameState, playerId, phase, isBettingPhase]);
 
   // Build community cards (hints/answer displayed as cards in center)

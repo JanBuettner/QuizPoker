@@ -103,14 +103,18 @@ export default function QuestionBrowser({ questions, onClose }: QuestionBrowserP
                     </span>
                   </div>
                   {showAnswer.has(q.id) && (
-                    <div className="mt-3 grid grid-cols-2 gap-3 animate-fade-in">
+                    <div className="mt-3 grid grid-cols-3 gap-3 animate-fade-in">
                       <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-lg px-3 py-2">
                         <div className="text-emerald-400/40 text-[9px] font-bold tracking-wider">ANTWORT</div>
                         <div className="text-emerald-400 font-bold font-mono">{q.answer.toLocaleString('de-DE')}</div>
                       </div>
                       <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg px-3 py-2">
-                        <div className="text-purple-400/40 text-[9px] font-bold tracking-wider">HINWEIS</div>
+                        <div className="text-purple-400/40 text-[9px] font-bold tracking-wider">HINWEIS 1</div>
                         <div className="text-purple-300 text-xs">{q.hint}</div>
+                      </div>
+                      <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg px-3 py-2">
+                        <div className="text-purple-400/40 text-[9px] font-bold tracking-wider">HINWEIS 2</div>
+                        <div className="text-purple-300 text-xs">{q.hint2}</div>
                       </div>
                     </div>
                   )}

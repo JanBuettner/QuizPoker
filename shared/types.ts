@@ -28,6 +28,7 @@ export interface Player {
   isEliminated: boolean;
   isConnected: boolean;
   currentBet: number;
+  totalBetThisHand: number;
   isHost: boolean;
   isBot: boolean;
   avatar: string | null;

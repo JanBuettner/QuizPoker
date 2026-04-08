@@ -56,6 +56,7 @@ export class GameRoom {
       isEliminated: false,
       isConnected: true,
       currentBet: 0,
+      totalBetThisHand: 0,
       isHost,
       isBot: false,
       avatar,
@@ -82,6 +83,7 @@ export class GameRoom {
       isEliminated: false,
       isConnected: true,
       currentBet: 0,
+      totalBetThisHand: 0,
       isHost: false,
       isBot: true,
       avatar: null,
@@ -234,6 +236,7 @@ export class GameRoom {
       player.hasSubmittedEstimate = false;
       player.hasFolded = player.isEliminated;
       player.currentBet = 0;
+      player.totalBetThisHand = 0;
     }
 
     this.phase = GamePhase.ESTIMATING;
@@ -262,16 +265,18 @@ export class GameRoom {
     const sbAmount = Math.min(this.config.smallBlind, sbPlayer.chips);
     sbPlayer.chips -= sbAmount;
     sbPlayer.currentBet = sbAmount;
+    sbPlayer.totalBetThisHand += sbAmount;
     this.pot += sbAmount;
     this.playerRoundBets.set(sbPlayer.id, sbAmount);
 
     const bbAmount = Math.min(this.config.bigBlind, bbPlayer.chips);
     bbPlayer.chips -= bbAmount;
     bbPlayer.currentBet = bbAmount;
+    bbPlayer.totalBetThisHand += bbAmount;
     this.pot += bbAmount;
     this.playerRoundBets.set(bbPlayer.id, bbAmount);
 
-    this.currentBetLevel = this.config.bigBlind;
+    this.currentBetLevel = bbAmount;
   }
 
   submitEstimate(playerId: string, estimate: number): boolean {
@@ -425,7 +430,8 @@ export class GameRoom {
     if (nePlayers.length === 0) return null;
     const idx = this.currentTurnIndex % nePlayers.length;
     const player = nePlayers[idx];
-    if (!player || player.hasFolded || player.isEliminated) {
+    // Skip folded, eliminated, AND all-in players (chips === 0)
+    if (!player || player.hasFolded || player.isEliminated || player.chips === 0) {
       return this.findNextActivePlayer();
     }
     return player;
@@ -437,7 +443,8 @@ export class GameRoom {
     for (let i = 0; i < nePlayers.length; i++) {
       const idx = (this.currentTurnIndex + i) % nePlayers.length;
       const p = nePlayers[idx];
-      if (!p.hasFolded) {
+      // Must not be folded AND must have chips to act
+      if (!p.hasFolded && p.chips > 0) {
         this.currentTurnIndex = idx;
         return p;
       }
@@ -490,6 +497,7 @@ export class GameRoom {
         const actualCall = Math.min(toCall, player.chips);
         player.chips -= actualCall;
         player.currentBet += actualCall;
+        player.totalBetThisHand += actualCall;
         this.pot += actualCall;
         const prev = this.playerRoundBets.get(player.id) || 0;
         this.playerRoundBets.set(player.id, prev + actualCall);
@@ -509,6 +517,7 @@ export class GameRoom {
         this.clearTimer();
         player.chips -= needed;
         player.currentBet += needed;
+        player.totalBetThisHand += needed;
         this.pot += needed;
         this.currentBetLevel = player.currentBet;
         this.minRaise = raiseAmount;
@@ -525,6 +534,7 @@ export class GameRoom {
         const allIn = player.chips;
         player.chips = 0;
         player.currentBet += allIn;
+        player.totalBetThisHand += allIn;
         this.pot += allIn;
         if (player.currentBet > this.currentBetLevel) {
           const raiseBy = player.currentBet - this.currentBetLevel;
@@ -660,35 +670,33 @@ export class GameRoom {
       this.winnerId = active[0].id;
       active[0].chips += this.pot;
     } else {
-      // Closest estimate wins
       const answer = this.currentQuestion!.answer;
-      let closestDiff = Infinity;
-      const winners: Player[] = [];
 
-      for (const player of active) {
-        if (player.currentEstimate !== null) {
-          const diff = Math.abs(player.currentEstimate - answer);
-          if (diff < closestDiff) {
-            closestDiff = diff;
-            winners.length = 0;
-            winners.push(player);
-          } else if (diff === closestDiff) {
-            winners.push(player);
+      // Rank active players by closeness to answer (best first)
+      const ranked = [...active]
+        .filter(p => p.currentEstimate !== null)
+        .sort((a, b) => Math.abs(a.currentEstimate! - answer) - Math.abs(b.currentEstimate! - answer));
+
+      if (ranked.length === 0) {
+        this.winnerId = active[0].id;
+        active[0].chips += this.pot;
+      } else {
+        // Handle ties (same distance)
+        const bestDiff = Math.abs(ranked[0].currentEstimate! - answer);
+        const winners = ranked.filter(p => Math.abs(p.currentEstimate! - answer) === bestDiff);
+
+        this.winnerId = winners[0].id;
+
+        if (winners.length === 1) {
+          winners[0].chips += this.pot;
+        } else {
+          // Split pot evenly among tied winners
+          const share = Math.floor(this.pot / winners.length);
+          const remainder = this.pot - share * winners.length;
+          for (let i = 0; i < winners.length; i++) {
+            winners[i].chips += share + (i === 0 ? remainder : 0);
           }
         }
-      }
-
-      if (winners.length === 1) {
-        this.winnerId = winners[0].id;
-        winners[0].chips += this.pot;
-      } else if (winners.length > 1) {
-        // Split pot evenly
-        const share = Math.floor(this.pot / winners.length);
-        const remainder = this.pot - share * winners.length;
-        for (let i = 0; i < winners.length; i++) {
-          winners[i].chips += share + (i === 0 ? remainder : 0);
-        }
-        this.winnerId = winners[0].id;
       }
     }
 

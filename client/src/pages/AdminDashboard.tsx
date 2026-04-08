@@ -435,7 +435,7 @@ export default function AdminDashboard({ gameState, onStartGame, onNextRound, on
               })}
             </div>
 
-            <Showdown key={`showdown-${gameState.roundNumber}`} gameState={gameState} playerId="" onNextRound={onNextRound} isHost={true} />
+            <Showdown key={`showdown-${gameState.roundNumber}`} gameState={gameState} playerId="" onNextRound={onNextRound} isHost={false} />
           </div>
         )}
 
