@@ -17,7 +17,7 @@ export default function EstimateInput({ onSubmit }: EstimateInputProps) {
   return (
     <div className="mt-6 animate-slide-up">
       <div className="glass rounded-2xl p-5">
-        <label className="text-white/30 text-[10px] font-bold tracking-[0.2em] mb-3 block text-center">DEINE SCHAETZUNG</label>
+        <label className="text-white/30 text-[10px] font-bold tracking-[0.2em] mb-3 block text-center">DEINE SCHÄTZUNG</label>
         <div className="flex gap-3">
           <input
             type="text"

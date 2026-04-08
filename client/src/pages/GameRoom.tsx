@@ -13,12 +13,12 @@ import ActionFeed from '../components/ActionFeed';
 
 const PHASE_LABELS: Record<GamePhase, string> = {
   [GamePhase.LOBBY]: 'Lobby',
-  [GamePhase.ESTIMATING]: 'Schaetzung',
+  [GamePhase.ESTIMATING]: 'Schätzung',
   [GamePhase.HINT_1]: 'Hinweis 1',
   [GamePhase.BETTING_1]: 'Setzrunde 1',
   [GamePhase.HINT_2]: 'Hinweis 2',
   [GamePhase.BETTING_2]: 'Setzrunde 2',
-  [GamePhase.REVEAL]: 'Aufloesung',
+  [GamePhase.REVEAL]: 'Auflösung',
   [GamePhase.BETTING_3]: 'Setzrunde 3',
   [GamePhase.SHOWDOWN]: 'Showdown',
   [GamePhase.ROUND_END]: 'Ergebnis',
@@ -116,13 +116,22 @@ export default function GameRoom({
 
   // Build community cards (hints/answer displayed as cards in center)
   const communityCards: { label: string; content: string; type: 'hint' | 'answer' }[] = [];
-  if (gameState.hint && phase !== GamePhase.ESTIMATING) {
+  // Hint 1 visible from HINT_1 onwards (whitelist matching server logic)
+  const hint1Phases = phase === GamePhase.HINT_1 || phase === GamePhase.BETTING_1 ||
+    phase === GamePhase.HINT_2 || phase === GamePhase.BETTING_2 ||
+    phase === GamePhase.REVEAL || phase === GamePhase.BETTING_3 || isShowdown || phase === GamePhase.GAME_OVER;
+  if (gameState.hint && hint1Phases) {
     communityCards.push({ label: 'HINWEIS 1', content: gameState.hint, type: 'hint' });
   }
-  if (gameState.hint2 && (phase === GamePhase.HINT_2 || phase === GamePhase.BETTING_2 || phase === GamePhase.REVEAL || phase === GamePhase.BETTING_3 || isShowdown)) {
+  // Hint 2 visible from HINT_2 onwards
+  const hint2Phases = phase === GamePhase.HINT_2 || phase === GamePhase.BETTING_2 ||
+    phase === GamePhase.REVEAL || phase === GamePhase.BETTING_3 || isShowdown || phase === GamePhase.GAME_OVER;
+  if (gameState.hint2 && hint2Phases) {
     communityCards.push({ label: 'HINWEIS 2', content: gameState.hint2, type: 'hint' });
   }
-  if (gameState.actualAnswer !== null && (phase === GamePhase.BETTING_3 || phase === GamePhase.REVEAL || isShowdown)) {
+  // Answer visible from REVEAL onwards
+  const answerPhases = phase === GamePhase.REVEAL || phase === GamePhase.BETTING_3 || isShowdown || phase === GamePhase.GAME_OVER;
+  if (gameState.actualAnswer !== null && answerPhases) {
     communityCards.push({ label: 'ANTWORT', content: gameState.actualAnswer.toLocaleString('de-DE'), type: 'answer' });
   }
 
@@ -400,7 +409,7 @@ export default function GameRoom({
             {/* Estimate submitted confirmation */}
             {phase === GamePhase.ESTIMATING && me?.hasSubmittedEstimate && (
               <div className="glass rounded-xl p-3 text-center animate-fade-in max-w-sm">
-                <div className="text-white/30 text-[10px] font-bold tracking-[0.2em] mb-1">DEINE SCHAETZUNG</div>
+                <div className="text-white/30 text-[10px] font-bold tracking-[0.2em] mb-1">DEINE SCHÄTZUNG</div>
                 <div className="text-gold font-black text-2xl font-mono">{gameState.yourEstimate?.toLocaleString('de-DE')}</div>
               </div>
             )}
@@ -504,7 +513,7 @@ export default function GameRoom({
                 ))}
               </div>
               <button onClick={onLeave} className="btn-gold py-3 px-10 text-lg">
-                Zurueck
+                Zurück
               </button>
             </div>
           </div>

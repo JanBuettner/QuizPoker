@@ -170,10 +170,10 @@ export default function Showdown({ gameState, playerId, onNextRound, isHost }: S
         <div className="text-center pt-2 animate-fade-in" style={{ animationDelay: '300ms', animationFillMode: 'backwards' }}>
           {isHost ? (
             <button onClick={onNextRound} className="btn-gold py-3 px-10 text-lg">
-              Naechste Runde
+              Nächste Runde
             </button>
           ) : (
-            <p className="text-white/20 text-sm">Warte auf naechste Runde...</p>
+            <p className="text-white/20 text-sm">Warte auf nächste Runde...</p>
           )}
         </div>
       )}

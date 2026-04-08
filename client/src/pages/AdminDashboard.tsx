@@ -23,12 +23,12 @@ interface AdminDashboardProps {
 
 const PHASE_LABELS: Record<GamePhase, string> = {
   [GamePhase.LOBBY]: 'Lobby',
-  [GamePhase.ESTIMATING]: 'Schaetzung',
+  [GamePhase.ESTIMATING]: 'Schätzung',
   [GamePhase.HINT_1]: 'Hinweis 1',
   [GamePhase.BETTING_1]: 'Setzrunde 1',
   [GamePhase.HINT_2]: 'Hinweis 2',
   [GamePhase.BETTING_2]: 'Setzrunde 2',
-  [GamePhase.REVEAL]: 'Aufloesung',
+  [GamePhase.REVEAL]: 'Auflösung',
   [GamePhase.BETTING_3]: 'Setzrunde 3',
   [GamePhase.SHOWDOWN]: 'Showdown',
   [GamePhase.ROUND_END]: 'Ergebnis',
@@ -44,7 +44,7 @@ const ADVANCE_LABELS: Partial<Record<GamePhase, string>> = {
   [GamePhase.REVEAL]: 'Weiter -> Setzrunde 3',
   [GamePhase.BETTING_3]: 'Weiter -> Showdown',
   [GamePhase.SHOWDOWN]: 'Weiter -> Ergebnis',
-  [GamePhase.ROUND_END]: 'Naechste Runde starten',
+  [GamePhase.ROUND_END]: 'Nächste Runde starten',
 };
 
 // Helper to compute dealer/SB/BB ids
@@ -81,15 +81,24 @@ export default function AdminDashboard({ gameState, onStartGame, onNextRound, on
   const isShowdown = phase === GamePhase.SHOWDOWN || phase === GamePhase.ROUND_END;
   const showTable = phase !== GamePhase.LOBBY && phase !== GamePhase.GAME_OVER;
 
-  // Build community cards
+  // Build community cards (whitelist matching game flow)
   const communityCards: { label: string; content: string; type: 'hint' | 'answer' }[] = [];
-  if (hint && phase !== GamePhase.ESTIMATING) {
+  // Hint 1 visible from HINT_1 onwards
+  const hint1Phases = phase === GamePhase.HINT_1 || phase === GamePhase.BETTING_1 ||
+    phase === GamePhase.HINT_2 || phase === GamePhase.BETTING_2 ||
+    phase === GamePhase.REVEAL || phase === GamePhase.BETTING_3 || isShowdown || phase === GamePhase.GAME_OVER;
+  if (hint && hint1Phases) {
     communityCards.push({ label: 'HINWEIS 1', content: hint, type: 'hint' });
   }
-  if (hint2 && (phase === GamePhase.HINT_2 || phase === GamePhase.BETTING_2 || phase === GamePhase.REVEAL || phase === GamePhase.BETTING_3 || isShowdown)) {
+  // Hint 2 visible from HINT_2 onwards
+  const hint2Phases = phase === GamePhase.HINT_2 || phase === GamePhase.BETTING_2 ||
+    phase === GamePhase.REVEAL || phase === GamePhase.BETTING_3 || isShowdown || phase === GamePhase.GAME_OVER;
+  if (hint2 && hint2Phases) {
     communityCards.push({ label: 'HINWEIS 2', content: hint2, type: 'hint' });
   }
-  if (actualAnswer !== null && (phase === GamePhase.BETTING_3 || phase === GamePhase.REVEAL || isShowdown)) {
+  // Answer visible from REVEAL onwards
+  const answerPhases = phase === GamePhase.REVEAL || phase === GamePhase.BETTING_3 || isShowdown || phase === GamePhase.GAME_OVER;
+  if (actualAnswer !== null && answerPhases) {
     communityCards.push({ label: 'ANTWORT', content: actualAnswer.toLocaleString('de-DE'), type: 'answer' });
   }
 
@@ -200,7 +209,7 @@ export default function AdminDashboard({ gameState, onStartGame, onNextRound, on
         {phase !== GamePhase.LOBBY && phase !== GamePhase.GAME_OVER && players.some(p => p.estimate !== null || p.hasSubmittedEstimate) && (
           <div className="w-full max-w-xl mb-3">
             <div className="glass rounded-xl p-3">
-              <div className="text-white/20 text-[9px] font-bold tracking-[0.15em] mb-2">SCHAETZUNGEN DER SPIELER</div>
+              <div className="text-white/20 text-[9px] font-bold tracking-[0.15em] mb-2">SCHÄTZUNGEN DER SPIELER</div>
               <div className="flex flex-wrap gap-2">
                 {players.filter(p => !p.isEliminated).map(p => (
                   <div key={p.id} className={`rounded-lg px-3 py-1.5 text-xs flex items-center gap-2
@@ -445,7 +454,7 @@ export default function AdminDashboard({ gameState, onStartGame, onNextRound, on
                   </div>
                 ))}
               </div>
-              <button onClick={onLeave} className="btn-gold py-3 px-10 text-lg">Zurueck</button>
+              <button onClick={onLeave} className="btn-gold py-3 px-10 text-lg">Zurück</button>
             </div>
           </div>
         )}

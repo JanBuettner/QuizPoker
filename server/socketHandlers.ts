@@ -214,13 +214,13 @@ export function setupSocketHandlers(io: TypedServer): void {
       const { room, isAdmin } = info;
 
       if (!isAdmin && !room.players.get(socket.id)?.isHost) {
-        socket.emit('error', { message: 'Nur Admin/Host kann Bots hinzufuegen' });
+        socket.emit('error', { message: 'Nur Admin/Host kann Bots hinzufügen' });
         return;
       }
 
       const bot = room.addBot();
       if (!bot) {
-        socket.emit('error', { message: 'Maximale Spielerzahl erreicht oder Spiel laeuft' });
+        socket.emit('error', { message: 'Maximale Spielerzahl erreicht oder Spiel läuft' });
         return;
       }
       broadcastState(room, io);
@@ -283,7 +283,7 @@ export function setupSocketHandlers(io: TypedServer): void {
       }
 
       if (typeof estimate !== 'number' || !isFinite(estimate)) {
-        socket.emit('error', { message: 'Ungueltige Schaetzung' });
+        socket.emit('error', { message: 'Ungültige Schätzung' });
         return;
       }
 
@@ -304,7 +304,7 @@ export function setupSocketHandlers(io: TypedServer): void {
       }
 
       if (amount !== undefined && (typeof amount !== 'number' || !isFinite(amount) || amount <= 0)) {
-        socket.emit('error', { message: 'Ungueltiger Einsatz' });
+        socket.emit('error', { message: 'Ungültiger Einsatz' });
         return;
       }
 
@@ -327,7 +327,7 @@ export function setupSocketHandlers(io: TypedServer): void {
       if (isAdmin || room.players.get(socket.id)?.isHost) {
         room.triggerNextRound();
       } else {
-        socket.emit('error', { message: 'Nur Admin/Host kann die naechste Runde starten' });
+        socket.emit('error', { message: 'Nur Admin/Host kann die nächste Runde starten' });
       }
     });
 

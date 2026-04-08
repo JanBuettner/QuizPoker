@@ -10,16 +10,16 @@
   --color-table-dark: #0a2e18;
   --color-table-light: #166534;
   --color-felt: #15803d;
-  --color-gold: #f59e0b;
-  --color-gold-light: #fbbf24;
-  --color-gold-dark: #d97706;
+  --color-gold: #c8a24e;
+  --color-gold-light: #d4b86a;
+  --color-gold-dark: #a8862e;
   --color-chip-red: #dc2626;
   --color-chip-blue: #3b82f6;
   --color-chip-white: #f1f5f9;
-  --color-card-bg: #0c0c1d;
-  --color-card-border: #1e293b;
-  --color-surface: #0f172a;
-  --color-surface-light: #1e293b;
+  --color-card-bg: #1a1209;
+  --color-card-border: #3d2e1a;
+  --color-surface: #1a1209;
+  --color-surface-light: #2a1f0e;
 }
 
 * {
@@ -29,8 +29,8 @@
 body {
   margin: 0;
   font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-  background: radial-gradient(ellipse at 50% 0%, #14532d 0%, #0a1f12 50%, #050d09 100%);
-  color: #e2e8f0;
+  background: radial-gradient(ellipse at 50% 0%, #2a1f0e 0%, #130e06 50%, #0d0a06 100%);
+  color: #e8dcc8;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -39,12 +39,55 @@ body {
   min-height: 100vh;
 }
 
-/* Felt texture overlay */
+/* Wood grain texture overlay */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(139, 90, 43, 0.02) 0px,
+      transparent 1px,
+      transparent 3px,
+      rgba(139, 90, 43, 0.015) 4px,
+      transparent 5px,
+      transparent 11px,
+      rgba(101, 67, 33, 0.02) 12px,
+      transparent 13px,
+      transparent 19px,
+      rgba(139, 90, 43, 0.01) 20px,
+      transparent 21px,
+      transparent 29px
+    ),
+    repeating-linear-gradient(
+      87deg,
+      transparent 0px,
+      rgba(120, 80, 40, 0.012) 40px,
+      transparent 80px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      rgba(100, 70, 35, 0.008) 0px,
+      transparent 2px,
+      transparent 60px,
+      rgba(100, 70, 35, 0.01) 62px,
+      transparent 64px,
+      transparent 150px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Warm ambient glow overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 20%, rgba(200, 162, 78, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 30% 70%, rgba(180, 130, 50, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 60%, rgba(180, 130, 50, 0.03) 0%, transparent 50%);
   pointer-events: none;
   z-index: 0;
 }
@@ -57,8 +100,8 @@ body::before {
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+::-webkit-scrollbar-thumb { background: rgba(200, 162, 78, 0.15); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(200, 162, 78, 0.25); }
 
 /* ============================================
    ANIMATIONS
@@ -75,8 +118,8 @@ body::before {
 }
 
 @keyframes pulse-gold {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
-  50% { box-shadow: 0 0 24px 6px rgba(245, 158, 11, 0.15); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200, 162, 78, 0.4); }
+  50% { box-shadow: 0 0 24px 6px rgba(200, 162, 78, 0.15); }
 }
 
 @keyframes pulse-glow {
@@ -106,8 +149,8 @@ body::before {
 }
 
 @keyframes borderGlow {
-  0%, 100% { border-color: rgba(245, 158, 11, 0.2); }
-  50% { border-color: rgba(245, 158, 11, 0.5); }
+  0%, 100% { border-color: rgba(200, 162, 78, 0.2); }
+  50% { border-color: rgba(200, 162, 78, 0.5); }
 }
 
 /* Card dealing animation */
@@ -141,10 +184,10 @@ body::before {
 /* Turn spotlight glow on active player seat */
 @keyframes seatGlow {
   0%, 100% {
-    box-shadow: 0 0 10px rgba(245, 158, 11, 0.3), 0 0 20px rgba(245, 158, 11, 0.15);
+    box-shadow: 0 0 10px rgba(200, 162, 78, 0.3), 0 0 20px rgba(200, 162, 78, 0.15);
   }
   50% {
-    box-shadow: 0 0 20px rgba(245, 158, 11, 0.5), 0 0 40px rgba(245, 158, 11, 0.25);
+    box-shadow: 0 0 20px rgba(200, 162, 78, 0.5), 0 0 40px rgba(200, 162, 78, 0.25);
   }
 }
 
@@ -165,7 +208,7 @@ body::before {
 .animate-chips-to-pot { animation: chipsToPot 0.4s ease-out forwards; }
 
 .shimmer-bg {
-  background: linear-gradient(90deg, transparent 0%, rgba(245, 158, 11, 0.08) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(200, 162, 78, 0.08) 50%, transparent 100%);
   background-size: 200% 100%;
   animation: shimmer 3s ease-in-out infinite;
 }
@@ -197,13 +240,13 @@ body::before {
 }
 
 @keyframes winnerGlow {
-  0%, 100% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.3), 0 0 60px rgba(245, 158, 11, 0.1); }
-  50% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.5), 0 0 80px rgba(245, 158, 11, 0.2); }
+  0%, 100% { box-shadow: 0 0 20px rgba(200, 162, 78, 0.3), 0 0 60px rgba(200, 162, 78, 0.1); }
+  50% { box-shadow: 0 0 30px rgba(200, 162, 78, 0.5), 0 0 80px rgba(200, 162, 78, 0.2); }
 }
 
 @keyframes textGlow {
-  0%, 100% { text-shadow: 0 0 20px rgba(245, 158, 11, 0.6), 0 0 40px rgba(245, 158, 11, 0.3); }
-  50% { text-shadow: 0 0 30px rgba(245, 158, 11, 0.8), 0 0 60px rgba(245, 158, 11, 0.4), 0 0 80px rgba(245, 158, 11, 0.2); }
+  0%, 100% { text-shadow: 0 0 20px rgba(200, 162, 78, 0.6), 0 0 40px rgba(200, 162, 78, 0.3); }
+  50% { text-shadow: 0 0 30px rgba(200, 162, 78, 0.8), 0 0 60px rgba(200, 162, 78, 0.4), 0 0 80px rgba(200, 162, 78, 0.2); }
 }
 
 .card-flip {
@@ -225,14 +268,14 @@ body::before {
 }
 
 .showdown-answer-card {
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(217, 119, 6, 0.08) 100%);
+  background: linear-gradient(135deg, rgba(200, 162, 78, 0.12) 0%, rgba(168, 134, 46, 0.08) 100%);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 2px solid rgba(245, 158, 11, 0.4);
+  border: 2px solid rgba(200, 162, 78, 0.4);
   border-radius: 16px;
   padding: 28px;
   text-align: center;
-  box-shadow: 0 0 40px rgba(245, 158, 11, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 40px rgba(200, 162, 78, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .showdown-answer-inner {
@@ -240,22 +283,22 @@ body::before {
 }
 
 .showdown-player-card {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(42, 31, 14, 0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(200, 162, 78, 0.1);
   border-radius: 14px;
   padding: 14px 20px;
   transition: all 0.3s ease;
 }
 
 .showdown-player-card:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(42, 31, 14, 0.8);
 }
 
 .showdown-winner-card {
-  border: 2px solid rgba(245, 158, 11, 0.6) !important;
-  background: rgba(245, 158, 11, 0.08) !important;
+  border: 2px solid rgba(200, 162, 78, 0.6) !important;
+  background: rgba(200, 162, 78, 0.08) !important;
   animation: cardFlip 0.45s ease-out forwards, winnerGlow 2s ease-in-out infinite 0.45s;
 }
 
@@ -263,15 +306,15 @@ body::before {
   position: relative;
   overflow: hidden;
   border-radius: 20px;
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.05) 100%);
-  border: 2px solid rgba(245, 158, 11, 0.4);
+  background: linear-gradient(135deg, rgba(200, 162, 78, 0.1) 0%, rgba(168, 134, 46, 0.05) 100%);
+  border: 2px solid rgba(200, 162, 78, 0.4);
   animation: cardFlip 0.45s ease-out forwards, winnerGlow 2s ease-in-out infinite 0.45s;
 }
 
 .showdown-spotlight {
   position: absolute;
   inset: -50%;
-  background: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.2) 0%, transparent 60%);
+  background: radial-gradient(circle at 50% 50%, rgba(200, 162, 78, 0.2) 0%, transparent 60%);
   animation: spotlightPulse 2.5s ease-in-out infinite;
   pointer-events: none;
 }
@@ -281,17 +324,33 @@ body::before {
    ============================================ */
 
 .glass {
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(26, 18, 9, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(200, 162, 78, 0.08);
 }
 
 .glass-gold {
-  background: rgba(245, 158, 11, 0.08);
+  background: rgba(200, 162, 78, 0.08);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(200, 162, 78, 0.25);
+}
+
+/* ============================================
+   LOUNGE CARD (Home page panel)
+   ============================================ */
+
+.lounge-card {
+  background:
+    linear-gradient(135deg, rgba(42, 31, 14, 0.85) 0%, rgba(26, 18, 9, 0.9) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(200, 162, 78, 0.12);
+  box-shadow:
+    0 0 1px rgba(200, 162, 78, 0.2),
+    inset 0 1px 0 rgba(200, 162, 78, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
 
 /* ============================================
@@ -299,21 +358,31 @@ body::before {
    ============================================ */
 
 .btn-gold {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  color: black;
+  background: linear-gradient(135deg, #c8a24e 0%, #a8862e 50%, #8b6d24 100%);
+  color: #1a1209;
   font-weight: 700;
   border-radius: 12px;
   transition: all 0.2s;
-  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+  box-shadow:
+    0 4px 14px rgba(200, 162, 78, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(200, 162, 78, 0.3);
 }
 .btn-gold:hover {
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+  background: linear-gradient(135deg, #d4b86a 0%, #c8a24e 50%, #a8862e 100%);
+  box-shadow:
+    0 6px 20px rgba(200, 162, 78, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   transform: translateY(-1px);
 }
 .btn-gold:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+  box-shadow:
+    0 2px 8px rgba(200, 162, 78, 0.2),
+    inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .btn-gold:disabled {
   opacity: 0.35;
@@ -328,8 +397,8 @@ body::before {
 
 .poker-table-felt {
   background-image:
-    radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.03) 0%, transparent 70%),
-    url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3h1v1H1V3zm2-2h1v1H3V1z' fill='%23ffffff' fill-opacity='0.02'/%3E%3C/svg%3E");
+    radial-gradient(ellipse at 50% 50%, rgba(200, 162, 78, 0.03) 0%, transparent 70%),
+    url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3h1v1H1V3zm2-2h1v1H3V1z' fill='%23c8a24e' fill-opacity='0.015'/%3E%3C/svg%3E");
 }
 
 .poker-table-felt::after {
@@ -337,7 +406,7 @@ body::before {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(ellipse at 50% 40%, rgba(16, 185, 129, 0.1) 0%, transparent 60%);
+  background: radial-gradient(ellipse at 50% 40%, rgba(200, 162, 78, 0.06) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -347,7 +416,7 @@ body::before {
 
 .poker-card {
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  color: #1a1a2e;
+  color: #1a1209;
   border-radius: 8px;
   padding: 6px 10px;
   font-size: 12px;
@@ -365,21 +434,21 @@ body::before {
 }
 
 .poker-card-gold {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fbbf24 100%);
-  color: #78350f;
+  background: linear-gradient(135deg, #f5edd6 0%, #d4b86a 50%, #c8a24e 100%);
+  color: #3d2e1a;
   border-radius: 8px;
   padding: 6px 10px;
   font-size: 12px;
-  box-shadow: 0 4px 16px rgba(245,158,11,0.4), 0 1px 3px rgba(0,0,0,0.2);
-  border: 1px solid rgba(245,158,11,0.3);
+  box-shadow: 0 4px 16px rgba(200,162,78,0.4), 0 1px 3px rgba(0,0,0,0.2);
+  border: 1px solid rgba(200,162,78,0.3);
   max-width: 150px;
   min-width: 80px;
 }
 
 .poker-card-question {
-  background: rgba(15, 23, 42, 0.8);
+  background: rgba(26, 18, 9, 0.8);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(200, 162, 78, 0.12);
   border-radius: 12px;
   padding: 12px 20px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.3);
@@ -390,12 +459,12 @@ body::before {
   background:
     repeating-linear-gradient(
       45deg,
-      #1e3a5f,
-      #1e3a5f 2px,
-      #1a2d4a 2px,
-      #1a2d4a 4px
+      #3d2e1a,
+      #3d2e1a 2px,
+      #2a1f0e 2px,
+      #2a1f0e 4px
     );
-  border: 2px solid #2563eb;
+  border: 2px solid #6b5530;
   border-radius: 4px;
 }
 
@@ -413,7 +482,7 @@ body::before {
 
 /* Dealer button */
 .dealer-button {
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3), 0 0 8px rgba(250,204,21,0.3);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3), 0 0 8px rgba(200,162,78,0.3);
 }
 
 /* Chip stack visual */
@@ -441,10 +510,10 @@ body::before {
 
 input[type="text"]:focus, input[type="number"]:focus {
   outline: none;
-  border-color: #f59e0b;
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+  border-color: #c8a24e;
+  box-shadow: 0 0 0 3px rgba(200, 162, 78, 0.15);
 }
 
 input[type="range"] {
-  accent-color: #f59e0b;
+  accent-color: #c8a24e;
 }
