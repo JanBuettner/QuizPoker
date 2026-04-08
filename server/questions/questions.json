@@ -5,7 +5,8 @@
     "answer": 21,
     "hint": "Früher gab es Etappen, die länger als ein ganzer Arbeitstag dauerten - das Rennen wurde seitdem massiv verkürzt und strukturiert.",
     "hint2": "Die Etappenzahl ist dieselbe wie die Anzahl der Punkte auf einem Würfel - wenn man alle sechs Seiten zusammenzählt.",
-    "category": "Sport"
+    "category": "Sport",
+    "difficulty": 1
   },
   {
     "id": 2,
@@ -13,7 +14,8 @@
     "answer": 665,
     "hint": "Es erstreckte sich über drei Tage - die Veranstalter hatten noch nie zuvor ein Match unterbrechen und am nächsten Tag fortsetzen müssen.",
     "hint2": "Allein der fünfte Satz dauerte länger als die meisten kompletten Grand-Slam-Matches.",
-    "category": "Sport"
+    "category": "Sport",
+    "difficulty": 3
   },
   {
     "id": 3,
@@ -21,7 +23,8 @@
     "answer": 226,
     "hint": "Der Laufanteil allein entspricht einem kompletten Marathon - und der kommt am Ende, nach allem anderen.",
     "hint2": "Die Strecke wäre kürzer als die Entfernung von Frankfurt nach München, aber kein normaler Mensch schafft das an einem Tag.",
-    "category": "Sport"
+    "category": "Sport",
+    "difficulty": 2
   },
   {
     "id": 4,
@@ -29,7 +32,8 @@
     "answer": 32,
     "hint": "Die zwei verschiedenen Vieleckarten kommen auch in der Natur vor - bei Bienenwaben und Bleistiftquerschnitten.",
     "hint2": "Die schwarzen Felder haben immer eine Ecke mehr als die weißen.",
-    "category": "Sport"
+    "category": "Sport",
+    "difficulty": 1
   },
   {
     "id": 5,
@@ -37,7 +41,8 @@
     "answer": 10,
     "hint": "Deutschland landete damit im Medaillenspiegel hinter den USA, China und Großbritannien.",
     "hint2": "Im Vergleich zu Rio 2016 war das eine deutliche Verschlechterung - damals holte Deutschland fast doppelt so viele Goldmedaillen.",
-    "category": "Sport"
+    "category": "Sport",
+    "difficulty": 3
   },
   {
     "id": 6,
@@ -45,7 +50,8 @@
     "answer": 60,
     "hint": "Das ist schneller als ein Fahrradfahrer bergab, aber langsamer als ein Auto auf der Landstraße.",
     "hint2": "Die Faust braucht für die Strecke von der Schulter bis zum Gegner weniger als eine Zehntelsekunde.",
-    "category": "Sport"
+    "category": "Sport",
+    "difficulty": 2
   },
   {
     "id": 7,
@@ -53,7 +59,8 @@
     "answer": 12,
     "hint": "Ungefähr so weit wie von deiner Haustür zum nächsten Stadion und zurück.",
     "hint2": "Mittelfeldspieler legen die weiteste Strecke zurück, Stürmer und Torhüter die kürzeste.",
-    "category": "Sport"
+    "category": "Sport",
+    "difficulty": 1
   },
   {
     "id": 8,
@@ -61,7 +68,8 @@
     "answer": 286,
     "hint": "Heute ist das Rennen eines der größten der Welt - die Teilnehmerzahl hat sich mehr als hundertfach gesteigert.",
     "hint2": "Damals fand der Marathon noch komplett im Tiergarten statt - durch die ganze Stadt durfte er erst später laufen.",
-    "category": "Sport"
+    "category": "Sport",
+    "difficulty": 3
   },
   {
     "id": 9,
@@ -69,7 +77,8 @@
     "answer": 501,
     "hint": "Der Name verrät alles - aber die Gesamtpunktzahl kennen die wenigsten auswendig.",
     "hint2": "Man muss mit genau drei Triples und einem Double beginnen - und mit einem Double enden.",
-    "category": "Sport"
+    "category": "Sport",
+    "difficulty": 2
   },
   {
     "id": 10,
@@ -77,7 +86,8 @@
     "answer": 263,
     "hint": "Auf deutschen Autobahnen wäre das noch knapp erlaubt - aber kein Serienfahrzeug erreicht das ohne Tuning problemlos.",
     "hint2": "Der Ball ist dabei für das menschliche Auge kaum zu verfolgen - Reaktionszeit fast null.",
-    "category": "Sport"
+    "category": "Sport",
+    "difficulty": 3
   },
   {
     "id": 11,
@@ -85,7 +95,8 @@
     "answer": 40000,
     "hint": "Die Anzahl hängt stark von der Körpergröße ab - Große machen weniger Schritte als Kleine.",
     "hint2": "Das entspricht ungefähr der Schrittzahl von vier durchschnittlichen Arbeitstagen am Stück.",
-    "category": "Sport"
+    "category": "Sport",
+    "difficulty": 2
   },
   {
     "id": 12,
@@ -93,7 +104,8 @@
     "answer": 32,
     "hint": "Ab der WM 2026 wird das Turnier deutlich größer - die Zahl der Teilnehmer steigt erheblich.",
     "hint2": "Diese Zahl ist dieselbe wie die Temperaturdifferenz zwischen dem Gefrierpunkt und der Körpertemperatur in Grad Fahrenheit.",
-    "category": "Sport"
+    "category": "Sport",
+    "difficulty": 1
   },
   {
     "id": 13,
@@ -101,7 +113,8 @@
     "answer": 9,
     "hint": "Mehr Nachbarländer hat in Europa nur Russland - und das ist flächenmäßig der größte Staat der Erde.",
     "hint2": "Einer dieser Nachbarn existierte vor 1990 noch gar nicht als eigenständiger Staat.",
-    "category": "Geografie"
+    "category": "Geografie",
+    "difficulty": 1
   },
   {
     "id": 14,
@@ -109,7 +122,8 @@
     "answer": 2240,
     "hint": "Läufer aus dem Flachland brauchen dort deutlich länger zur Erholung - die Luft ist spürbar dünner.",
     "hint2": "Die Stadt liegt höher als jeder Berggipfel in Deutschland.",
-    "category": "Geografie"
+    "category": "Geografie",
+    "difficulty": 2
   },
   {
     "id": 15,
@@ -117,7 +131,8 @@
     "answer": 330,
     "hint": "Bei seiner Fertigstellung war er das höchste Bauwerk der Welt - dieser Titel hielt sich über 40 Jahre.",
     "hint2": "Im Sommer ist er wegen der Wärmeausdehnung des Stahls messbar größer als im Winter.",
-    "category": "Geografie"
+    "category": "Geografie",
+    "difficulty": 1
   },
   {
     "id": 16,
@@ -125,7 +140,8 @@
     "answer": 254,
     "hint": "Das Wasser dort unten hat das ganze Jahr fast dieselbe Temperatur - egal wie heiß der Sommer ist.",
     "hint2": "Tiefer als der Kölner Dom hoch ist (157m), aber nicht ganz so tief wie der Eiffelturm.",
-    "category": "Geografie"
+    "category": "Geografie",
+    "difficulty": 2
   },
   {
     "id": 17,
@@ -133,7 +149,8 @@
     "answer": 370000,
     "hint": "Weniger Menschen leben dort als in Bielefeld - auf einer Insel so groß wie Bulgarien.",
     "hint2": "Die Hauptstadt Reykjavik beherbergt mehr als die Hälfte der Gesamtbevölkerung.",
-    "category": "Geografie"
+    "category": "Geografie",
+    "difficulty": 2
   },
   {
     "id": 18,
@@ -141,7 +158,8 @@
     "answer": 1230,
     "hint": "Man könnte ihn nicht an einem Tag mit dem Auto abfahren, ohne Pausen zu machen.",
     "hint2": "Er durchquert sechs Länder - und ist damit einer der internationalsten Flüsse Europas.",
-    "category": "Geografie"
+    "category": "Geografie",
+    "difficulty": 1
   },
   {
     "id": 19,
@@ -149,7 +167,8 @@
     "answer": 6000,
     "hint": "Die meisten davon sind so klein, dass kein Mensch dauerhaft darauf lebt.",
     "hint2": "Würde man jeden Tag eine andere Insel besuchen, bräuchte man über 16 Jahre für alle.",
-    "category": "Geografie"
+    "category": "Geografie",
+    "difficulty": 2
   },
   {
     "id": 20,
@@ -157,7 +176,8 @@
     "answer": 16100,
     "hint": "Ein Direktflug - sofern er existierte - würde fast 17 Stunden dauern.",
     "hint2": "Es ist fast die halbe Erdumrundung - etwas weiter und man wäre kürzer um die andere Seite geflogen.",
-    "category": "Geografie"
+    "category": "Geografie",
+    "difficulty": 2
   },
   {
     "id": 21,
@@ -165,7 +185,8 @@
     "answer": 533,
     "hint": "Wer das schafft, hat in etwa so viel Höhe zurückgelegt wie beim Erklimmen des Frankfurter Messeturms.",
     "hint2": "Der Dom war beim Bau vorübergehend das höchste Gebäude der Welt.",
-    "category": "Geografie"
+    "category": "Geografie",
+    "difficulty": 3
   },
   {
     "id": 22,
@@ -173,7 +194,8 @@
     "answer": 100000,
     "hint": "Das ist mehr als zweimal der Erdumfang - die Fjorde allein machen den größten Teil aus.",
     "hint2": "Kein anderes Land in Europa hat eine längere Küste, obwohl Norwegen flächenmäßig nicht das größte ist.",
-    "category": "Geografie"
+    "category": "Geografie",
+    "difficulty": 3
   },
   {
     "id": 23,
@@ -181,7 +203,8 @@
     "answer": 16,
     "hint": "Sie verbringt damit mehr Zeit schlafend als nahezu jedes andere Haustier.",
     "hint2": "In 20 Lebensjahren wäre eine Katze rechnerisch nur etwa 5 Jahre lang wach gewesen.",
-    "category": "Natur"
+    "category": "Natur",
+    "difficulty": 1
   },
   {
     "id": 24,
@@ -189,7 +212,8 @@
     "answer": 120,
     "hint": "Auf deutschen Schnellstraßen wäre er innerorts verboten, außerorts gerade noch erlaubt.",
     "hint2": "Er erreicht seine Höchstgeschwindigkeit in weniger als 3 Sekunden - schneller als die meisten Sportwagen.",
-    "category": "Natur"
+    "category": "Natur",
+    "difficulty": 1
   },
   {
     "id": 25,
@@ -197,7 +221,8 @@
     "answer": 300,
     "hint": "Wer täglich Eier isst, schafft damit gerade mal ein Drittel der Jahresproduktion einer einzigen Henne.",
     "hint2": "Das wildlebende Huhn legt nur einen Bruchteil davon - Züchtung hat die Zahl massiv gesteigert.",
-    "category": "Natur"
+    "category": "Natur",
+    "difficulty": 1
   },
   {
     "id": 26,
@@ -205,7 +230,8 @@
     "answer": 40000,
     "hint": "Eine einzelne Biene erzeugt in ihrem gesamten Leben nur etwa einen Teelöffel Honig.",
     "hint2": "Die gesamte Flugstrecke entspricht ungefähr dem Erdumfang.",
-    "category": "Natur"
+    "category": "Natur",
+    "difficulty": 3
   },
   {
     "id": 27,
@@ -213,7 +239,8 @@
     "answer": 3,
     "hint": "Sein Blut ist blau, nicht rot - wegen eines kupferhaltigen Proteins statt Hämoglobin.",
     "hint2": "Zwei dieser Herzen pumpen nur zur Lunge, eines versorgt den Rest des Körpers.",
-    "category": "Natur"
+    "category": "Natur",
+    "difficulty": 1
   },
   {
     "id": 28,
@@ -221,7 +248,8 @@
     "answer": 400,
     "hint": "Ein heute lebender Grönlandhai könnte zu Shakespeares Lebzeiten geboren worden sein.",
     "hint2": "Er ist das langlebigste bekannte Wirbeltier der Erde - und wächst nur etwa 1 cm pro Jahr.",
-    "category": "Natur"
+    "category": "Natur",
+    "difficulty": 2
   },
   {
     "id": 29,
@@ -229,7 +257,8 @@
     "answer": 25,
     "hint": "Er verbringt fast die gesamte Wachzeit mit Fressen - bis zu 14 Stunden täglich.",
     "hint2": "Bambus hat so wenig Nährstoffe, dass der Panda enorme Mengen braucht, um Energie zu gewinnen.",
-    "category": "Natur"
+    "category": "Natur",
+    "difficulty": 2
   },
   {
     "id": 30,
@@ -237,7 +266,8 @@
     "answer": 8,
     "hint": "Die meisten sind auf die Seiten verteilt, um ein breites Sichtfeld zu haben - nicht nach vorne gerichtet wie beim Menschen.",
     "hint2": "Trotz der vielen Augen sind die meisten Spinnen nicht besonders scharf sehend - Bewegung nehmen sie aber sehr gut wahr.",
-    "category": "Natur"
+    "category": "Natur",
+    "difficulty": 1
   },
   {
     "id": 31,
@@ -245,7 +275,8 @@
     "answer": 30,
     "hint": "Für einen Menschen wäre das ein Sprung über ein 30-stöckiges Hochhaus.",
     "hint2": "Der Floh beschleunigt dabei stärker als ein Raumschiff beim Start - relativ gesehen.",
-    "category": "Natur"
+    "category": "Natur",
+    "difficulty": 2
   },
   {
     "id": 32,
@@ -253,7 +284,8 @@
     "answer": 75,
     "hint": "Um einen Kilometer zurückzulegen, bräuchte sie über 10 Stunden - ohne Pause.",
     "hint2": "Ein Mensch im Schlaf, der sich im Bett dreht, bewegt sich rechnerisch fast schneller.",
-    "category": "Natur"
+    "category": "Natur",
+    "difficulty": 2
   },
   {
     "id": 33,
@@ -261,7 +293,8 @@
     "answer": 206,
     "hint": "Als Säugling hat man deutlich mehr - viele verschmelzen im Laufe des Lebens miteinander.",
     "hint2": "Allein im Fuß steckt fast ein Viertel aller Knochen des gesamten Körpers.",
-    "category": "Wissenschaft"
+    "category": "Wissenschaft",
+    "difficulty": 1
   },
   {
     "id": 34,
@@ -269,7 +302,8 @@
     "answer": 7500,
     "hint": "Das Herz schlägt rund 100.000 Mal am Tag - und pumpt dabei jedes Mal eine Tasse voller Blut.",
     "hint2": "In einem Jahr käme genug zusammen, um einen mittelgroßen Swimmingpool zu füllen.",
-    "category": "Wissenschaft"
+    "category": "Wissenschaft",
+    "difficulty": 2
   },
   {
     "id": 35,
@@ -277,7 +311,8 @@
     "answer": 35,
     "hint": "Das entspricht ungefähr sieben Zuckerwürfeln - mehr als die WHO als Tageshöchstmenge empfiehlt.",
     "hint2": "Wegen der Kohlensäure und Säure schmeckt man die Süße weniger stark als bei gleichem Zuckergehalt in Saft.",
-    "category": "Wissenschaft"
+    "category": "Wissenschaft",
+    "difficulty": 1
   },
   {
     "id": 36,
@@ -285,7 +320,8 @@
     "answer": 55,
     "hint": "Im EU-Vergleich liegt Deutschland beim Pro-Kopf-Müll im oberen Drittel - trotz Pfandsystem.",
     "hint2": "Jeder Deutsche erzeugt im Schnitt sein eigenes Körpergewicht an Müll - mehrmals im Jahr.",
-    "category": "Wissenschaft"
+    "category": "Wissenschaft",
+    "difficulty": 2
   },
   {
     "id": 37,
@@ -293,7 +329,8 @@
     "answer": 450,
     "hint": "Eine Flasche, die heute weggeworfen wird, ist erst im Jahr 2475 vollständig verschwunden.",
     "hint2": "Plastik existiert als Material erst seit etwa 100 Jahren - keine einzige Flasche ist bisher vollständig zerfallen.",
-    "category": "Wissenschaft"
+    "category": "Wissenschaft",
+    "difficulty": 2
   },
   {
     "id": 38,
@@ -301,7 +338,8 @@
     "answer": 1235,
     "hint": "Ein Überschallflugzeug muss schneller fliegen - und erzeugt dabei einen Knall, den man am Boden hört.",
     "hint2": "Bei einem Gewitter kann man damit grob ausrechnen, wie weit der Blitz entfernt war.",
-    "category": "Wissenschaft"
+    "category": "Wissenschaft",
+    "difficulty": 2
   },
   {
     "id": 39,
@@ -309,7 +347,8 @@
     "answer": 32,
     "hint": "Viele Menschen haben diese Zahl nie erreicht - weil ihre Weisheitszähne operativ entfernt wurden.",
     "hint2": "Als Kind hatte man deutlich weniger - das Milchgebiss kommt mit 20 Zähnen aus.",
-    "category": "Wissenschaft"
+    "category": "Wissenschaft",
+    "difficulty": 1
   },
   {
     "id": 40,
@@ -317,7 +356,8 @@
     "answer": 86,
     "hint": "Wenn man jede Sekunde eine Nervenzelle zählen würde, bräuchte man fast 3.000 Jahre.",
     "hint2": "Jedes Neuron kann mit Tausenden anderen verbunden sein - die Gesamtzahl der Verbindungen übersteigt die Sternenzahl der Milchstraße.",
-    "category": "Wissenschaft"
+    "category": "Wissenschaft",
+    "difficulty": 2
   },
   {
     "id": 41,
@@ -325,7 +365,8 @@
     "answer": 5500,
     "hint": "Der Kern ist um ein Vielfaches heißer - die Oberfläche ist tatsächlich die kühlste Schicht der Sonne.",
     "hint2": "Kein bekanntes Material der Erde könnte bei dieser Temperatur fest bleiben.",
-    "category": "Wissenschaft"
+    "category": "Wissenschaft",
+    "difficulty": 2
   },
   {
     "id": 42,
@@ -333,7 +374,8 @@
     "answer": 9,
     "hint": "Das Licht braucht für diese Strecke genau ein Jahr - mit 300.000 km pro Sekunde.",
     "hint2": "Das nächste Sternsystem (Alpha Centauri) ist über 4 Lichtjahre entfernt - mit heutigen Raketen bräuchte man Jahrtausende.",
-    "category": "Wissenschaft"
+    "category": "Wissenschaft",
+    "difficulty": 2
   },
   {
     "id": 43,
@@ -341,7 +383,8 @@
     "answer": 71,
     "hint": "Trotzdem ist Trinkwasser knapp - der allergrößte Teil davon ist Salzwasser.",
     "hint2": "Betrachtet man die Erde von bestimmten Blickwinkeln aus dem Weltall, sieht man fast nur Wasser - kein Land.",
-    "category": "Wissenschaft"
+    "category": "Wissenschaft",
+    "difficulty": 1
   },
   {
     "id": 44,
@@ -349,7 +392,8 @@
     "answer": 65,
     "hint": "Das ist so schnell, dass man mit bloßem Auge nur ein Summen wahrnimmt - die Flügel sind unsichtbar.",
     "hint2": "Kein anderer Vogel schlägt seine Flügel schneller - dieser Rekord ist in der Vogelwelt unerreicht.",
-    "category": "Wissenschaft"
+    "category": "Wissenschaft",
+    "difficulty": 2
   },
   {
     "id": 45,
@@ -357,7 +401,8 @@
     "answer": 33000,
     "hint": "Man könnte damit die Erde am Äquator fast viermal umrunden.",
     "hint2": "In den 1990ern war das Netz noch deutlich länger - viele Strecken wurden seitdem stillgelegt.",
-    "category": "Technik"
+    "category": "Technik",
+    "difficulty": 2
   },
   {
     "id": 46,
@@ -365,7 +410,8 @@
     "answer": 8000,
     "hint": "Allein ein einziges Unternehmen hat in den letzten Jahren mehr Satelliten gestartet als alle Länder in den Jahrzehnten davor zusammen.",
     "hint2": "Der erste Satellit flog 1957 - seitdem hat sich die Zahl in Schüben explosionsartig erhöht.",
-    "category": "Technik"
+    "category": "Technik",
+    "difficulty": 2
   },
   {
     "id": 47,
@@ -373,7 +419,8 @@
     "answer": 325,
     "hint": "Der Großteil davon ist Spam - ungefähr die Hälfte aller E-Mails kommt unerwünscht an.",
     "hint2": "Das entspricht pro Sekunde mehr Nachrichten als es Menschen auf der Erde gibt.",
-    "category": "Technik"
+    "category": "Technik",
+    "difficulty": 3
   },
   {
     "id": 48,
@@ -381,7 +428,8 @@
     "answer": 48,
     "hint": "In den 1970ern hatten Chips einige Tausend Transistoren - die Zahl hat sich alle zwei Jahre etwa verdoppelt.",
     "hint2": "Sie sind so klein, dass ein menschliches Haar mehrere Tausend davon bedecken würde.",
-    "category": "Technik"
+    "category": "Technik",
+    "difficulty": 3
   },
   {
     "id": 49,
@@ -389,7 +437,8 @@
     "answer": 6,
     "hint": "Steve Jobs zeigte es der Welt, bevor es fertig war - das Team arbeitete unter extremem Druck.",
     "hint2": "Die Software war bei der Ankündigung noch so instabil, dass eine Demo fast schiefgegangen wäre.",
-    "category": "Technik"
+    "category": "Technik",
+    "difficulty": 2
   },
   {
     "id": 50,
@@ -397,7 +446,8 @@
     "answer": 1300,
     "hint": "Das Alte Testament allein macht etwa drei Viertel des Gesamtumfangs aus.",
     "hint2": "Obwohl über Jahrhunderte von unzähligen Autoren geschrieben, wird sie heute als ein einzelnes Buch gedruckt.",
-    "category": "Geschichte"
+    "category": "Geschichte",
+    "difficulty": 2
   },
   {
     "id": 51,
@@ -405,7 +455,8 @@
     "answer": 91,
     "hint": "Alle anderen Suchmaschinen zusammen teilen sich den Rest - keiner kommt auch nur annähernd heran.",
     "hint2": "In China ist Google weitgehend gesperrt - dennoch hält es diesen Marktanteil global.",
-    "category": "Technik"
+    "category": "Technik",
+    "difficulty": 1
   },
   {
     "id": 52,
@@ -413,7 +464,8 @@
     "answer": 2,
     "hint": "Google Play hat noch mehr - obwohl Apple strenger bei der Zulassung ist.",
     "hint2": "Die allermeisten davon werden kaum genutzt - ein kleiner Bruchteil macht den Großteil aller Downloads aus.",
-    "category": "Technik"
+    "category": "Technik",
+    "difficulty": 1
   },
   {
     "id": 53,
@@ -421,7 +473,8 @@
     "answer": 400000,
     "hint": "Ein gebildeter Muttersprachler nutzt im Alltag aktiv vielleicht 12.000 bis 16.000 davon.",
     "hint2": "Das Englische hat schätzungsweise drei- bis viermal so viele - vor allem wegen der vielen Lehnwörter.",
-    "category": "Alltag"
+    "category": "Alltag",
+    "difficulty": 2
   },
   {
     "id": 54,
@@ -429,7 +482,8 @@
     "answer": 155,
     "hint": "Die Mauer war länger als die Entfernung von Berlin nach Magdeburg.",
     "hint2": "Nur ein kleiner Teil verlief mitten durch die Stadt - der Rest umschloss West-Berlin ringsum.",
-    "category": "Geschichte"
+    "category": "Geschichte",
+    "difficulty": 1
   },
   {
     "id": 55,
@@ -437,7 +491,8 @@
     "answer": 25,
     "hint": "Die Reihe läuft seit über 60 Jahren - das entspricht mehr Filmen als die meisten Menschen Urlaubswochen im Leben haben.",
     "hint2": "Sechs verschiedene Schauspieler haben die Hauptrolle gespielt - zwei davon sind bereits gestorben.",
-    "category": "Popkultur"
+    "category": "Popkultur",
+    "difficulty": 1
   },
   {
     "id": 56,
@@ -445,7 +500,8 @@
     "answer": 7000,
     "hint": "Ein großer Teil davon hat weniger als 1.000 Sprecher und droht in den nächsten Jahrzehnten auszusterben.",
     "hint2": "Der Kontinent mit der höchsten Sprachenvielfalt ist nicht Europa, sondern Afrika.",
-    "category": "Geschichte"
+    "category": "Geschichte",
+    "difficulty": 2
   },
   {
     "id": 57,
@@ -453,7 +509,8 @@
     "answer": 7,
     "hint": "Die Reihe spielt über sieben Schuljahre - jedes Buch entspricht einem davon.",
     "hint2": "Das letzte Buch erschien zehn Jahre nach dem ersten - und brach weltweit Verkaufsrekorde.",
-    "category": "Geschichte"
+    "category": "Geschichte",
+    "difficulty": 1
   },
   {
     "id": 58,
@@ -461,7 +518,8 @@
     "answer": 1973,
     "hint": "Es hatte kein Display, keine SMS-Funktion und wog fast ein Kilogramm.",
     "hint2": "Bis es käuflich zu erwerben war, dauerte es noch über zehn Jahre.",
-    "category": "Geschichte"
+    "category": "Geschichte",
+    "difficulty": 2
   },
   {
     "id": 59,
@@ -469,7 +527,8 @@
     "answer": 500,
     "hint": "Selbst wenn man aufhören würde, neue Videos hochzuladen, würde es Jahrzehnte dauern, alles anzuschauen.",
     "hint2": "Das entspricht pro Tag etwa 700.000 Stunden neuem Content - täglich.",
-    "category": "Technik"
+    "category": "Technik",
+    "difficulty": 3
   },
   {
     "id": 60,
@@ -477,7 +536,8 @@
     "answer": 10,
     "hint": "Er ist das meistbesuchte Museum der Welt - mehr als das Metropolitan Museum in New York und das British Museum zusammen.",
     "hint2": "Die Mona Lisa allein zieht einen großen Teil dieser Besucher an - obwohl das Bild selbst überraschend klein ist.",
-    "category": "Geschichte"
+    "category": "Geschichte",
+    "difficulty": 1
   },
   {
     "id": 61,
@@ -485,7 +545,8 @@
     "answer": 1300,
     "hint": "Der Roman hat über 500 Figuren - allein die Liste der Charaktere würde ein Notizbuch füllen.",
     "hint2": "Es dauert durchschnittlich 36 Stunden, das Buch am Stück zu lesen - also mehrere Wochen bei normalem Lesetempo.",
-    "category": "Geschichte"
+    "category": "Geschichte",
+    "difficulty": 3
   },
   {
     "id": 62,
@@ -493,7 +554,8 @@
     "answer": 55,
     "hint": "Das entsprach damals etwa einem Viertel der gesamten Weltbevölkerung.",
     "hint2": "Viele Bewohner waren Sklaven - schätzungsweise ein Fünftel der Gesamtbevölkerung.",
-    "category": "Geschichte"
+    "category": "Geschichte",
+    "difficulty": 2
   },
   {
     "id": 63,
@@ -501,7 +563,8 @@
     "answer": 70000,
     "hint": "Das entspricht dem Inhalt von etwa 280 Badewannen.",
     "hint2": "Wenn man das Wasser in Flaschen kaufen würde, käme man auf mehrere Zehntausend Euro Ausgaben im Leben.",
-    "category": "Alltag"
+    "category": "Alltag",
+    "difficulty": 2
   },
   {
     "id": 64,
@@ -509,7 +572,8 @@
     "answer": 750,
     "hint": "Das sind im Schnitt zwei Scheiben pro Tag - und das gilt als Grundlage vieler Mahlzeiten.",
     "hint2": "Deutschland hat mehr Brotsorten als jedes andere Land der Welt - über 3.200 eingetragene Sorten.",
-    "category": "Alltag"
+    "category": "Alltag",
+    "difficulty": 2
   },
   {
     "id": 65,
@@ -517,7 +581,8 @@
     "answer": 54,
     "hint": "Das ist weniger als früher - der Konsum ist in den letzten Jahren leicht gesunken.",
     "hint2": "Amerika liegt noch deutlich darüber - Deutschland gehört aber weltweit noch zu den Top-Konsumenten.",
-    "category": "Alltag"
+    "category": "Alltag",
+    "difficulty": 1
   },
   {
     "id": 66,
@@ -525,7 +590,8 @@
     "answer": 7,
     "hint": "Das reicht, um einen olympischen Swimmingpool fast dreimal zu füllen.",
     "hint2": "Die Maßkrüge, die dabei benutzt werden, wiegen leer schon fast ein Kilogramm.",
-    "category": "Alltag"
+    "category": "Alltag",
+    "difficulty": 1
   },
   {
     "id": 67,
@@ -533,7 +599,8 @@
     "answer": 550,
     "hint": "Das entspricht ungefähr einem Viertel des täglichen Kalorienbedarfs eines durchschnittlichen Erwachsenen.",
     "hint2": "Mit Pommes und Cola kommt man auf eine komplette Tagesration - in einer einzigen Mahlzeit.",
-    "category": "Alltag"
+    "category": "Alltag",
+    "difficulty": 1
   },
   {
     "id": 68,
@@ -541,7 +608,8 @@
     "answer": 550,
     "hint": "Das sind mehr als eine Tasse pro Tag - Kaffee ist das meistkonsumierte Heißgetränk in Deutschland.",
     "hint2": "Deutschland ist einer der größten Kaffeekonsumenten weltweit - obwohl dort kein einziges Kaffeeböhnchen wächst.",
-    "category": "Alltag"
+    "category": "Alltag",
+    "difficulty": 2
   },
   {
     "id": 69,
@@ -549,7 +617,8 @@
     "answer": -89,
     "hint": "Bei dieser Temperatur gefriert ausgeatmeter Atem sofort - Metall wird spröde wie Glas.",
     "hint2": "Selbst das kälteste bewohnte Dorf der Erde (Oimjakon) ist noch über 30 Grad wärmer.",
-    "category": "Rekorde"
+    "category": "Rekorde",
+    "difficulty": 3
   },
   {
     "id": 70,
@@ -557,7 +626,8 @@
     "answer": 11000,
     "hint": "Der Mount Everest würde darin versinken - und es wären noch knapp 2 km Wasser darüber.",
     "hint2": "Dort herrscht ein Druck, der einem Gewicht von mehreren Tonnen pro Quadratzentimeter entspricht.",
-    "category": "Rekorde"
+    "category": "Rekorde",
+    "difficulty": 1
   },
   {
     "id": 71,
@@ -565,7 +635,8 @@
     "answer": 122,
     "hint": "Sie war bei Ausbruch des Ersten Weltkriegs schon über 40 - und erlebte noch das Internet-Zeitalter.",
     "hint2": "Als junges Mädchen hatte sie angeblich persönlichen Kontakt zu Vincent van Gogh.",
-    "category": "Rekorde"
+    "category": "Rekorde",
+    "difficulty": 1
   },
   {
     "id": 72,
@@ -573,7 +644,8 @@
     "answer": 979,
     "hint": "So hoch, dass das Wasser auf dem Weg nach unten teilweise zu Nebel wird, bevor es unten ankommt.",
     "hint2": "Der Wasserfall ist fast dreimal so hoch wie der Eiffelturm.",
-    "category": "Rekorde"
+    "category": "Rekorde",
+    "difficulty": 2
   },
   {
     "id": 73,
@@ -581,7 +653,8 @@
     "answer": 190,
     "hint": "Sein Herz allein ist so groß wie ein kleines Auto und wiegt mehrere hundert Kilogramm.",
     "hint2": "Sein Zungenbein, also die Zungenstruktur, wiegt mehr als ein ausgewachsener Elefant.",
-    "category": "Rekorde"
+    "category": "Rekorde",
+    "difficulty": 2
   },
   {
     "id": 74,
@@ -589,7 +662,8 @@
     "answer": 264,
     "hint": "Ab Tag drei beginnen die meisten Menschen Halluzinationen zu erleben - der Körper schläft stellenweise mit offenen Augen.",
     "hint2": "Die WHO stuft Schlafentzug offiziell als Folterinstrument ein.",
-    "category": "Rekorde"
+    "category": "Rekorde",
+    "difficulty": 3
   },
   {
     "id": 75,
@@ -597,7 +671,8 @@
     "answer": 1670,
     "hint": "Das ist schneller als Schallgeschwindigkeit - wir merken es nur deshalb nicht, weil sich alles um uns gleichmäßig mitbewegt.",
     "hint2": "An den Polen beträgt die Rotationsgeschwindigkeit fast null - Astronomen machen sich das zunutze.",
-    "category": "Rekorde"
+    "category": "Rekorde",
+    "difficulty": 2
   },
   {
     "id": 76,
@@ -605,7 +680,8 @@
     "answer": 50,
     "hint": "Das ist noch immer weniger als das NATO-Ziel von 2% des BIP verlangt.",
     "hint2": "Die USA geben mehr für Verteidigung aus als die nächsten zehn Länder zusammen.",
-    "category": "Wirtschaft"
+    "category": "Wirtschaft",
+    "difficulty": 2
   },
   {
     "id": 77,
@@ -613,7 +689,8 @@
     "answer": 4,
     "hint": "Deutschland ist einer der größten Autoproduzenten der Welt - aber China hat es längst überholt.",
     "hint2": "Der Export macht den größten Anteil aus - die meisten deutschen Autos verlassen das Land.",
-    "category": "Wirtschaft"
+    "category": "Wirtschaft",
+    "difficulty": 1
   },
   {
     "id": 78,
@@ -621,7 +698,8 @@
     "answer": 33,
     "hint": "Deutschland ist Amazons zweitgrößter Markt weltweit - nur die USA sind größer.",
     "hint2": "Das entspricht mehr als dem BIP einiger kleiner europäischer Länder.",
-    "category": "Wirtschaft"
+    "category": "Wirtschaft",
+    "difficulty": 3
   },
   {
     "id": 79,
@@ -629,7 +707,8 @@
     "answer": 83,
     "hint": "In der Corona-Krise fiel der Preis kurzzeitig in den negativen Bereich - Produzenten zahlten dafür, dass man ihnen das Öl abnimmt.",
     "hint2": "Ein Barrel entspricht 159 Litern - daraus werden aber viele verschiedene Produkte, nicht nur Benzin.",
-    "category": "Wirtschaft"
+    "category": "Wirtschaft",
+    "difficulty": 2
   },
   {
     "id": 80,
@@ -637,7 +716,8 @@
     "answer": 60,
     "hint": "Das klingt nach viel - aber das sind weniger als 1% der Weltbevölkerung.",
     "hint2": "Die USA haben die meisten Millionäre, gefolgt von China und Deutschland.",
-    "category": "Wirtschaft"
+    "category": "Wirtschaft",
+    "difficulty": 2
   },
   {
     "id": 81,
@@ -645,7 +725,8 @@
     "answer": 125,
     "hint": "Das entspricht etwa der Fläche Griechenlands - jedes Jahr aufs Neue.",
     "hint2": "Der größte Teil des Holzes wird nicht für Möbel verwendet, sondern für Brandrodung zur Landgewinnung.",
-    "category": "Umwelt"
+    "category": "Umwelt",
+    "difficulty": 3
   },
   {
     "id": 82,
@@ -653,7 +734,8 @@
     "answer": 1,
     "hint": "Das klingt wenig - aber selbst 0,5 Grad mehr würden Meeresspiegel und Extremwetter dramatisch verschärfen.",
     "hint2": "Das Pariser Klimaabkommen versucht, die Erwärmung unter 1,5 Grad zu halten - wir sind schon nah dran.",
-    "category": "Umwelt"
+    "category": "Umwelt",
+    "difficulty": 1
   },
   {
     "id": 83,
@@ -661,7 +743,8 @@
     "answer": 1000000,
     "hint": "In der Zeit, die man braucht, um diese Frage zu beantworten, sind mehrere Tausend neue Flaschen verbraucht worden.",
     "hint2": "Weniger als die Hälfte davon wird recycelt - der Rest landet in Deponien oder der Natur.",
-    "category": "Umwelt"
+    "category": "Umwelt",
+    "difficulty": 3
   },
   {
     "id": 84,
@@ -669,7 +752,8 @@
     "answer": 23,
     "hint": "Der Anstieg beschleunigt sich - die Hälfte davon passierte in den letzten 30 Jahren.",
     "hint2": "Für viele Inselstaaten im Pazifik ist selbst dieser Anstieg bereits existenzbedrohend.",
-    "category": "Umwelt"
+    "category": "Umwelt",
+    "difficulty": 3
   },
   {
     "id": 85,
@@ -677,7 +761,8 @@
     "answer": 17,
     "hint": "Gleichzeitig werden aber jährlich noch mehr Bäume gefällt - das Netto-Ergebnis ist ein Verlust.",
     "hint2": "Für jeden Menschen auf der Erde stehen statistisch über 400 Bäume - die meisten davon im Norden Russlands.",
-    "category": "Umwelt"
+    "category": "Umwelt",
+    "difficulty": 3
   },
   {
     "id": 86,
@@ -685,7 +770,8 @@
     "answer": 736,
     "hint": "Der Bundestag ist damit einer der größten nationalen Parlamente der Welt.",
     "hint2": "Die reguläre Anzahl wäre 598 - Überhang- und Ausgleichsmandate treiben die Zahl nach oben.",
-    "category": "Politik"
+    "category": "Politik",
+    "difficulty": 2
   },
   {
     "id": 87,
@@ -693,7 +779,8 @@
     "answer": 193,
     "hint": "Fast jeder Staat der Erde ist dabei - nur sehr wenige Gebiete sind nicht Mitglied.",
     "hint2": "Die UNO wurde kurz nach dem Zweiten Weltkrieg gegründet - damals mit deutlich weniger Mitgliedern.",
-    "category": "Politik"
+    "category": "Politik",
+    "difficulty": 1
   },
   {
     "id": 88,
@@ -701,7 +788,8 @@
     "answer": 450,
     "hint": "Damit ist die EU bevölkerungsreicher als die USA - aber kleiner als China oder Indien.",
     "hint2": "Nach dem Brexit hat die EU mehrere Millionen Einwohner verloren.",
-    "category": "Politik"
+    "category": "Politik",
+    "difficulty": 1
   },
   {
     "id": 89,
@@ -709,7 +797,8 @@
     "answer": 20,
     "hint": "Das ist der gesetzliche Mindestanspruch - die meisten Tarifverträge liegen deutlich darüber.",
     "hint2": "Im internationalen Vergleich liegt Deutschland damit im oberen Mittelfeld - die USA haben keinen gesetzlichen Mindesturlaubsanspruch.",
-    "category": "Politik"
+    "category": "Politik",
+    "difficulty": 1
   },
   {
     "id": 90,
@@ -717,7 +806,8 @@
     "answer": 110,
     "hint": "Das ist der höchste Stand seit dem Zweiten Weltkrieg - und die Zahl steigt weiter.",
     "hint2": "Der größte Teil bleibt in den Nachbarländern des Herkunftslandes - nicht in Europa oder Nordamerika.",
-    "category": "Politik"
+    "category": "Politik",
+    "difficulty": 2
   },
   {
     "id": 91,
@@ -725,7 +815,8 @@
     "answer": 10,
     "hint": "Eines davon ist das meistverkaufte Album aller Zeiten - Thriller mit über 66 Millionen Exemplaren.",
     "hint2": "Seinen ersten Nummer-1-Hit hatte er bereits als Kind - mit dem Jackson 5.",
-    "category": "Popkultur"
+    "category": "Popkultur",
+    "difficulty": 2
   },
   {
     "id": 92,
@@ -733,7 +824,8 @@
     "answer": 4,
     "hint": "Es war jahrelang das meistgestreamte Lied auf Spotify - bis es von neueren Songs überholt wurde.",
     "hint2": "In Stunden umgerechnet wäre das mehr Hörzeit, als die Menschheit seit dem Mittelalter Lebenszeit hatte.",
-    "category": "Popkultur"
+    "category": "Popkultur",
+    "difficulty": 3
   },
   {
     "id": 93,
@@ -741,7 +833,8 @@
     "answer": 8,
     "hint": "Die ersten Staffeln gelten als Meisterwerke - die letzte wurde von Fans und Kritikern gleichermaßen zerrissen.",
     "hint2": "Die Bücher, auf denen die Serie basiert, sind bis heute nicht vollständig erschienen.",
-    "category": "Popkultur"
+    "category": "Popkultur",
+    "difficulty": 1
   },
   {
     "id": 94,
@@ -749,7 +842,8 @@
     "answer": 32,
     "hint": "Sie ist die Künstlerin mit den meisten Grammy-Gewinnen aller Zeiten.",
     "hint2": "Trotzdem hat sie Album des Jahres bisher nie gewonnen - was zu einem laufenden Diskurs führt.",
-    "category": "Popkultur"
+    "category": "Popkultur",
+    "difficulty": 3
   },
   {
     "id": 95,
@@ -757,7 +851,8 @@
     "answer": 750,
     "hint": "Die Show läuft seit 1989 - viele Schauspieler sind in dieser Zeit gestorben oder ausgeschieden.",
     "hint2": "Kein anderes Animationsprogramm in den USA hat mehr Folgen produziert.",
-    "category": "Popkultur"
+    "category": "Popkultur",
+    "difficulty": 2
   },
   {
     "id": 96,
@@ -765,7 +860,8 @@
     "answer": 140,
     "hint": "Man könnte jeden Tag seines Lebens spielen und trotzdem mit hoher Wahrscheinlichkeit nie gewinnen.",
     "hint2": "Die Wahrscheinlichkeit, zweimal hintereinander vom Blitz getroffen zu werden, ist statistisch nicht viel kleiner.",
-    "category": "Wissenschaft"
+    "category": "Wissenschaft",
+    "difficulty": 3
   },
   {
     "id": 97,
@@ -773,7 +869,8 @@
     "answer": 120,
     "hint": "Das übersteigt die Anzahl der Atome im beobachtbaren Universum um ein Vielfaches.",
     "hint2": "Kein Computer kann deshalb alle Züge durchrechnen - selbst die stärksten KIs spielen auf Basis von Heuristiken.",
-    "category": "Wissenschaft"
+    "category": "Wissenschaft",
+    "difficulty": 3
   },
   {
     "id": 98,
@@ -781,7 +878,8 @@
     "answer": 55,
     "hint": "Das klingt schockierend - aber es zeigt, wie grundlegend manche biologischen Mechanismen sind, die alle Lebewesen teilen.",
     "hint2": "Mit einem Schimpansen teilen wir über 98% - der Unterschied zu uns liegt oft in der Genregulation, nicht den Genen selbst.",
-    "category": "Wissenschaft"
+    "category": "Wissenschaft",
+    "difficulty": 2
   },
   {
     "id": 99,
@@ -789,7 +887,8 @@
     "answer": 42,
     "hint": "Jede Faltung verdoppelt die Dicke - nach 10 Faltungen ist das Papier bereits dicker als ein Buch.",
     "hint2": "In der Praxis kann man ein Blatt Papier nur etwa 7-8 Mal falten - danach ist der Widerstand zu groß.",
-    "category": "Wissenschaft"
+    "category": "Wissenschaft",
+    "difficulty": 3
   },
   {
     "id": 100,
@@ -797,6 +896,7 @@
     "answer": 3,
     "hint": "Das Herz macht dabei keine einzige Pause - es schlägt von der 4. Schwangerschaftswoche bis zum Tod.",
     "hint2": "Trotzdem nutzt es sich kaum ab - die meisten Herzprobleme entstehen durch äußere Faktoren wie Ernährung und Stress.",
-    "category": "Wissenschaft"
+    "category": "Wissenschaft",
+    "difficulty": 2
   }
 ]

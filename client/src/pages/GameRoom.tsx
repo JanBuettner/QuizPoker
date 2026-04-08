@@ -33,6 +33,8 @@ interface GameRoomProps {
   onRemoveBot: (botId: string) => void;
   onLeave: () => void;
   error: string | null;
+  emotes: Map<string, string>;
+  onSendEmote: (emote: string) => void;
 }
 
 // Helper to compute dealer/SB/BB ids
@@ -67,6 +69,8 @@ export default function GameRoom({
   onRemoveBot,
   onLeave,
   error,
+  emotes,
+  onSendEmote,
 }: GameRoomProps) {
   const { phase, players, pot, roomCode, roundNumber, totalRounds } = gameState;
   const me = players.find(p => p.id === playerId);
@@ -388,6 +392,7 @@ export default function GameRoom({
                       isBB={player.id === bbId}
                       phase={phase}
                       showEstimate={false}
+                      emote={emotes.get(player.id)}
                     />
                   </div>
                 );
@@ -449,6 +454,21 @@ export default function GameRoom({
           </div>
         )}
 
+        {/* === EMOTE BAR === */}
+        {phase !== GamePhase.LOBBY && phase !== GamePhase.GAME_OVER && me && !me.isEliminated && (
+          <div className="flex items-center gap-1.5 mt-2">
+            {['\uD83D\uDC4D', '\uD83D\uDD25', '\uD83D\uDE02', '\uD83D\uDE31', '\uD83D\uDE2D', '\uD83E\uDD21'].map(emote => (
+              <button
+                key={emote}
+                onClick={() => onSendEmote(emote)}
+                className="w-9 h-9 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/25 text-lg flex items-center justify-center transition-all hover:scale-110 active:scale-95"
+              >
+                {emote}
+              </button>
+            ))}
+          </div>
+        )}
+
         {/* === SHOWDOWN with poker table background === */}
         {isShowdown && (
           <div className="w-full max-w-5xl mx-auto flex flex-col items-center gap-4">
@@ -489,6 +509,7 @@ export default function GameRoom({
                       isBB={player.id === bbId}
                       phase={phase}
                       showEstimate={true}
+                      emote={emotes.get(player.id)}
                     />
                   </div>
                 );

@@ -20,6 +20,7 @@ export function useGameState() {
   });
 
   const [questions, setQuestions] = useState<Question[]>([]);
+  const [emotes, setEmotes] = useState<Map<string, string>>(new Map());
   const roomCodeRef = useRef<string | null>(null);
 
   useEffect(() => {
@@ -50,6 +51,21 @@ export function useGameState() {
       setQuestions(questions);
     });
 
+    socket.on('emote', ({ playerId, emote }) => {
+      setEmotes(prev => {
+        const next = new Map(prev);
+        next.set(playerId, emote);
+        return next;
+      });
+      setTimeout(() => {
+        setEmotes(prev => {
+          const next = new Map(prev);
+          if (next.get(playerId) === emote) next.delete(playerId);
+          return next;
+        });
+      }, 3000);
+    });
+
     socket.on('roomClosed', () => {
       setState({ roomCode: null, playerId: null, token: null, error: 'Raum wurde geschlossen', gameState: null });
       localStorage.removeItem('qp_token');
@@ -70,6 +86,7 @@ export function useGameState() {
       socket.off('gameState');
       socket.off('error');
       socket.off('questionList');
+      socket.off('emote');
       socket.off('roomClosed');
       socket.off('connect');
     };
@@ -103,6 +120,10 @@ export function useGameState() {
     socket.emit('advancePhase');
   }, []);
 
+  const updateConfig = useCallback((data: Record<string, any>) => {
+    socket.emit('updateConfig', data);
+  }, []);
+
   const setBlinds = useCallback((smallBlind: number, bigBlind: number) => {
     socket.emit('setBlinds', { smallBlind, bigBlind });
   }, []);
@@ -117,6 +138,10 @@ export function useGameState() {
 
   const nextRound = useCallback(() => {
     socket.emit('nextRound');
+  }, []);
+
+  const sendEmote = useCallback((emote: string) => {
+    socket.emit('sendEmote', { emote });
   }, []);
 
   const loadQuestions = useCallback(() => {
@@ -144,10 +169,13 @@ export function useGameState() {
     startGame,
     advancePhase,
     setBlinds,
+    updateConfig,
     submitEstimate,
     bet,
     nextRound,
     leaveRoom,
+    emotes,
+    sendEmote,
     questions,
     loadQuestions,
   };

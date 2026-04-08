@@ -56,6 +56,7 @@ export interface Question {
   hint: string;
   hint2: string;
   category: string;
+  difficulty: number;
 }
 
 export interface RoomConfig {
@@ -65,6 +66,8 @@ export interface RoomConfig {
   betTimeSec: number;
   smallBlind: number;
   bigBlind: number;
+  blindIncreaseEvery: number; // rounds between blind doubles (0 = manual only)
+  difficultyScaling: boolean; // true = easy→hard, false = random
 }
 
 export interface VisibleGameState {
@@ -100,11 +103,13 @@ export interface ClientToServerEvents {
   startGame: () => void;
   advancePhase: () => void;
   setBlinds: (data: { smallBlind: number; bigBlind: number }) => void;
+  updateConfig: (data: Partial<RoomConfig>) => void;
   submitEstimate: (data: { estimate: number }) => void;
   bet: (data: { action: BettingAction; amount?: number }) => void;
   nextRound: () => void;
   rejoin: (data: { roomCode: string; token: string }) => void;
   getQuestions: () => void;
+  sendEmote: (data: { emote: string }) => void;
 }
 
 export interface ServerToClientEvents {
@@ -113,6 +118,7 @@ export interface ServerToClientEvents {
   error: (data: { message: string }) => void;
   questionList: (data: { questions: Question[] }) => void;
   roomClosed: (data?: { reason?: string }) => void;
+  emote: (data: { playerId: string; emote: string }) => void;
 }
 
 export const DEFAULT_CONFIG: RoomConfig = {
@@ -122,4 +128,6 @@ export const DEFAULT_CONFIG: RoomConfig = {
   betTimeSec: 30,
   smallBlind: 10,
   bigBlind: 20,
+  blindIncreaseEvery: 5,
+  difficultyScaling: true,
 };

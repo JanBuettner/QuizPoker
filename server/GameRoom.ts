@@ -201,7 +201,7 @@ export class GameRoom {
     if (this.phase !== GamePhase.LOBBY) return false;
     if (this.players.size < 2) return false;
 
-    this.questions = getShuffledQuestions();
+    this.questions = getShuffledQuestions(this.config.difficultyScaling);
     this.questionIndex = 0;
     this.roundNumber = 0;
     this.dealerIndex = 0;
@@ -212,6 +212,13 @@ export class GameRoom {
 
   private startNewRound(): void {
     this.roundNumber++;
+
+    // Auto-increase blinds every N rounds
+    if (this.config.blindIncreaseEvery > 0 && this.roundNumber > 1 && (this.roundNumber - 1) % this.config.blindIncreaseEvery === 0) {
+      this.config.smallBlind *= 2;
+      this.config.bigBlind *= 2;
+    }
+
     this.pot = 0;
     this.winnerId = null;
     this.currentBetLevel = 0;
@@ -219,7 +226,7 @@ export class GameRoom {
     this.playerRoundBets.clear();
 
     if (this.questionIndex >= this.questions.length) {
-      this.questions = getShuffledQuestions();
+      this.questions = getShuffledQuestions(this.config.difficultyScaling);
       this.questionIndex = 0;
     }
     this.currentQuestion = this.questions[this.questionIndex++];

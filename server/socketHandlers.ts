@@ -86,6 +86,8 @@ function destroyRoom(room: GameRoom, roomCode: string, io: TypedServer): void {
 
 export function setupSocketHandlers(io: TypedServer): void {
   const rateLimits = new Map<string, number[]>(); // socketId -> timestamps
+  const emoteRateLimits = new Map<string, number[]>(); // socketId -> timestamps
+  const ALLOWED_EMOTES = ['\uD83D\uDC4D', '\uD83D\uDD25', '\uD83D\uDE02', '\uD83D\uDE31', '\uD83D\uDE2D', '\uD83E\uDD21'];
 
   function checkRateLimit(socketId: string, maxPerSecond: number = 10): boolean {
     const now = Date.now();
@@ -282,6 +284,53 @@ export function setupSocketHandlers(io: TypedServer): void {
       broadcastState(info.room, io);
     });
 
+    socket.on('updateConfig', (data) => {
+      const info = getRoomForSocket(socket.id);
+      if (!info) return;
+      if (!info.isAdmin) {
+        socket.emit('error', { message: 'Nur der Admin kann Einstellungen ändern' });
+        return;
+      }
+      // Only allow config changes in LOBBY
+      if (info.room.phase !== 'LOBBY') {
+        // Allow some settings to change during game
+        if (typeof data.blindIncreaseEvery === 'number') {
+          info.room.config.blindIncreaseEvery = Math.max(0, Math.round(data.blindIncreaseEvery));
+        }
+        if (typeof data.difficultyScaling === 'boolean') {
+          info.room.config.difficultyScaling = data.difficultyScaling;
+        }
+      } else {
+        // In LOBBY, allow all settings
+        if (typeof data.startingChips === 'number' && data.startingChips > 0) {
+          info.room.config.startingChips = Math.round(data.startingChips);
+          // Update existing players' chips
+          for (const p of info.room.players.values()) {
+            p.chips = info.room.config.startingChips;
+          }
+        }
+        if (typeof data.smallBlind === 'number' && data.smallBlind > 0) {
+          info.room.config.smallBlind = Math.round(data.smallBlind);
+        }
+        if (typeof data.bigBlind === 'number' && data.bigBlind > 0) {
+          info.room.config.bigBlind = Math.round(data.bigBlind);
+        }
+        if (typeof data.estimateTimeSec === 'number' && data.estimateTimeSec > 0) {
+          info.room.config.estimateTimeSec = Math.round(data.estimateTimeSec);
+        }
+        if (typeof data.betTimeSec === 'number' && data.betTimeSec > 0) {
+          info.room.config.betTimeSec = Math.round(data.betTimeSec);
+        }
+        if (typeof data.blindIncreaseEvery === 'number') {
+          info.room.config.blindIncreaseEvery = Math.max(0, Math.round(data.blindIncreaseEvery));
+        }
+        if (typeof data.difficultyScaling === 'boolean') {
+          info.room.config.difficultyScaling = data.difficultyScaling;
+        }
+      }
+      broadcastState(info.room, io);
+    });
+
     socket.on('getQuestions', () => {
       // Only admin can view all questions
       const info = getRoomForSocket(socket.id);
@@ -347,9 +396,34 @@ export function setupSocketHandlers(io: TypedServer): void {
       }
     });
 
+    socket.on('sendEmote', ({ emote }) => {
+      // Validate emote
+      if (!ALLOWED_EMOTES.includes(emote)) return;
+
+      // Rate limit: max 3 per 5 seconds
+      const now = Date.now();
+      const timestamps = emoteRateLimits.get(socket.id) || [];
+      const recent = timestamps.filter(t => now - t < 5000);
+      if (recent.length >= 3) return;
+      recent.push(now);
+      emoteRateLimits.set(socket.id, recent);
+
+      const info = getRoomForSocket(socket.id);
+      if (!info) return;
+
+      // Broadcast to all players + admin
+      for (const [pid] of info.room.players) {
+        if (!pid.startsWith('bot_')) io.to(pid).emit('emote', { playerId: socket.id, emote });
+      }
+      if (info.room.adminId && info.room.adminConnected) {
+        io.to(info.room.adminId).emit('emote', { playerId: socket.id, emote });
+      }
+    });
+
     socket.on('disconnect', () => {
       console.log(`Disconnected: ${socket.id}`);
       rateLimits.delete(socket.id);
+      emoteRateLimits.delete(socket.id);
 
       // Check if admin
       const adminRoom = adminRooms.get(socket.id);

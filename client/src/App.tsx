@@ -53,12 +53,14 @@ export default function App() {
       onNextRound={game.nextRound}
       onAdvancePhase={game.advancePhase}
       onSetBlinds={game.setBlinds}
+      onUpdateConfig={game.updateConfig}
       onAddBot={game.addBot}
       onRemoveBot={game.removeBot}
       onLeave={game.leaveRoom}
       error={game.error}
       questions={game.questions}
       onLoadQuestions={game.loadQuestions}
+      emotes={game.emotes}
     />;
   }
 
@@ -73,5 +75,7 @@ export default function App() {
     onRemoveBot={game.removeBot}
     onLeave={game.leaveRoom}
     error={game.error}
+    emotes={game.emotes}
+    onSendEmote={game.sendEmote}
   />;
 }

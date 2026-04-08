@@ -13,12 +13,14 @@ interface AdminDashboardProps {
   onNextRound: () => void;
   onAdvancePhase: () => void;
   onSetBlinds: (smallBlind: number, bigBlind: number) => void;
+  onUpdateConfig: (data: Record<string, any>) => void;
   onAddBot: () => void;
   onRemoveBot: (botId: string) => void;
   onLeave: () => void;
   error: string | null;
   questions: Question[];
   onLoadQuestions: () => void;
+  emotes: Map<string, string>;
 }
 
 const PHASE_LABELS: Record<GamePhase, string> = {
@@ -73,7 +75,7 @@ function computePositions(players: VisibleGameState['players'], dealerIndex: num
   return { dealerId, sbId, bbId };
 }
 
-export default function AdminDashboard({ gameState, onStartGame, onNextRound, onAdvancePhase, onSetBlinds, onAddBot, onRemoveBot, onLeave, error, questions, onLoadQuestions }: AdminDashboardProps) {
+export default function AdminDashboard({ gameState, onStartGame, onNextRound, onAdvancePhase, onSetBlinds, onUpdateConfig, onAddBot, onRemoveBot, onLeave, error, questions, onLoadQuestions, emotes }: AdminDashboardProps) {
   const [showQuestions, setShowQuestions] = useState(false);
   const [showPlayers, setShowPlayers] = useState(false);
   const [copiedHeader, setCopiedHeader] = useState(false);
@@ -301,6 +303,81 @@ export default function AdminDashboard({ gameState, onStartGame, onNextRound, on
                 ))}
               </div>
 
+              {/* Settings */}
+              <div className="glass rounded-xl p-4 mb-6 text-left">
+                <div className="text-white/30 text-[10px] font-bold tracking-[0.15em] mb-3">EINSTELLUNGEN</div>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/50 text-xs">Start-Chips</span>
+                    <div className="flex items-center gap-1.5">
+                      {[500, 1000, 2000, 5000].map(v => (
+                        <button key={v} onClick={() => onUpdateConfig({ startingChips: v })}
+                          className={`px-2 py-1 rounded text-[10px] font-bold transition-all ${gameState.config.startingChips === v ? 'bg-gold/20 text-gold border border-gold/30' : 'bg-white/5 text-white/30 border border-white/5 hover:text-white/50'}`}>
+                          {v}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/50 text-xs">Blinds</span>
+                    <div className="flex items-center gap-1.5">
+                      {[[5,10],[10,20],[25,50],[50,100]].map(([sb,bb]) => (
+                        <button key={sb} onClick={() => onUpdateConfig({ smallBlind: sb, bigBlind: bb })}
+                          className={`px-2 py-1 rounded text-[10px] font-bold transition-all ${gameState.config.smallBlind === sb ? 'bg-gold/20 text-gold border border-gold/30' : 'bg-white/5 text-white/30 border border-white/5 hover:text-white/50'}`}>
+                          {sb}/{bb}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/50 text-xs">Auto-Blinderhöhung</span>
+                    <div className="flex items-center gap-1.5">
+                      {[{v:0,l:'Aus'},{v:3,l:'3 Runden'},{v:5,l:'5 Runden'},{v:10,l:'10 Runden'}].map(({v,l}) => (
+                        <button key={v} onClick={() => onUpdateConfig({ blindIncreaseEvery: v })}
+                          className={`px-2 py-1 rounded text-[10px] font-bold transition-all ${gameState.config.blindIncreaseEvery === v ? 'bg-gold/20 text-gold border border-gold/30' : 'bg-white/5 text-white/30 border border-white/5 hover:text-white/50'}`}>
+                          {l}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/50 text-xs">Schwierigkeit</span>
+                    <div className="flex items-center gap-1.5">
+                      <button onClick={() => onUpdateConfig({ difficultyScaling: true })}
+                        className={`px-2 py-1 rounded text-[10px] font-bold transition-all ${gameState.config.difficultyScaling ? 'bg-gold/20 text-gold border border-gold/30' : 'bg-white/5 text-white/30 border border-white/5 hover:text-white/50'}`}>
+                        Leicht→Schwer
+                      </button>
+                      <button onClick={() => onUpdateConfig({ difficultyScaling: false })}
+                        className={`px-2 py-1 rounded text-[10px] font-bold transition-all ${!gameState.config.difficultyScaling ? 'bg-gold/20 text-gold border border-gold/30' : 'bg-white/5 text-white/30 border border-white/5 hover:text-white/50'}`}>
+                        Zufällig
+                      </button>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/50 text-xs">Schätzzeit</span>
+                    <div className="flex items-center gap-1.5">
+                      {[{v:30,l:'30s'},{v:45,l:'45s'},{v:60,l:'60s'},{v:90,l:'90s'}].map(({v,l}) => (
+                        <button key={v} onClick={() => onUpdateConfig({ estimateTimeSec: v })}
+                          className={`px-2 py-1 rounded text-[10px] font-bold transition-all ${gameState.config.estimateTimeSec === v ? 'bg-gold/20 text-gold border border-gold/30' : 'bg-white/5 text-white/30 border border-white/5 hover:text-white/50'}`}>
+                          {l}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/50 text-xs">Setzzeit</span>
+                    <div className="flex items-center gap-1.5">
+                      {[{v:15,l:'15s'},{v:30,l:'30s'},{v:45,l:'45s'},{v:60,l:'60s'}].map(({v,l}) => (
+                        <button key={v} onClick={() => onUpdateConfig({ betTimeSec: v })}
+                          className={`px-2 py-1 rounded text-[10px] font-bold transition-all ${gameState.config.betTimeSec === v ? 'bg-gold/20 text-gold border border-gold/30' : 'bg-white/5 text-white/30 border border-white/5 hover:text-white/50'}`}>
+                          {l}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <p className="text-white/20 text-sm mb-4">{players.length} Spieler im Raum (min. 2)</p>
               <button onClick={onStartGame} disabled={players.length < 2} className="btn-gold py-4 px-10 text-lg">
                 Spiel starten
@@ -399,6 +476,7 @@ export default function AdminDashboard({ gameState, onStartGame, onNextRound, on
                       isBB={player.id === bbId}
                       phase={phase}
                       showEstimate={false}
+                      emote={emotes.get(player.id)}
                     />
                   </div>
                 );
@@ -444,6 +522,7 @@ export default function AdminDashboard({ gameState, onStartGame, onNextRound, on
                       isBB={player.id === bbId}
                       phase={phase}
                       showEstimate={true}
+                      emote={emotes.get(player.id)}
                     />
                   </div>
                 );

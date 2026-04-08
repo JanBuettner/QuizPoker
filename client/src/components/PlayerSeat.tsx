@@ -10,6 +10,7 @@ interface PlayerSeatProps {
   isBB?: boolean;
   phase: GamePhase;
   showEstimate?: boolean;
+  emote?: string;
 }
 
 const AVATAR_COLORS = [
@@ -40,13 +41,20 @@ export default function PlayerSeat({
   isBB,
   phase,
   showEstimate,
+  emote,
 }: PlayerSeatProps) {
   const isActive = !player.hasFolded && !player.isEliminated;
   const avatarColor = getAvatarColor(player.name);
   const initial = player.name.charAt(0).toUpperCase();
 
   return (
-    <div className={`player-seat flex flex-col items-center gap-1 ${player.isEliminated ? 'opacity-20' : ''}`}>
+    <div className={`player-seat relative flex flex-col items-center gap-1 ${player.isEliminated ? 'opacity-20' : ''}`}>
+      {/* Emote reaction */}
+      {emote && (
+        <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-2xl animate-emote-pop pointer-events-none z-20">
+          {emote}
+        </div>
+      )}
       {/* Bet amount - displayed "in front of" the player toward table center */}
       {player.currentBet > 0 && isActive && (
         <div className="player-bet-chips flex items-center gap-1 mb-0.5 animate-fade-in">

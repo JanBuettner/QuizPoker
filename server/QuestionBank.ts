@@ -17,11 +17,24 @@ export function getAllQuestions(): Question[] {
   return allQuestions;
 }
 
-export function getShuffledQuestions(): Question[] {
-  const shuffled = [...allQuestions];
-  for (let i = shuffled.length - 1; i > 0; i--) {
+function shuffle(arr: Question[]): Question[] {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    [copy[i], copy[j]] = [copy[j], copy[i]];
   }
-  return shuffled;
+  return copy;
+}
+
+export function getShuffledQuestions(difficultyScaling = true): Question[] {
+  if (difficultyScaling) {
+    // Sort by difficulty: easy first, then medium, then hard
+    const easy = allQuestions.filter(q => q.difficulty === 1);
+    const medium = allQuestions.filter(q => q.difficulty === 2);
+    const hard = allQuestions.filter(q => q.difficulty === 3);
+    return [...shuffle(easy), ...shuffle(medium), ...shuffle(hard)];
+  } else {
+    // Fully random
+    return shuffle(allQuestions);
+  }
 }
