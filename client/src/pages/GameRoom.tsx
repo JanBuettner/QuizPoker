@@ -11,6 +11,26 @@ import Timer from '../components/Timer';
 import ActionFeed from '../components/ActionFeed';
 import PokerTable from '../components/PokerTable';
 
+// Predefined seat positions for different player counts
+// Each position is [left%, top%] relative to the wrapper
+// Bottom center = closest to screen ("me" seat), then clockwise
+const SEAT_POSITIONS: Record<number, [number, number][]> = {
+  2: [[50, 95], [50, 5]],
+  3: [[50, 95], [5, 35], [95, 35]],
+  4: [[50, 95], [3, 50], [50, 5], [97, 50]],
+  5: [[50, 95], [3, 65], [20, 10], [80, 10], [97, 65]],
+  6: [[50, 95], [3, 68], [3, 30], [50, 5], [97, 30], [97, 68]],
+  7: [[50, 95], [3, 68], [3, 30], [25, 5], [75, 5], [97, 30], [97, 68]],
+  8: [[50, 95], [3, 72], [3, 45], [15, 10], [50, 5], [85, 10], [97, 45], [97, 72]],
+};
+
+// Reorder players so "me" is at index 0 (bottom center seat)
+function reorderPlayers<T extends { id: string }>(players: T[], myId: string): T[] {
+  const myIndex = players.findIndex(p => p.id === myId);
+  if (myIndex <= 0) return players;
+  return [...players.slice(myIndex), ...players.slice(0, myIndex)];
+}
+
 const PHASE_LABELS: Record<GamePhase, string> = {
   [GamePhase.LOBBY]: 'Lobby',
   [GamePhase.ESTIMATING]: 'Schätzung',
@@ -296,74 +316,119 @@ export default function GameRoom({
         )}
 
         {/* === POKER TABLE === */}
-        {showTable && !isShowdown && (
+        {showTable && !isShowdown && (() => {
+          const ordered = reorderPlayers(players, playerId);
+          const positions = SEAT_POSITIONS[ordered.length] || SEAT_POSITIONS[8];
+          return (
           <div className="w-full max-w-5xl mx-auto flex flex-col items-center gap-3">
 
-            {/* Question above table */}
-            {gameState.currentQuestion && (
-              <div className="glass rounded-xl text-center py-3 px-6 border border-amber-900/20 max-w-2xl">
-                <p className="text-white text-sm sm:text-base leading-relaxed font-semibold">{gameState.currentQuestion}</p>
+            {/* Question above table - only when not in estimating (moved to table center during estimating) */}
+            {gameState.currentQuestion && phase !== GamePhase.ESTIMATING && (
+              <div className="glass rounded-xl text-center py-2.5 px-5 border border-amber-900/20 max-w-xl mb-6">
+                <p className="text-white text-sm leading-relaxed font-semibold">{gameState.currentQuestion}</p>
               </div>
             )}
 
-            {/* Top players */}
-            <div className="flex justify-center gap-4 flex-wrap">
-              {players.slice(0, Math.ceil(players.length / 2)).map(player => (
-                <PlayerSeat key={player.id} player={player} isMe={player.id === playerId}
-                  isTurn={player.id === gameState.currentTurnPlayerId}
-                  isDealer={player.id === dealerId} isSB={player.id === sbId} isBB={player.id === bbId}
-                  phase={phase} showEstimate={false} emote={emotes.get(player.id)} />
-              ))}
-            </div>
+            {/* Wrapper for table + seats */}
+            <div className="relative w-full max-w-4xl mx-auto" style={{ minHeight: '500px' }}>
 
-            {/* THE POKER TABLE - simple inline styles, no CSS classes */}
-            <PokerTable>
-              {/* Pot */}
-              {pot > 0 && (
-                <div className="flex items-center gap-1.5">
-                  <div className="w-5 h-5 rounded-full bg-gradient-to-b from-red-400 to-red-600 border-2 border-red-300 shadow-md" />
-                  <span className="text-amber-100 font-black text-xl sm:text-2xl font-mono drop-shadow-lg">{pot.toLocaleString('de-DE')}</span>
-                </div>
-              )}
+              {/* Table in the center */}
+              <div className="absolute left-[12%] right-[12%] top-[18%] bottom-[18%]">
+                <PokerTable>
+                  {/* Question in table center during ESTIMATING */}
+                  {gameState.currentQuestion && phase === GamePhase.ESTIMATING && (
+                    <p className="text-white/90 text-sm sm:text-base text-center leading-snug font-semibold drop-shadow max-w-[90%]">{gameState.currentQuestion}</p>
+                  )}
 
-              {/* Community cards (hints + answer) */}
-              {communityCards.length > 0 && (
-                <div className="flex items-stretch gap-2">
-                  {communityCards.map((card, i) => (
-                    <div key={card.label}
-                      className={`rounded-lg px-3 py-2 text-center max-w-[150px] animate-card-deal ${card.type === 'answer' ? 'bg-amber-100 border border-amber-400' : 'bg-white/90 border border-white/40'}`}
-                      style={{ animationDelay: `${i * 200}ms`, boxShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>
-                      <div className={`text-[7px] font-bold tracking-wider ${card.type === 'answer' ? 'text-amber-600' : 'text-emerald-700/60'}`}>{card.label}</div>
-                      <div className={`text-[10px] font-semibold leading-tight mt-0.5 ${card.type === 'answer' ? 'text-amber-800 font-black text-xs' : 'text-gray-700'}`}>
-                        {card.content.length > 55 ? card.content.slice(0, 55) + '…' : card.content}
-                      </div>
+                  {/* Pot */}
+                  {pot > 0 && (
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-5 h-5 rounded-full bg-gradient-to-b from-red-400 to-red-600 border-2 border-red-300 shadow-md" />
+                      <span className="text-amber-100 font-black text-xl sm:text-2xl font-mono drop-shadow-lg">{pot.toLocaleString('de-DE')}</span>
                     </div>
-                  ))}
-                </div>
-              )}
+                  )}
 
-              {/* Status */}
-              {phase === GamePhase.ESTIMATING && me?.hasSubmittedEstimate && (
-                <div className="text-white/30 text-xs">Warte auf andere...</div>
-              )}
-              {isBettingPhase && !isMyTurn && !me?.hasFolded && (
-                <div className="text-white/30 text-xs">
-                  Warte auf <span className="text-white/60 font-semibold">{players.find(p => p.id === gameState.currentTurnPlayerId)?.name || '...'}</span>
-                </div>
-              )}
-              {me?.hasFolded && isBettingPhase && (
-                <div className="text-red-300/50 text-xs font-semibold">Gefoldet</div>
-              )}
-            </PokerTable>
+                  {/* Community cards (hints + answer) */}
+                  {communityCards.length > 0 && (
+                    <div className="flex items-stretch gap-2">
+                      {communityCards.map((card, i) => (
+                        <div key={card.label}
+                          className={`rounded-lg px-3 py-2 text-center max-w-[150px] animate-card-deal ${card.type === 'answer' ? 'bg-amber-100 border border-amber-400' : 'bg-white/90 border border-white/40'}`}
+                          style={{ animationDelay: `${i * 200}ms`, boxShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>
+                          <div className={`text-[7px] font-bold tracking-wider ${card.type === 'answer' ? 'text-amber-600' : 'text-emerald-700/60'}`}>{card.label}</div>
+                          <div className={`text-[10px] font-semibold leading-tight mt-0.5 ${card.type === 'answer' ? 'text-amber-800 font-black text-xs' : 'text-gray-700'}`}>
+                            {card.content.length > 55 ? card.content.slice(0, 55) + '...' : card.content}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
-            {/* Bottom players */}
-            <div className="flex justify-center gap-4 flex-wrap">
-              {players.slice(Math.ceil(players.length / 2)).map(player => (
-                <PlayerSeat key={player.id} player={player} isMe={player.id === playerId}
-                  isTurn={player.id === gameState.currentTurnPlayerId}
-                  isDealer={player.id === dealerId} isSB={player.id === sbId} isBB={player.id === bbId}
-                  phase={phase} showEstimate={false} emote={emotes.get(player.id)} />
-              ))}
+                  {/* Status */}
+                  {phase === GamePhase.ESTIMATING && me?.hasSubmittedEstimate && (
+                    <div className="text-white/30 text-xs">Warte auf andere...</div>
+                  )}
+                  {isBettingPhase && !isMyTurn && !me?.hasFolded && (
+                    <div className="text-white/30 text-xs">
+                      Warte auf <span className="text-white/60 font-semibold">{players.find(p => p.id === gameState.currentTurnPlayerId)?.name || '...'}</span>
+                    </div>
+                  )}
+                  {me?.hasFolded && isBettingPhase && (
+                    <div className="text-red-300/50 text-xs font-semibold">Gefoldet</div>
+                  )}
+                </PokerTable>
+              </div>
+
+              {/* Bet chips on the felt - between seat and center */}
+              {ordered.map((player, i) => {
+                if (player.currentBet <= 0 || player.hasFolded) return null;
+                const [seatLeft, seatTop] = positions[i % positions.length];
+                // Position 60% of the way from seat toward center (50, 50)
+                const chipLeft = seatLeft + (50 - seatLeft) * 0.55;
+                const chipTop = seatTop + (50 - seatTop) * 0.55;
+                return (
+                  <div key={`chip-${player.id}`}
+                    className="absolute transform -translate-x-1/2 -translate-y-1/2 z-[5] flex items-center gap-1 pointer-events-none"
+                    style={{ left: `${chipLeft}%`, top: `${chipTop}%` }}>
+                    {/* Chip stack visual */}
+                    <div className="relative">
+                      <div className="w-6 h-6 rounded-full border-2 border-red-300 shadow-lg"
+                        style={{ background: 'radial-gradient(circle at 35% 35%, #ef4444, #b91c1c)', boxShadow: '0 2px 6px rgba(0,0,0,0.5)' }}>
+                        <div className="absolute inset-[3px] rounded-full border border-dashed border-white/30" />
+                      </div>
+                      {player.currentBet >= 50 && (
+                        <div className="absolute -bottom-0.5 -right-0.5 w-6 h-6 rounded-full border-2 border-blue-300 -z-10"
+                          style={{ background: 'radial-gradient(circle at 35% 35%, #3b82f6, #1d4ed8)' }} />
+                      )}
+                    </div>
+                    <span className="text-white font-mono font-bold text-xs drop-shadow-lg">{player.currentBet}</span>
+                  </div>
+                );
+              })}
+
+              {/* Player seats at fixed positions around the table */}
+              {ordered.map((player, i) => {
+                const [left, top] = positions[i % positions.length];
+                return (
+                  <div
+                    key={player.id}
+                    className="absolute transform -translate-x-1/2 -translate-y-1/2 z-10"
+                    style={{ left: `${left}%`, top: `${top}%` }}
+                  >
+                    <PlayerSeat
+                      player={player}
+                      isMe={player.id === playerId}
+                      isTurn={player.id === gameState.currentTurnPlayerId}
+                      isDealer={player.id === dealerId}
+                      isSB={player.id === sbId}
+                      isBB={player.id === bbId}
+                      phase={phase}
+                      showEstimate={false}
+                      emote={emotes.get(player.id)}
+                    />
+                  </div>
+                );
+              })}
             </div>
 
             {/* Timer below table */}
@@ -406,7 +471,8 @@ export default function GameRoom({
               <div className="text-white/20 text-xs">Warte auf andere Spieler...</div>
             )}
           </div>
-        )}
+          );
+        })()}
 
         {/* === BETTING CONTROLS - Fixed bottom bar === */}
         {isBettingPhase && isMyTurn && me && !me.hasFolded && (
@@ -436,57 +502,9 @@ export default function GameRoom({
           </div>
         )}
 
-        {/* === SHOWDOWN with poker table background === */}
+        {/* === SHOWDOWN === */}
         {isShowdown && (
-          <div className="w-full max-w-5xl mx-auto flex flex-col items-center gap-4">
-            {/* Mini poker table with player positions showing estimates */}
-            <div className="relative w-full max-w-4xl mx-auto aspect-[16/7] min-h-[240px] hidden sm:block">
-              {/* Table rail (wood border) */}
-              <div className="poker-table-rail absolute inset-4 rounded-[50%]">
-                {/* Table felt */}
-                <div className="poker-table-felt absolute inset-[10px] rounded-[50%] bg-gradient-to-b from-emerald-800 via-emerald-700/90 to-emerald-900">
-                  <div className="poker-betting-line absolute inset-[18%] rounded-[50%] pointer-events-none" />
-                  {/* Center: answer */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    {gameState.actualAnswer !== null && (
-                      <div className="poker-card-gold animate-fade-in-scale !max-w-[140px] text-center">
-                        <div className="text-[9px] font-bold tracking-wider text-amber-600 mb-0.5">ANTWORT</div>
-                        <div className="text-xl font-black text-amber-800 font-mono">{gameState.actualAnswer.toLocaleString('de-DE')}</div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-              {/* Player seats with estimates visible */}
-              {players.map((player, i) => {
-                const angle = (i / players.length) * 2 * Math.PI - Math.PI / 2;
-                const rx = 48;
-                const ry = 45;
-                const x = 50 + rx * Math.cos(angle);
-                const y = 50 + ry * Math.sin(angle);
-                return (
-                  <div
-                    key={player.id}
-                    className="absolute transform -translate-x-1/2 -translate-y-1/2 z-10"
-                    style={{ left: `${x}%`, top: `${y}%` }}
-                  >
-                    <PlayerSeat
-                      player={player}
-                      isMe={player.id === playerId}
-                      isTurn={false}
-                      isDealer={player.id === dealerId}
-                      isSB={player.id === sbId}
-                      isBB={player.id === bbId}
-                      phase={phase}
-                      showEstimate={true}
-                      emote={emotes.get(player.id)}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Showdown details below */}
+          <div className="w-full max-w-2xl mx-auto">
             <Showdown
               key={`showdown-${gameState.roundNumber}`}
               gameState={gameState}

@@ -56,14 +56,6 @@ export default function PlayerSeat({
         </div>
       )}
 
-      {/* Bet amount - displayed between seat and table center */}
-      {player.currentBet > 0 && isActive && (
-        <div className="player-bet-chips flex items-center gap-1 mb-0.5 animate-fade-in">
-          <div className="w-4 h-4 rounded-full bg-gradient-to-b from-red-400 to-red-600 border border-red-300 shadow-sm flex-shrink-0" />
-          <span className="text-gold font-mono font-black text-sm drop-shadow-md">{player.currentBet.toLocaleString('de-DE')}</span>
-        </div>
-      )}
-
       {/* Main seat container */}
       <div
         className={`

@@ -7,6 +7,18 @@ import Showdown from '../components/Showdown';
 import ActionFeed from '../components/ActionFeed';
 import QuestionBrowser from '../components/QuestionBrowser';
 
+// Predefined seat positions for different player counts
+// Each position is [left%, top%] relative to the wrapper
+const SEAT_POSITIONS: Record<number, [number, number][]> = {
+  2: [[50, 100], [50, 0]],
+  3: [[50, 100], [5, 30], [95, 30]],
+  4: [[50, 100], [5, 50], [50, 0], [95, 50]],
+  5: [[50, 100], [3, 65], [20, 5], [80, 5], [97, 65]],
+  6: [[50, 100], [3, 70], [3, 25], [50, 0], [97, 25], [97, 70]],
+  7: [[50, 100], [3, 70], [3, 25], [25, 0], [75, 0], [97, 25], [97, 70]],
+  8: [[50, 100], [3, 75], [3, 45], [15, 5], [50, 0], [85, 5], [97, 45], [97, 75]],
+};
+
 interface AdminDashboardProps {
   gameState: VisibleGameState;
   onStartGame: () => void;
@@ -401,86 +413,110 @@ export default function AdminDashboard({ gameState, onStartGame, onNextRound, on
             )}
 
             {/* The Poker Table */}
-            <div className="relative w-full max-w-4xl mx-auto aspect-[16/9] min-h-[320px]">
-              {/* Table felt */}
-              <div className="poker-table-felt absolute inset-6 sm:inset-8 rounded-[50%] bg-gradient-to-b from-emerald-800 via-emerald-800 to-emerald-900 border-[8px] border-amber-900/80 shadow-[inset_0_0_60px_rgba(0,0,0,0.5),0_0_30px_rgba(0,0,0,0.3)]">
-                <div className="absolute -inset-3 rounded-[50%] border-4 border-amber-800/30 pointer-events-none" />
-                <div className="absolute -inset-1 rounded-[50%] border border-amber-700/15 pointer-events-none" />
-
-                {/* Center content */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-4 gap-2">
-
-                  {/* Pot display */}
-                  {pot > 0 && (
-                    <div className="flex flex-col items-center animate-fade-in">
-                      <div className="text-amber-200/40 text-[9px] font-bold tracking-[0.2em]">POT</div>
-                      <div className="flex items-center gap-1.5 mt-0.5">
-                        <div className="chip-stack">
-                          <div className="w-5 h-5 rounded-full bg-gradient-to-b from-red-400 to-red-600 border-2 border-red-300 shadow-md" />
+            <div className="relative w-full max-w-4xl mx-auto" style={{ minHeight: '500px' }}>
+              {/* Table in the center */}
+              <div className="absolute left-[12%] right-[12%] top-[18%] bottom-[18%]">
+                <div className="w-full h-full">
+                  <div
+                    style={{
+                      background: 'linear-gradient(160deg, #6b4423, #4a2e14, #3d2510, #5c3a1e)',
+                      borderRadius: '50%',
+                      padding: '16px',
+                      boxShadow: '0 0 40px rgba(0,0,0,0.5), inset 0 2px 4px rgba(139,90,43,0.3), inset 0 -2px 4px rgba(0,0,0,0.4)',
+                      border: '3px solid rgba(90,60,25,0.6)',
+                      width: '100%',
+                      height: '100%',
+                    }}
+                  >
+                    <div
+                      style={{
+                        background: 'radial-gradient(ellipse at 50% 40%, #2d8a4e, #1a6b35, #14532d)',
+                        borderRadius: '50%',
+                        width: '100%',
+                        height: '100%',
+                        boxShadow: 'inset 0 0 40px rgba(0,0,0,0.4), inset 0 0 80px rgba(0,0,0,0.2)',
+                        border: '2px solid rgba(0,0,0,0.3)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        padding: '8% 12%',
+                        gap: '6px',
+                        overflow: 'hidden',
+                      }}
+                    >
+                      {/* Pot display */}
+                      {pot > 0 && (
+                        <div className="flex flex-col items-center animate-fade-in">
+                          <div className="text-amber-200/40 text-[9px] font-bold tracking-[0.2em]">POT</div>
+                          <div className="flex items-center gap-1.5 mt-0.5">
+                            <div className="chip-stack">
+                              <div className="w-5 h-5 rounded-full bg-gradient-to-b from-red-400 to-red-600 border-2 border-red-300 shadow-md" />
+                            </div>
+                            <span className="text-gold font-black text-xl sm:text-2xl font-mono">{pot.toLocaleString('de-DE')}</span>
+                          </div>
                         </div>
-                        <span className="text-gold font-black text-xl sm:text-2xl font-mono">{pot.toLocaleString('de-DE')}</span>
-                      </div>
-                    </div>
-                  )}
+                      )}
 
-                  {/* Answer card on table */}
-                  {actualAnswer !== null && answerPhases && (
-                    <div className="poker-card-gold animate-card-deal mt-1 px-4 py-2">
-                      <div className="text-[8px] font-bold tracking-wider mb-0.5 text-amber-600">ANTWORT</div>
-                      <div className="text-amber-800 font-black text-lg font-mono">{actualAnswer.toLocaleString('de-DE')}</div>
-                    </div>
-                  )}
+                      {/* Answer card on table */}
+                      {actualAnswer !== null && answerPhases && (
+                        <div className="poker-card-gold animate-card-deal mt-1 px-4 py-2">
+                          <div className="text-[8px] font-bold tracking-wider mb-0.5 text-amber-600">ANTWORT</div>
+                          <div className="text-amber-800 font-black text-lg font-mono">{actualAnswer.toLocaleString('de-DE')}</div>
+                        </div>
+                      )}
 
-                  {/* Action feed inside table */}
-                  {isBettingPhase && (
-                    <div className="max-w-xs">
-                      <ActionFeed actionLog={gameState.actionLog} />
-                    </div>
-                  )}
+                      {/* Action feed inside table */}
+                      {isBettingPhase && (
+                        <div className="max-w-xs">
+                          <ActionFeed actionLog={gameState.actionLog} />
+                        </div>
+                      )}
 
-                  {/* Admin: who's turn */}
-                  {isBettingPhase && currentTurnPlayerId && (
-                    <div className="text-white/25 text-xs mt-1">
-                      Am Zug: <span className="text-gold font-semibold">{players.find(p => p.id === currentTurnPlayerId)?.name}</span>
-                    </div>
-                  )}
+                      {/* Admin: who's turn */}
+                      {isBettingPhase && currentTurnPlayerId && (
+                        <div className="text-white/25 text-xs mt-1">
+                          Am Zug: <span className="text-gold font-semibold">{players.find(p => p.id === currentTurnPlayerId)?.name}</span>
+                        </div>
+                      )}
 
-                  {/* Estimating status */}
-                  {phase === GamePhase.ESTIMATING && (
-                    <div className="text-white/20 text-xs">
-                      {players.filter(p => p.hasSubmittedEstimate).length}/{players.filter(p => !p.isEliminated).length} haben getippt
+                      {/* Estimating status */}
+                      {phase === GamePhase.ESTIMATING && (
+                        <div className="text-white/20 text-xs">
+                          {players.filter(p => p.hasSubmittedEstimate).length}/{players.filter(p => !p.isEliminated).length} haben getippt
+                        </div>
+                      )}
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
 
-              {/* Player seats around the oval */}
-              {players.map((player, i) => {
-                const angle = (i / players.length) * 2 * Math.PI - Math.PI / 2;
-                const rx = 47;
-                const ry = 45;
-                const x = 50 + rx * Math.cos(angle);
-                const y = 50 + ry * Math.sin(angle);
-                return (
-                  <div
-                    key={player.id}
-                    className="absolute transform -translate-x-1/2 -translate-y-1/2 z-10"
-                    style={{ left: `${x}%`, top: `${y}%` }}
-                  >
-                    <PlayerSeat
-                      player={player}
-                      isMe={false}
-                      isTurn={player.id === currentTurnPlayerId}
-                      isDealer={player.id === dealerId}
-                      isSB={player.id === sbId}
-                      isBB={player.id === bbId}
-                      phase={phase}
-                      showEstimate={false}
-                      emote={emotes.get(player.id)}
-                    />
-                  </div>
-                );
-              })}
+              {/* Player seats at fixed positions around the table */}
+              {(() => {
+                const positions = SEAT_POSITIONS[players.length] || SEAT_POSITIONS[8];
+                return players.map((player, i) => {
+                  const [left, top] = positions[i % positions.length];
+                  return (
+                    <div
+                      key={player.id}
+                      className="absolute transform -translate-x-1/2 -translate-y-1/2 z-10"
+                      style={{ left: `${left}%`, top: `${top}%` }}
+                    >
+                      <PlayerSeat
+                        player={player}
+                        isMe={false}
+                        isTurn={player.id === currentTurnPlayerId}
+                        isDealer={player.id === dealerId}
+                        isSB={player.id === sbId}
+                        isBB={player.id === bbId}
+                        phase={phase}
+                        showEstimate={false}
+                        emote={emotes.get(player.id)}
+                      />
+                    </div>
+                  );
+                });
+              })()}
             </div>
           </div>
         )}
@@ -489,44 +525,71 @@ export default function AdminDashboard({ gameState, onStartGame, onNextRound, on
         {isShowdown && (
           <div className="w-full max-w-5xl mx-auto flex flex-col items-center gap-4">
             {/* Mini poker table with estimates */}
-            <div className="relative w-full max-w-4xl mx-auto aspect-[16/7] min-h-[220px] hidden sm:block">
-              <div className="poker-table-felt absolute inset-6 rounded-[50%] bg-gradient-to-b from-emerald-800 to-emerald-900 border-[8px] border-amber-900/80 shadow-[inset_0_0_60px_rgba(0,0,0,0.5),0_0_30px_rgba(0,0,0,0.3)]">
-                <div className="absolute -inset-3 rounded-[50%] border-4 border-amber-800/30 pointer-events-none" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  {actualAnswer !== null && (
-                    <div className="poker-card-gold animate-fade-in-scale !max-w-[140px] text-center">
-                      <div className="text-[9px] font-bold tracking-wider text-amber-600 mb-0.5">ANTWORT</div>
-                      <div className="text-xl font-black text-amber-800 font-mono">{actualAnswer.toLocaleString('de-DE')}</div>
+            <div className="relative w-full max-w-4xl mx-auto hidden sm:block" style={{ minHeight: '440px' }}>
+              {/* Table in the center */}
+              <div className="absolute left-[12%] right-[12%] top-[18%] bottom-[18%]">
+                <div className="w-full h-full">
+                  <div
+                    style={{
+                      background: 'linear-gradient(160deg, #6b4423, #4a2e14, #3d2510, #5c3a1e)',
+                      borderRadius: '50%',
+                      padding: '12px',
+                      boxShadow: '0 0 40px rgba(0,0,0,0.5), inset 0 2px 4px rgba(139,90,43,0.3), inset 0 -2px 4px rgba(0,0,0,0.4)',
+                      border: '3px solid rgba(90,60,25,0.6)',
+                      width: '100%',
+                      height: '100%',
+                    }}
+                  >
+                    <div
+                      style={{
+                        background: 'radial-gradient(ellipse at 50% 40%, #2d8a4e, #1a6b35, #14532d)',
+                        borderRadius: '50%',
+                        width: '100%',
+                        height: '100%',
+                        boxShadow: 'inset 0 0 40px rgba(0,0,0,0.4), inset 0 0 80px rgba(0,0,0,0.2)',
+                        border: '2px solid rgba(0,0,0,0.3)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      {actualAnswer !== null && (
+                        <div className="poker-card-gold animate-fade-in-scale !max-w-[140px] text-center">
+                          <div className="text-[9px] font-bold tracking-wider text-amber-600 mb-0.5">ANTWORT</div>
+                          <div className="text-xl font-black text-amber-800 font-mono">{actualAnswer.toLocaleString('de-DE')}</div>
+                        </div>
+                      )}
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
-              {players.map((player, i) => {
-                const angle = (i / players.length) * 2 * Math.PI - Math.PI / 2;
-                const rx = 47;
-                const ry = 44;
-                const x = 50 + rx * Math.cos(angle);
-                const y = 50 + ry * Math.sin(angle);
-                return (
-                  <div
-                    key={player.id}
-                    className="absolute transform -translate-x-1/2 -translate-y-1/2 z-10"
-                    style={{ left: `${x}%`, top: `${y}%` }}
-                  >
-                    <PlayerSeat
-                      player={player}
-                      isMe={false}
-                      isTurn={false}
-                      isDealer={player.id === dealerId}
-                      isSB={player.id === sbId}
-                      isBB={player.id === bbId}
-                      phase={phase}
-                      showEstimate={true}
-                      emote={emotes.get(player.id)}
-                    />
-                  </div>
-                );
-              })}
+              {/* Player seats at fixed positions */}
+              {(() => {
+                const positions = SEAT_POSITIONS[players.length] || SEAT_POSITIONS[8];
+                return players.map((player, i) => {
+                  const [left, top] = positions[i % positions.length];
+                  return (
+                    <div
+                      key={player.id}
+                      className="absolute transform -translate-x-1/2 -translate-y-1/2 z-10"
+                      style={{ left: `${left}%`, top: `${top}%` }}
+                    >
+                      <PlayerSeat
+                        player={player}
+                        isMe={false}
+                        isTurn={false}
+                        isDealer={player.id === dealerId}
+                        isSB={player.id === sbId}
+                        isBB={player.id === bbId}
+                        phase={phase}
+                        showEstimate={true}
+                        emote={emotes.get(player.id)}
+                      />
+                    </div>
+                  );
+                });
+              })()}
             </div>
 
             <Showdown key={`showdown-${gameState.roundNumber}`} gameState={gameState} playerId="" onNextRound={onNextRound} isHost={false} />
