@@ -161,6 +161,7 @@ export class GameRoom {
       winnerId: this.winnerId,
       dealerIndex: this.dealerIndex,
       isAdmin: true,
+      bettingActive: this.timerEnd > 0 || this.actedThisRound.size > 0,
       actionLog: [...this.actionLog],
     };
   }
@@ -865,6 +866,7 @@ export class GameRoom {
       config: this.config,
       winnerId: this.winnerId,
       dealerIndex: this.dealerIndex,
+      bettingActive: this.timerEnd > 0 || this.actedThisRound.size > 0,
       actionLog: [...this.actionLog],
     };
   }
@@ -894,6 +896,11 @@ export class GameRoom {
       this.phase === GamePhase.TURN ||
       this.phase === GamePhase.RIVER
     ) {
+      // Don't let bots bet during admin hint-reveal pause
+      // (when admin is present and betting hasn't started yet for FLOP/TURN/RIVER)
+      if (this.adminId && this.phase !== GamePhase.PREFLOP && this.actedThisRound.size === 0 && this.timerEnd === 0) {
+        return;
+      }
       this.botBet();
     }
   }

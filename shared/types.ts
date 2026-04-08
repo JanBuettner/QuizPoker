@@ -85,6 +85,7 @@ export interface VisibleGameState {
   timeRemaining: number;
   config: RoomConfig;
   winnerId: string | null;
+  bettingActive: boolean;
   dealerIndex: number;
   isAdmin?: boolean;
   actionLog: string[]; // last 5 actions like "Max raist auf 200", "Lisa foldet"

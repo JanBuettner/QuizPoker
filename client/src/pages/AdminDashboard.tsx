@@ -33,14 +33,23 @@ const PHASE_LABELS: Record<GamePhase, string> = {
   [GamePhase.GAME_OVER]: 'Spiel vorbei',
 };
 
-const ADVANCE_LABELS: Partial<Record<GamePhase, string>> = {
+// Labels when betting is NOT active (reveal/pause state)
+const ADVANCE_REVEAL: Partial<Record<GamePhase, string>> = {
   [GamePhase.ESTIMATING]: 'Weiter → Preflop',
-  [GamePhase.PREFLOP]: 'Weiter → Flop',
-  [GamePhase.FLOP]: 'Weiter → Turn',
-  [GamePhase.TURN]: 'Weiter → River',
-  [GamePhase.RIVER]: 'Weiter → Showdown',
+  [GamePhase.PREFLOP]: 'Preflop beenden → Flop',
+  [GamePhase.FLOP]: 'Wetten starten',
+  [GamePhase.TURN]: 'Wetten starten',
+  [GamePhase.RIVER]: 'Wetten starten',
   [GamePhase.SHOWDOWN]: 'Weiter → Ergebnis',
   [GamePhase.ROUND_END]: 'Nächste Runde',
+};
+
+// Labels when betting IS active
+const ADVANCE_BETTING: Partial<Record<GamePhase, string>> = {
+  [GamePhase.PREFLOP]: 'Preflop beenden → Flop',
+  [GamePhase.FLOP]: 'Flop beenden → Turn',
+  [GamePhase.TURN]: 'Turn beenden → River',
+  [GamePhase.RIVER]: 'River beenden → Showdown',
 };
 
 // Helper to compute dealer/SB/BB ids
@@ -162,17 +171,23 @@ export default function AdminDashboard({ gameState, onStartGame, onNextRound, on
       {/* Main */}
       <main className="flex-1 flex flex-col items-center justify-center p-3 sm:p-4 overflow-hidden">
 
-        {/* Admin advance button - floating at top */}
-        {ADVANCE_LABELS[phase] && (
-          <div className="w-full max-w-xl mb-3">
-            <button
-              onClick={phase === GamePhase.ROUND_END ? onNextRound : onAdvancePhase}
-              className="btn-gold w-full py-3 text-base animate-border-glow"
-            >
-              {ADVANCE_LABELS[phase]}
-            </button>
-          </div>
-        )}
+        {/* Admin advance button - smart labels based on betting state */}
+        {(() => {
+          const label = gameState.bettingActive
+            ? ADVANCE_BETTING[phase]
+            : ADVANCE_REVEAL[phase];
+          if (!label) return null;
+          return (
+            <div className="w-full max-w-xl mb-3">
+              <button
+                onClick={phase === GamePhase.ROUND_END ? onNextRound : onAdvancePhase}
+                className={`w-full py-3 text-base ${gameState.bettingActive ? 'btn-gold opacity-70 hover:opacity-100' : 'btn-gold animate-border-glow'}`}
+              >
+                {label}
+              </button>
+            </div>
+          );
+        })()}
 
         {/* Blinds control */}
         {phase !== GamePhase.LOBBY && phase !== GamePhase.GAME_OVER && (
