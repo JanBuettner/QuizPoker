@@ -12,6 +12,7 @@ interface AdminDashboardProps {
   onStartGame: () => void;
   onNextRound: () => void;
   onAdvancePhase: () => void;
+  onSetBlinds: (smallBlind: number, bigBlind: number) => void;
   onAddBot: () => void;
   onRemoveBot: (botId: string) => void;
   onLeave: () => void;
@@ -67,7 +68,7 @@ function computePositions(players: VisibleGameState['players'], dealerIndex: num
   return { dealerId, sbId, bbId };
 }
 
-export default function AdminDashboard({ gameState, onStartGame, onNextRound, onAdvancePhase, onAddBot, onRemoveBot, onLeave, error, questions, onLoadQuestions }: AdminDashboardProps) {
+export default function AdminDashboard({ gameState, onStartGame, onNextRound, onAdvancePhase, onSetBlinds, onAddBot, onRemoveBot, onLeave, error, questions, onLoadQuestions }: AdminDashboardProps) {
   const [showQuestions, setShowQuestions] = useState(false);
   const [showPlayers, setShowPlayers] = useState(false);
   const [copiedHeader, setCopiedHeader] = useState(false);
@@ -119,7 +120,7 @@ export default function AdminDashboard({ gameState, onStartGame, onNextRound, on
                   <span className="text-white/40 font-semibold">{PHASE_LABELS[phase]}</span>
                 </span>
                 <div className="w-px h-4 bg-white/10 hidden sm:block" />
-                <span className="text-white/20 text-xs font-mono hidden sm:inline">R{roundNumber}/{totalRounds}</span>
+                <span className="text-white/20 text-xs font-mono hidden sm:inline">Runde {roundNumber}</span>
               </>
             )}
           </div>
@@ -175,6 +176,30 @@ export default function AdminDashboard({ gameState, onStartGame, onNextRound, on
             >
               {ADVANCE_LABELS[phase]}
             </button>
+          </div>
+        )}
+
+        {/* Blinds control */}
+        {phase !== GamePhase.LOBBY && phase !== GamePhase.GAME_OVER && (
+          <div className="w-full max-w-xl mb-2">
+            <div className="glass rounded-xl px-4 py-2 flex items-center gap-3 text-xs">
+              <span className="text-white/20 font-bold tracking-wider">BLINDS</span>
+              <span className="text-gold font-mono font-bold">{gameState.config.smallBlind}/{gameState.config.bigBlind}</span>
+              <div className="flex items-center gap-1.5 ml-auto">
+                <button
+                  onClick={() => onSetBlinds(gameState.config.smallBlind * 2, gameState.config.bigBlind * 2)}
+                  className="px-2.5 py-1 bg-white/5 hover:bg-gold/10 text-white/40 hover:text-gold rounded-lg border border-white/5 hover:border-gold/20 transition-all font-bold"
+                >
+                  ×2
+                </button>
+                <button
+                  onClick={() => onSetBlinds(Math.max(5, Math.round(gameState.config.smallBlind / 2)), Math.max(10, Math.round(gameState.config.bigBlind / 2)))}
+                  className="px-2.5 py-1 bg-white/5 hover:bg-white/10 text-white/40 hover:text-white/60 rounded-lg border border-white/5 transition-all font-bold"
+                >
+                  ÷2
+                </button>
+              </div>
+            </div>
           </div>
         )}
 

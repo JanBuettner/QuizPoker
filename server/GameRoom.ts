@@ -655,7 +655,7 @@ export class GameRoom {
 
     const alive = this.nonEliminatedPlayers();
 
-    if (alive.length <= 1 || this.roundNumber >= this.config.maxRounds) {
+    if (alive.length <= 1) {
       this.phase = GamePhase.GAME_OVER;
 
       let maxChips = -1;

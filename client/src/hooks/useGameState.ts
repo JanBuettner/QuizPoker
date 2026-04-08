@@ -103,6 +103,10 @@ export function useGameState() {
     socket.emit('advancePhase');
   }, []);
 
+  const setBlinds = useCallback((smallBlind: number, bigBlind: number) => {
+    socket.emit('setBlinds', { smallBlind, bigBlind });
+  }, []);
+
   const submitEstimate = useCallback((estimate: number) => {
     socket.emit('submitEstimate', { estimate });
   }, []);
@@ -139,6 +143,7 @@ export function useGameState() {
     removeBot,
     startGame,
     advancePhase,
+    setBlinds,
     submitEstimate,
     bet,
     nextRound,

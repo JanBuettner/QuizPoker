@@ -266,6 +266,22 @@ export function setupSocketHandlers(io: TypedServer): void {
       info.room.advancePhase();
     });
 
+    socket.on('setBlinds', ({ smallBlind, bigBlind }) => {
+      const info = getRoomForSocket(socket.id);
+      if (!info) return;
+      if (!info.isAdmin) {
+        socket.emit('error', { message: 'Nur der Admin kann Blinds ändern' });
+        return;
+      }
+      if (typeof smallBlind !== 'number' || typeof bigBlind !== 'number' || smallBlind <= 0 || bigBlind <= 0) {
+        socket.emit('error', { message: 'Ungültige Blind-Werte' });
+        return;
+      }
+      info.room.config.smallBlind = Math.round(smallBlind);
+      info.room.config.bigBlind = Math.round(bigBlind);
+      broadcastState(info.room, io);
+    });
+
     socket.on('getQuestions', () => {
       // Only admin can view all questions
       const info = getRoomForSocket(socket.id);

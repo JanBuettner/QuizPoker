@@ -52,6 +52,7 @@ export default function App() {
       onStartGame={game.startGame}
       onNextRound={game.nextRound}
       onAdvancePhase={game.advancePhase}
+      onSetBlinds={game.setBlinds}
       onAddBot={game.addBot}
       onRemoveBot={game.removeBot}
       onLeave={game.leaveRoom}

@@ -97,6 +97,7 @@ export interface ClientToServerEvents {
   removeBot: (data: { botId: string }) => void;
   startGame: () => void;
   advancePhase: () => void;
+  setBlinds: (data: { smallBlind: number; bigBlind: number }) => void;
   submitEstimate: (data: { estimate: number }) => void;
   bet: (data: { action: BettingAction; amount?: number }) => void;
   nextRound: () => void;

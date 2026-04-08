@@ -152,7 +152,7 @@ export default function GameRoom({
                 </span>
                 <div className="w-px h-4 bg-white/10 hidden sm:block" />
                 <span className="text-white/20 text-xs font-mono hidden sm:inline">
-                  R{roundNumber}/{totalRounds}
+                  Runde {roundNumber}
                 </span>
               </>
             )}
