@@ -296,88 +296,66 @@ export default function GameRoom({
 
         {/* === POKER TABLE === */}
         {showTable && !isShowdown && (
-          <div className="w-full max-w-5xl mx-auto flex flex-col items-center gap-3">
+          <div className="w-full max-w-5xl mx-auto flex flex-col items-center gap-2">
 
             {/* Question card above table */}
             {gameState.currentQuestion && (
-              <div className="w-full max-w-lg px-2">
-                <div className="poker-card-question text-center animate-fade-in !py-2.5 !px-5">
-                  <div className="text-gold/40 text-[8px] font-bold tracking-[0.3em] mb-1.5">FRAGE</div>
+              <div className="w-full max-w-2xl px-2 mb-1">
+                <div className="glass rounded-xl text-center py-3 px-5 border border-amber-900/20">
                   <p className="text-white text-sm sm:text-base leading-relaxed font-semibold">{gameState.currentQuestion}</p>
                 </div>
               </div>
             )}
 
             {/* The Poker Table */}
-            <div className="relative w-full max-w-4xl mx-auto aspect-[16/9] min-h-[340px]">
+            <div className="relative w-full max-w-4xl mx-auto" style={{ aspectRatio: '16/8', minHeight: '300px' }}>
               {/* Table rail (wood border) */}
-              <div className="poker-table-rail absolute inset-3 sm:inset-5 rounded-[50%]">
+              <div className="poker-table-rail absolute inset-[2%] sm:inset-[4%] rounded-[50%]">
                 {/* Table felt */}
                 <div className="poker-table-felt absolute inset-[10px] sm:inset-[12px] rounded-[50%] bg-gradient-to-b from-emerald-800 via-emerald-700/90 to-emerald-900">
 
                   {/* Betting line */}
-                  <div className="poker-betting-line absolute inset-[18%] rounded-[50%] pointer-events-none" />
+                  <div className="poker-betting-line absolute inset-[15%] rounded-[50%] pointer-events-none" />
 
-                  {/* Center content */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-4 gap-2">
-
+                  {/* Center content - only pot + answer */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-4 gap-1">
                     {/* Pot display */}
                     {pot > 0 && (
-                      <div className="flex flex-col items-center animate-fade-in">
-                        <div className="text-amber-200/40 text-[9px] font-bold tracking-[0.2em]">POT</div>
-                        <div className="flex items-center gap-1.5 mt-0.5">
-                          <div className="chip-stack">
-                            <div className="w-5 h-5 rounded-full bg-gradient-to-b from-red-400 to-red-600 border-2 border-red-300 shadow-md" />
-                          </div>
-                          <span className="text-gold font-black text-xl sm:text-2xl font-mono drop-shadow-lg">{pot.toLocaleString('de-DE')}</span>
-                        </div>
+                      <div className="flex items-center gap-1.5 animate-fade-in">
+                        <div className="w-5 h-5 rounded-full bg-gradient-to-b from-red-400 to-red-600 border-2 border-red-300 shadow-md" />
+                        <span className="text-gold font-black text-2xl sm:text-3xl font-mono drop-shadow-lg">{pot.toLocaleString('de-DE')}</span>
                       </div>
                     )}
 
-                    {/* Answer card on table (only when revealed) */}
+                    {/* Answer card on table */}
                     {gameState.actualAnswer !== null && answerPhases && (
-                      <div className="poker-card-gold animate-card-deal mt-1 px-4 py-2">
-                        <div className="text-[8px] font-bold tracking-wider mb-0.5 text-amber-600">ANTWORT</div>
-                        <div className="text-amber-800 font-black text-lg font-mono">{gameState.actualAnswer.toLocaleString('de-DE')}</div>
+                      <div className="poker-card-gold animate-card-deal px-4 py-1.5 mt-1">
+                        <div className="text-[8px] font-bold tracking-wider text-amber-600">ANTWORT</div>
+                        <div className="text-amber-800 font-black text-xl font-mono">{gameState.actualAnswer.toLocaleString('de-DE')}</div>
                       </div>
                     )}
 
-                    {/* Your estimate (shown as face-down card) */}
-                    {gameState.yourEstimate !== null && isBettingPhase && (
-                      <div className="mt-1 flex items-center gap-1.5">
-                        <div className="poker-card-back w-8 h-11 rounded shadow-md" />
-                        <span className="text-white/30 text-[10px]">Dein Tipp: <span className="text-gold font-mono font-bold">{gameState.yourEstimate.toLocaleString('de-DE')}</span></span>
-                      </div>
-                    )}
-
-                    {/* Action feed inside table */}
-                    {isBettingPhase && (
-                      <div className="max-w-xs">
-                        <ActionFeed actionLog={gameState.actionLog} />
-                      </div>
-                    )}
-
-                    {/* Waiting messages */}
+                    {/* Status text */}
                     {phase === GamePhase.ESTIMATING && me?.hasSubmittedEstimate && (
-                      <div className="text-white/20 text-xs">Warte auf andere Spieler...</div>
+                      <div className="text-white/20 text-xs">Warte auf andere...</div>
                     )}
                     {isBettingPhase && !isMyTurn && !me?.hasFolded && (
-                      <div className="text-white/25 text-xs mt-1">
+                      <div className="text-white/25 text-xs">
                         Warte auf <span className="text-white/50 font-semibold">{players.find(p => p.id === gameState.currentTurnPlayerId)?.name || '...'}</span>
                       </div>
                     )}
                     {me?.hasFolded && isBettingPhase && (
-                      <div className="text-red-400/40 text-xs font-semibold">Du hast gefoldet</div>
+                      <div className="text-red-400/40 text-xs font-semibold">Gefoldet</div>
                     )}
                   </div>
                 </div>
               </div>
 
-              {/* Player seats around the oval */}
+              {/* Player seats around the oval - OUTSIDE the table */}
               {players.map((player, i) => {
                 const angle = (i / players.length) * 2 * Math.PI - Math.PI / 2;
-                const rx = 48;
-                const ry = 46;
+                const rx = 50;
+                const ry = 50;
                 const x = 50 + rx * Math.cos(angle);
                 const y = 50 + ry * Math.sin(angle);
                 return (
@@ -413,6 +391,13 @@ export default function GameRoom({
             {phase === GamePhase.ESTIMATING && me && !me.hasSubmittedEstimate && !me.hasFolded && (
               <div className="w-full max-w-md">
                 <EstimateInput onSubmit={onSubmitEstimate} />
+              </div>
+            )}
+
+            {/* Action feed below table */}
+            {isBettingPhase && gameState.actionLog.length > 0 && (
+              <div className="w-full max-w-md px-2">
+                <ActionFeed actionLog={gameState.actionLog} />
               </div>
             )}
 
