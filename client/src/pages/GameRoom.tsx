@@ -296,101 +296,98 @@ export default function GameRoom({
 
         {/* === POKER TABLE === */}
         {showTable && !isShowdown && (
-          <div className="w-full max-w-5xl mx-auto flex flex-col items-center gap-2">
+          <div className="w-full max-w-4xl mx-auto flex flex-col items-center gap-3">
 
-            {/* Question card above table */}
+            {/* Question */}
             {gameState.currentQuestion && (
-              <div className="w-full max-w-2xl px-2 mb-1">
+              <div className="w-full max-w-2xl px-2">
                 <div className="glass rounded-xl text-center py-3 px-5 border border-amber-900/20">
                   <p className="text-white text-sm sm:text-base leading-relaxed font-semibold">{gameState.currentQuestion}</p>
                 </div>
               </div>
             )}
 
+            {/* Top row of players */}
+            <div className="flex justify-center gap-3 flex-wrap">
+              {players.slice(0, Math.ceil(players.length / 2)).map(player => (
+                <PlayerSeat key={player.id} player={player} isMe={player.id === playerId}
+                  isTurn={player.id === gameState.currentTurnPlayerId}
+                  isDealer={player.id === dealerId} isSB={player.id === sbId} isBB={player.id === bbId}
+                  phase={phase} showEstimate={false} emote={emotes.get(player.id)} />
+              ))}
+            </div>
+
             {/* The Poker Table */}
-            <div className="relative w-full max-w-4xl mx-auto" style={{ aspectRatio: '16/8', minHeight: '300px' }}>
-              {/* Table rail (wood border) */}
-              <div className="poker-table-rail absolute inset-[2%] sm:inset-[4%] rounded-[50%]">
-                {/* Table felt */}
-                <div className="poker-table-felt absolute inset-[10px] sm:inset-[12px] rounded-[50%] bg-gradient-to-b from-emerald-800 via-emerald-700/90 to-emerald-900">
+            <div className="w-full max-w-3xl mx-auto">
+              <div className="poker-table-rail rounded-[50%] mx-4 sm:mx-8" style={{ aspectRatio: '2.5/1' }}>
+                <div className="poker-table-felt rounded-[50%] m-[10px] sm:m-[12px] bg-gradient-to-b from-emerald-800 via-emerald-700/90 to-emerald-900 h-full flex flex-col items-center justify-center p-4 gap-1.5 overflow-hidden">
 
-                  {/* Betting line */}
-                  <div className="poker-betting-line absolute inset-[15%] rounded-[50%] pointer-events-none" />
+                  {/* Pot */}
+                  {pot > 0 && (
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-4 h-4 rounded-full bg-gradient-to-b from-red-400 to-red-600 border-2 border-red-300 shadow-md" />
+                      <span className="text-gold font-black text-xl sm:text-2xl font-mono drop-shadow-lg">{pot.toLocaleString('de-DE')}</span>
+                    </div>
+                  )}
 
-                  {/* Center content */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-3 gap-1 overflow-hidden">
-                    {/* Pot display */}
-                    {pot > 0 && (
-                      <div className="flex items-center gap-1.5 animate-fade-in">
-                        <div className="w-4 h-4 rounded-full bg-gradient-to-b from-red-400 to-red-600 border-2 border-red-300 shadow-md" />
-                        <span className="text-gold font-black text-xl sm:text-2xl font-mono drop-shadow-lg">{pot.toLocaleString('de-DE')}</span>
-                      </div>
-                    )}
-
-                    {/* Community cards row: hints + answer like flop/turn/river */}
-                    {communityCards.length > 0 && (
-                      <div className="flex items-stretch gap-1.5 mt-1">
-                        {communityCards.map((card, i) => (
-                          <div
-                            key={card.label}
-                            className={`animate-card-deal rounded-lg px-2 py-1.5 text-center max-w-[140px] ${card.type === 'answer' ? 'bg-amber-100 border border-amber-400 shadow-lg' : 'bg-white/90 border border-white/50 shadow-md'}`}
-                            style={{ animationDelay: `${i * 200}ms` }}
-                          >
-                            <div className={`text-[7px] font-bold tracking-wider ${card.type === 'answer' ? 'text-amber-600' : 'text-emerald-700/60'}`}>
-                              {card.label}
-                            </div>
-                            <div className={`text-[10px] font-semibold leading-tight mt-0.5 ${card.type === 'answer' ? 'text-amber-800 font-black text-sm' : 'text-gray-700'}`}>
-                              {card.content.length > 50 ? card.content.slice(0, 50) + '...' : card.content}
-                            </div>
+                  {/* Community cards (hints + answer) */}
+                  {communityCards.length > 0 && (
+                    <div className="flex items-stretch gap-2">
+                      {communityCards.map((card, i) => (
+                        <div key={card.label}
+                          className={`animate-card-deal rounded-lg px-3 py-2 text-center max-w-[160px] ${card.type === 'answer' ? 'bg-amber-100 border border-amber-400 shadow-lg' : 'bg-white/90 border border-white/50 shadow-md'}`}
+                          style={{ animationDelay: `${i * 200}ms` }}>
+                          <div className={`text-[7px] font-bold tracking-wider ${card.type === 'answer' ? 'text-amber-600' : 'text-emerald-700/60'}`}>{card.label}</div>
+                          <div className={`text-[10px] font-semibold leading-tight mt-0.5 ${card.type === 'answer' ? 'text-amber-800 font-black text-xs' : 'text-gray-700'}`}>
+                            {card.content.length > 60 ? card.content.slice(0, 60) + '…' : card.content}
                           </div>
-                        ))}
-                      </div>
-                    )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
-                    {/* Status text */}
-                    {phase === GamePhase.ESTIMATING && me?.hasSubmittedEstimate && (
-                      <div className="text-white/20 text-[10px]">Warte auf andere...</div>
-                    )}
-                    {isBettingPhase && !isMyTurn && !me?.hasFolded && (
-                      <div className="text-white/25 text-[10px]">
-                        Warte auf <span className="text-white/50 font-semibold">{players.find(p => p.id === gameState.currentTurnPlayerId)?.name || '...'}</span>
-                      </div>
-                    )}
-                    {me?.hasFolded && isBettingPhase && (
-                      <div className="text-red-400/40 text-[10px] font-semibold">Gefoldet</div>
-                    )}
-                  </div>
+                  {/* Status */}
+                  {phase === GamePhase.ESTIMATING && me?.hasSubmittedEstimate && (
+                    <div className="text-white/20 text-[10px]">Warte auf andere...</div>
+                  )}
+                  {isBettingPhase && !isMyTurn && !me?.hasFolded && (
+                    <div className="text-white/25 text-[10px]">
+                      Warte auf <span className="text-white/50 font-semibold">{players.find(p => p.id === gameState.currentTurnPlayerId)?.name || '...'}</span>
+                    </div>
+                  )}
+                  {me?.hasFolded && isBettingPhase && (
+                    <div className="text-red-400/40 text-[10px] font-semibold">Gefoldet</div>
+                  )}
                 </div>
               </div>
-
-              {/* Player seats around the oval - OUTSIDE the table */}
-              {players.map((player, i) => {
-                const angle = (i / players.length) * 2 * Math.PI - Math.PI / 2;
-                const rx = 50;
-                const ry = 50;
-                const x = 50 + rx * Math.cos(angle);
-                const y = 50 + ry * Math.sin(angle);
-                return (
-                  <div
-                    key={player.id}
-                    className="absolute transform -translate-x-1/2 -translate-y-1/2 z-10"
-                    style={{ left: `${x}%`, top: `${y}%` }}
-                  >
-                    <PlayerSeat
-                      player={player}
-                      isMe={player.id === playerId}
-                      isTurn={player.id === gameState.currentTurnPlayerId}
-                      isDealer={player.id === dealerId}
-                      isSB={player.id === sbId}
-                      isBB={player.id === bbId}
-                      phase={phase}
-                      showEstimate={false}
-                      emote={emotes.get(player.id)}
-                    />
-                  </div>
-                );
-              })}
             </div>
+
+            {/* Bottom row of players */}
+            <div className="flex justify-center gap-3 flex-wrap">
+              {players.slice(Math.ceil(players.length / 2)).map(player => (
+                <PlayerSeat key={player.id} player={player} isMe={player.id === playerId}
+                  isTurn={player.id === gameState.currentTurnPlayerId}
+                  isDealer={player.id === dealerId} isSB={player.id === sbId} isBB={player.id === bbId}
+                  phase={phase} showEstimate={false} emote={emotes.get(player.id)} />
+              ))}
+            </div>
+
+            {/* Action feed */}
+            {isBettingPhase && gameState.actionLog.length > 0 && (
+              <div className="w-full max-w-md">
+                <ActionFeed actionLog={gameState.actionLog} />
+              </div>
+            )}
+
+            {/* Your estimate */}
+            {gameState.yourEstimate !== null && isBettingPhase && (
+              <div className="glass rounded-xl p-3 text-center max-w-sm border border-amber-800/20">
+                <div className="text-white/30 text-[10px] font-bold tracking-[0.2em] mb-1">DEINE SCHÄTZUNG</div>
+                <div className="text-gold font-black text-2xl font-mono">{gameState.yourEstimate.toLocaleString('de-DE')}</div>
+              </div>
+            )}
+
+          </div>
 
             {/* Timer below table */}
             {(phase === GamePhase.ESTIMATING || isBettingPhase) && (
