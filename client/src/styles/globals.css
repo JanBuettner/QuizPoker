@@ -406,19 +406,67 @@ body::after {
    POKER TABLE
    ============================================ */
 
-.poker-table-felt {
-  background-image:
-    radial-gradient(ellipse at 50% 50%, rgba(200, 162, 78, 0.03) 0%, transparent 70%),
-    url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3h1v1H1V3zm2-2h1v1H3V1z' fill='%23c8a24e' fill-opacity='0.015'/%3E%3C/svg%3E");
+/* Wood rail border around the table */
+.poker-table-rail {
+  background:
+    linear-gradient(160deg, #6b4423 0%, #4a2e14 25%, #3d2510 50%, #5c3a1e 75%, #4a2e14 100%);
+  box-shadow:
+    0 0 40px rgba(0, 0, 0, 0.5),
+    0 0 80px rgba(0, 0, 0, 0.3),
+    inset 0 2px 4px rgba(139, 90, 43, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 0 20px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(90, 60, 25, 0.6);
+  position: relative;
 }
 
+/* Outer highlight on the wood rail */
+.poker-table-rail::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  border: 1px solid rgba(139, 90, 43, 0.2);
+  pointer-events: none;
+}
+
+/* Inner shadow on the wood rail */
+.poker-table-rail::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+.poker-table-felt {
+  background-image:
+    radial-gradient(ellipse at 50% 40%, rgba(120, 200, 120, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(200, 162, 78, 0.04) 0%, transparent 70%),
+    url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3h1v1H1V3zm2-2h1v1H3V1z' fill='%23c8a24e' fill-opacity='0.015'/%3E%3C/svg%3E");
+  box-shadow:
+    inset 0 0 80px rgba(0, 0, 0, 0.5),
+    inset 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Spotlight glow on felt (overhead lamp effect) */
 .poker-table-felt::after {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(ellipse at 50% 40%, rgba(200, 162, 78, 0.06) 0%, transparent 60%);
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 38%, rgba(180, 220, 160, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 40%, rgba(200, 162, 78, 0.06) 0%, transparent 55%);
   pointer-events: none;
+}
+
+/* Betting line - subtle dotted oval inside the felt */
+.poker-betting-line {
+  border: 1.5px dashed rgba(200, 162, 78, 0.12);
+  box-shadow: 0 0 6px rgba(200, 162, 78, 0.05);
 }
 
 /* ============================================
@@ -483,6 +531,13 @@ body::after {
    PLAYER SEATS
    ============================================ */
 
+.player-seat-box {
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.5),
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
 .player-seat-active {
   animation: seatGlow 2s ease-in-out infinite;
 }
@@ -493,7 +548,7 @@ body::after {
 
 /* Dealer button */
 .dealer-button {
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3), 0 0 8px rgba(200,162,78,0.3);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 0 12px rgba(200,162,78,0.4);
 }
 
 /* Chip stack visual */

@@ -48,94 +48,121 @@ export default function PlayerSeat({
   const initial = player.name.charAt(0).toUpperCase();
 
   return (
-    <div className={`player-seat relative flex flex-col items-center gap-1 ${player.isEliminated ? 'opacity-20' : ''}`}>
+    <div className={`player-seat relative flex flex-col items-center gap-0.5 ${player.isEliminated ? 'opacity-20' : ''}`}>
       {/* Emote reaction */}
       {emote && (
-        <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-2xl animate-emote-pop pointer-events-none z-20">
+        <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-3xl animate-emote-pop pointer-events-none z-20">
           {emote}
         </div>
       )}
-      {/* Bet amount - displayed "in front of" the player toward table center */}
+
+      {/* Bet amount - displayed between seat and table center */}
       {player.currentBet > 0 && isActive && (
         <div className="player-bet-chips flex items-center gap-1 mb-0.5 animate-fade-in">
-          <div className="w-3.5 h-3.5 rounded-full bg-gradient-to-b from-red-400 to-red-600 border border-red-300 shadow-sm" />
-          <span className="text-gold font-mono font-bold text-xs">{player.currentBet.toLocaleString('de-DE')}</span>
+          <div className="w-4 h-4 rounded-full bg-gradient-to-b from-red-400 to-red-600 border border-red-300 shadow-sm flex-shrink-0" />
+          <span className="text-gold font-mono font-black text-sm drop-shadow-md">{player.currentBet.toLocaleString('de-DE')}</span>
         </div>
       )}
 
       {/* Main seat container */}
       <div
         className={`
-          relative rounded-xl px-3 py-2 min-w-[90px] max-w-[120px] text-center transition-all duration-300
-          ${isTurn ? 'player-seat-active bg-black/70 border-2 border-gold shadow-[0_0_20px_rgba(245,158,11,0.4)]' : 'bg-black/60 border border-white/10'}
-          ${isMe ? 'ring-1 ring-gold/30' : ''}
+          player-seat-box relative rounded-2xl min-w-[130px] max-w-[150px] text-center transition-all duration-300 overflow-hidden
+          ${isTurn
+            ? 'player-seat-active border-2 border-gold shadow-[0_0_24px_rgba(245,158,11,0.5),0_0_48px_rgba(245,158,11,0.2)]'
+            : 'border border-white/10'}
+          ${isMe ? 'ring-2 ring-gold/50 ring-offset-1 ring-offset-black/50' : ''}
           ${!isActive && !player.isEliminated ? 'opacity-40' : ''}
         `}
       >
+        {/* Seat background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/95 via-black/90 to-gray-950/95 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
+
         {/* Badges row */}
-        <div className="absolute -top-2 left-1/2 -translate-x-1/2 flex gap-1">
+        <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 flex gap-1 z-10">
           {isDealer && (
-            <span className="dealer-button w-5 h-5 rounded-full bg-gradient-to-b from-yellow-300 to-yellow-500 text-black text-[9px] font-black flex items-center justify-center shadow-md border border-yellow-200">
+            <span className="dealer-button w-6 h-6 rounded-full bg-gradient-to-b from-yellow-300 to-yellow-500 text-black text-[10px] font-black flex items-center justify-center shadow-lg border-2 border-yellow-200">
               D
             </span>
           )}
           {isSB && !isDealer && (
-            <span className="w-5 h-5 rounded-full bg-gradient-to-b from-gray-300 to-gray-500 text-black text-[8px] font-black flex items-center justify-center shadow-md">
+            <span className="w-6 h-6 rounded-full bg-gradient-to-b from-gray-300 to-gray-500 text-black text-[9px] font-black flex items-center justify-center shadow-lg border border-gray-200">
               SB
             </span>
           )}
           {isBB && (
-            <span className="w-5 h-5 rounded-full bg-gradient-to-b from-blue-400 to-blue-600 text-white text-[8px] font-black flex items-center justify-center shadow-md">
+            <span className="w-6 h-6 rounded-full bg-gradient-to-b from-blue-400 to-blue-600 text-white text-[9px] font-black flex items-center justify-center shadow-lg border border-blue-300">
               BB
             </span>
           )}
         </div>
 
-        {/* Avatar */}
-        {player.avatar ? (
-          <img src={player.avatar} alt={player.name} className="w-8 h-8 rounded-full mx-auto shadow-md border-2 border-white/20 object-cover" />
-        ) : (
-          <div className={`w-8 h-8 rounded-full bg-gradient-to-b ${avatarColor} mx-auto flex items-center justify-center text-white font-bold text-sm shadow-md border-2 border-white/20`}>
-            {player.isBot ? '🤖' : initial}
+        {/* Content area */}
+        <div className="relative z-[1] px-3 pt-3 pb-2.5">
+          {/* Avatar */}
+          {player.avatar ? (
+            <img
+              src={player.avatar}
+              alt={player.name}
+              className={`w-14 h-14 rounded-full mx-auto shadow-lg object-cover border-[3px] ${
+                isMe ? 'border-gold/70' : isTurn ? 'border-gold/50' : 'border-white/20'
+              }`}
+            />
+          ) : (
+            <div
+              className={`w-14 h-14 rounded-full bg-gradient-to-b ${avatarColor} mx-auto flex items-center justify-center shadow-lg border-[3px] ${
+                isMe ? 'border-gold/70' : isTurn ? 'border-gold/50' : 'border-white/20'
+              }`}
+            >
+              {player.isBot ? (
+                <span className="text-2xl">&#x1F916;</span>
+              ) : (
+                <span className="text-white font-black text-xl drop-shadow-md">{initial}</span>
+              )}
+            </div>
+          )}
+
+          {/* Divider line */}
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mt-2 mb-1.5" />
+
+          {/* Name */}
+          <div className={`text-sm font-bold truncate ${isMe ? 'text-gold' : 'text-white/90'}`}>
+            {player.name}
+            {isMe && <span className="text-gold/40 text-xs"> (Du)</span>}
           </div>
-        )}
 
-        {/* Name */}
-        <div className={`text-[11px] font-semibold mt-1 truncate ${isMe ? 'text-gold' : 'text-white/80'}`}>
-          {player.name}
-          {isMe && <span className="text-gold/50"> (Du)</span>}
-        </div>
-
-        {/* Chips */}
-        <div className="flex items-center justify-center gap-1 mt-0.5">
-          <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-b from-gold-light to-gold border border-gold-dark shadow-sm" />
-          <span className="text-gold/80 text-[10px] font-mono font-bold">{player.chips.toLocaleString('de-DE')}</span>
+          {/* Chips */}
+          <div className="flex items-center justify-center gap-1 mt-0.5">
+            <div className="w-3 h-3 rounded-full bg-gradient-to-b from-gold-light to-gold border border-gold-dark shadow-sm" />
+            <span className="text-gold/80 text-xs font-mono font-black">{player.chips.toLocaleString('de-DE')}</span>
+          </div>
         </div>
 
         {/* Status overlays */}
         {player.hasFolded && !player.isEliminated && (
-          <div className="absolute inset-0 rounded-xl bg-black/60 flex items-center justify-center">
-            <span className="text-red-400/80 text-[10px] font-black tracking-wider">FOLD</span>
+          <div className="absolute inset-0 rounded-2xl bg-black/70 flex items-center justify-center z-[2]">
+            <span className="text-red-400/80 text-xs font-black tracking-widest">FOLD</span>
           </div>
         )}
         {player.isEliminated && (
-          <div className="absolute inset-0 rounded-xl bg-black/60 flex items-center justify-center">
-            <span className="text-white/30 text-[10px] font-black tracking-wider">RAUS</span>
+          <div className="absolute inset-0 rounded-2xl bg-black/70 flex items-center justify-center z-[2]">
+            <span className="text-white/30 text-xs font-black tracking-widest">RAUS</span>
           </div>
         )}
 
         {/* Estimate submitted indicator */}
         {player.hasSubmittedEstimate && phase === GamePhase.ESTIMATING && !player.hasFolded && (
-          <div className="text-emerald-400/70 text-[9px] font-bold mt-0.5">&#10003;</div>
+          <div className="relative z-[1] text-emerald-400/70 text-sm font-bold pb-1">&#10003;</div>
         )}
 
         {/* Connected indicator */}
-        <div className={`absolute top-1 right-1 w-1.5 h-1.5 rounded-full ${player.isConnected ? 'bg-emerald-400 shadow-sm shadow-emerald-400/50' : 'bg-red-400/50'}`} />
+        <div className={`absolute top-1.5 right-1.5 w-2 h-2 rounded-full z-[2] ${player.isConnected ? 'bg-emerald-400 shadow-sm shadow-emerald-400/50' : 'bg-red-400/50'}`} />
       </div>
 
       {/* Estimate card (visible in showdown) */}
       {showEstimate && player.estimate !== null && (
-        <div className="poker-card mt-1 animate-fade-in-scale text-center !p-1.5 !max-w-[100px]">
+        <div className="poker-card mt-1 animate-fade-in-scale text-center !p-2 !max-w-[120px]">
           <div className="text-[8px] text-gray-400 font-bold">TIPP</div>
           <div className="text-sm font-black text-gray-800 font-mono">{player.estimate.toLocaleString('de-DE')}</div>
         </div>

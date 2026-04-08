@@ -249,7 +249,7 @@
     "hint": "Ein heute lebender Grönlandhai könnte zu Shakespeares Lebzeiten geboren worden sein.",
     "hint2": "Er ist das langlebigste bekannte Wirbeltier der Erde - und wächst nur etwa 1 cm pro Jahr.",
     "category": "Natur",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "id": 29,
@@ -366,7 +366,7 @@
     "hint": "Der Kern ist um ein Vielfaches heißer - die Oberfläche ist tatsächlich die kühlste Schicht der Sonne.",
     "hint2": "Kein bekanntes Material der Erde könnte bei dieser Temperatur fest bleiben.",
     "category": "Wissenschaft",
-    "difficulty": 2
+    "difficulty": 1
   },
   {
     "id": 42,
