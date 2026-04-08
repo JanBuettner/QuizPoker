@@ -93,6 +93,7 @@ export class GameRoom {
   }
 
   removeBot(botId: string): boolean {
+    if (this.phase !== GamePhase.LOBBY) return false;
     const player = this.players.get(botId);
     if (!player?.isBot) return false;
     this.players.delete(botId);
@@ -569,6 +570,11 @@ export class GameRoom {
       return;
     }
 
+    // Auto-mark all-in players as acted (they can't do anything more)
+    for (const p of this.activePlayers()) {
+      if (p.chips === 0) this.actedThisRound.add(p.id);
+    }
+
     const allMatched = this.activePlayers().every(
       p => p.currentBet === this.currentBetLevel || p.chips === 0
     );
@@ -938,27 +944,36 @@ export class GameRoom {
     const confidence = Math.max(0, 1 - relativeError);
     const roll = Math.random();
 
+    // Helper: try action, fall back to simpler action if it fails
+    const tryBet = (action: BettingAction, amount?: number): boolean => {
+      return this.executeBet(current.id, action, amount);
+    };
+
     if (toCall === 0) {
       if (confidence > 0.7 && roll > 0.6 && current.chips > this.minRaise) {
         const raiseAmt = this.minRaise * (1 + Math.floor(Math.random() * 3));
-        this.executeBet(current.id, BettingAction.RAISE, Math.min(raiseAmt, current.chips));
+        if (!tryBet(BettingAction.RAISE, raiseAmt)) {
+          tryBet(BettingAction.CHECK); // fallback
+        }
       } else {
-        this.executeBet(current.id, BettingAction.CHECK);
+        tryBet(BettingAction.CHECK);
       }
     } else if (toCall >= current.chips) {
       if (confidence > 0.7 && roll > 0.5) {
-        this.executeBet(current.id, BettingAction.ALL_IN);
+        tryBet(BettingAction.ALL_IN);
       } else {
-        this.executeBet(current.id, BettingAction.FOLD);
+        tryBet(BettingAction.FOLD);
       }
     } else {
       if (confidence > 0.7 && roll > 0.7 && current.chips > toCall + this.minRaise) {
         const raiseAmt = this.minRaise * (1 + Math.floor(Math.random() * 2));
-        this.executeBet(current.id, BettingAction.RAISE, Math.min(raiseAmt, current.chips - toCall));
+        if (!tryBet(BettingAction.RAISE, raiseAmt)) {
+          tryBet(BettingAction.CALL); // fallback
+        }
       } else if (confidence > 0.4 && roll > 0.4) {
-        this.executeBet(current.id, BettingAction.CALL);
+        tryBet(BettingAction.CALL);
       } else {
-        this.executeBet(current.id, BettingAction.FOLD);
+        tryBet(BettingAction.FOLD);
       }
     }
   }
