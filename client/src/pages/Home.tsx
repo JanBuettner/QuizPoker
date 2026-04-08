@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import type { DiscordUser } from '../discord';
 
 interface HomeProps {
-  onCreateRoom: (name: string) => void;
+  onCreateRoom: (name: string, avatar?: string) => void;
   onCreateRoomAsAdmin: () => void;
-  onJoinRoom: (code: string, name: string) => void;
+  onJoinRoom: (code: string, name: string, avatar?: string) => void;
   error: string | null;
   discordUser?: DiscordUser | null;
 }
@@ -13,15 +13,16 @@ export default function Home({ onCreateRoom, onCreateRoomAsAdmin, onJoinRoom, er
   const [name, setName] = useState(discordUser?.globalName || discordUser?.username || '');
   const [roomCode, setRoomCode] = useState('');
   const [mode, setMode] = useState<'menu' | 'create' | 'join'>('menu');
+  const avatar = discordUser?.avatar || undefined;
 
   const handleCreate = () => {
     if (name.trim().length < 1) return;
-    onCreateRoom(name.trim());
+    onCreateRoom(name.trim(), avatar);
   };
 
   const handleJoin = () => {
     if (name.trim().length < 1 || roomCode.trim().length < 1) return;
-    onJoinRoom(roomCode.trim().toUpperCase(), name.trim());
+    onJoinRoom(roomCode.trim().toUpperCase(), name.trim(), avatar);
   };
 
   useEffect(() => {

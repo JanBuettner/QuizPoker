@@ -45,7 +45,7 @@ export class GameRoom {
     this.onStateChange = onStateChange;
   }
 
-  addPlayer(id: string, name: string, isHost: boolean): Player {
+  addPlayer(id: string, name: string, isHost: boolean, avatar: string | null = null): Player {
     const player: Player = {
       id,
       name,
@@ -58,6 +58,7 @@ export class GameRoom {
       currentBet: 0,
       isHost,
       isBot: false,
+      avatar,
     };
     this.players.set(id, player);
     return player;
@@ -83,6 +84,7 @@ export class GameRoom {
       currentBet: 0,
       isHost: false,
       isBot: true,
+      avatar: null,
     };
     this.players.set(id, player);
     return player;
@@ -129,6 +131,7 @@ export class GameRoom {
       currentBet: p.currentBet,
       isHost: p.isHost,
       isBot: p.isBot,
+      avatar: p.avatar,
       estimate: p.currentEstimate,
     }));
 
@@ -799,6 +802,7 @@ export class GameRoom {
       currentBet: p.currentBet,
       isHost: p.isHost,
       isBot: p.isBot,
+      avatar: p.avatar,
       estimate:
         this.phase === GamePhase.SHOWDOWN || this.phase === GamePhase.ROUND_END || this.phase === GamePhase.GAME_OVER
           ? p.currentEstimate

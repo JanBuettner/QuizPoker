@@ -75,16 +75,16 @@ export function useGameState() {
     };
   }, []);
 
-  const createRoom = useCallback((playerName: string) => {
-    socket.emit('createRoom', { playerName });
+  const createRoom = useCallback((playerName: string, avatar?: string) => {
+    socket.emit('createRoom', { playerName, avatar });
   }, []);
 
   const createRoomAsAdmin = useCallback(() => {
     socket.emit('createRoom', { playerName: 'Admin', asAdmin: true });
   }, []);
 
-  const joinRoom = useCallback((roomCode: string, playerName: string) => {
-    socket.emit('joinRoom', { roomCode, playerName });
+  const joinRoom = useCallback((roomCode: string, playerName: string, avatar?: string) => {
+    socket.emit('joinRoom', { roomCode, playerName, avatar });
   }, []);
 
   const addBot = useCallback(() => {

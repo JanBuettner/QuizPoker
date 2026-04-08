@@ -30,6 +30,7 @@ export interface Player {
   currentBet: number;
   isHost: boolean;
   isBot: boolean;
+  avatar: string | null;
 }
 
 export interface VisiblePlayer {
@@ -43,7 +44,8 @@ export interface VisiblePlayer {
   currentBet: number;
   isHost: boolean;
   isBot: boolean;
-  estimate: number | null; // only visible during showdown
+  avatar: string | null;
+  estimate: number | null;
 }
 
 export interface Question {
@@ -89,8 +91,8 @@ export interface VisibleGameState {
 
 // Socket events
 export interface ClientToServerEvents {
-  createRoom: (data: { playerName: string; asAdmin?: boolean }) => void;
-  joinRoom: (data: { roomCode: string; playerName: string }) => void;
+  createRoom: (data: { playerName: string; asAdmin?: boolean; avatar?: string }) => void;
+  joinRoom: (data: { roomCode: string; playerName: string; avatar?: string }) => void;
   addBot: () => void;
   removeBot: (data: { botId: string }) => void;
   startGame: () => void;

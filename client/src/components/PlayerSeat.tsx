@@ -84,9 +84,13 @@ export default function PlayerSeat({
         </div>
 
         {/* Avatar */}
-        <div className={`w-8 h-8 rounded-full bg-gradient-to-b ${avatarColor} mx-auto flex items-center justify-center text-white font-bold text-sm shadow-md border-2 border-white/20`}>
-          {player.isBot ? '🤖' : initial}
-        </div>
+        {player.avatar ? (
+          <img src={player.avatar} alt={player.name} className="w-8 h-8 rounded-full mx-auto shadow-md border-2 border-white/20 object-cover" />
+        ) : (
+          <div className={`w-8 h-8 rounded-full bg-gradient-to-b ${avatarColor} mx-auto flex items-center justify-center text-white font-bold text-sm shadow-md border-2 border-white/20`}>
+            {player.isBot ? '🤖' : initial}
+          </div>
+        )}
 
         {/* Name */}
         <div className={`text-[11px] font-semibold mt-1 truncate ${isMe ? 'text-gold' : 'text-white/80'}`}>

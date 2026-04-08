@@ -100,7 +100,7 @@ export function setupSocketHandlers(io: TypedServer): void {
   io.on('connection', (socket: TypedSocket) => {
     console.log(`Connected: ${socket.id}`);
 
-    socket.on('createRoom', ({ playerName, asAdmin }) => {
+    socket.on('createRoom', ({ playerName, asAdmin, avatar }) => {
       const code = generateRoomCode();
       const room = new GameRoom(code, {}, () => broadcastState(room, io));
       rooms.set(code, room);
@@ -121,7 +121,7 @@ export function setupSocketHandlers(io: TypedServer): void {
           rooms.delete(code);
           return;
         }
-        room.addPlayer(socket.id, name, true);
+        room.addPlayer(socket.id, name, true, avatar || null);
         playerRooms.set(socket.id, code);
         socket.join(socket.id);
         rejoinTokens.set(token, { roomCode: code, playerId: socket.id });
@@ -130,7 +130,7 @@ export function setupSocketHandlers(io: TypedServer): void {
       }
     });
 
-    socket.on('joinRoom', ({ roomCode, playerName }) => {
+    socket.on('joinRoom', ({ roomCode, playerName, avatar }) => {
       const code = roomCode.toUpperCase();
       const room = rooms.get(code);
 
@@ -155,7 +155,7 @@ export function setupSocketHandlers(io: TypedServer): void {
         return;
       }
 
-      room.addPlayer(socket.id, name, false);
+      room.addPlayer(socket.id, name, false, avatar || null);
       playerRooms.set(socket.id, code);
       socket.join(socket.id);
 
