@@ -67,7 +67,7 @@ export default function PlayerSeat({
       {/* Main seat container */}
       <div
         className={`
-          player-seat-box relative rounded-2xl min-w-[130px] max-w-[150px] text-center transition-all duration-300 overflow-hidden
+          player-seat-box relative rounded-xl min-w-[100px] max-w-[120px] text-center transition-all duration-300 overflow-visible
           ${isTurn
             ? 'player-seat-active border-2 border-gold shadow-[0_0_24px_rgba(245,158,11,0.5),0_0_48px_rgba(245,158,11,0.2)]'
             : 'border border-white/10'}
@@ -99,19 +99,19 @@ export default function PlayerSeat({
         </div>
 
         {/* Content area */}
-        <div className="relative z-[1] px-3 pt-3 pb-2.5">
+        <div className="relative z-[1] px-2 pt-2 pb-1.5">
           {/* Avatar */}
           {player.avatar ? (
             <img
               src={player.avatar}
               alt={player.name}
-              className={`w-14 h-14 rounded-full mx-auto shadow-lg object-cover border-[3px] ${
+              className={`w-11 h-11 rounded-full mx-auto shadow-lg object-cover border-[3px] ${
                 isMe ? 'border-gold/70' : isTurn ? 'border-gold/50' : 'border-white/20'
               }`}
             />
           ) : (
             <div
-              className={`w-14 h-14 rounded-full bg-gradient-to-b ${avatarColor} mx-auto flex items-center justify-center shadow-lg border-[3px] ${
+              className={`w-11 h-11 rounded-full bg-gradient-to-b ${avatarColor} mx-auto flex items-center justify-center shadow-lg border-[3px] ${
                 isMe ? 'border-gold/70' : isTurn ? 'border-gold/50' : 'border-white/20'
               }`}
             >
