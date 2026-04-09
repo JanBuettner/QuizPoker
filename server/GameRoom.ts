@@ -672,49 +672,96 @@ export class GameRoom {
     this.clearTimer();
     this.phase = GamePhase.SHOWDOWN;
 
-    const active = this.activePlayers();
+    this.lastPot = this.pot;
+
+    // Get all players who contributed to the pot (folded or not)
+    const contributors = this.nonEliminatedPlayers().filter(p => p.totalBetThisHand > 0);
+    const active = this.activePlayers(); // not folded, not eliminated
+
+    if (contributors.length === 0) {
+      // No one bet anything (shouldn't happen) - just clear
+      this.pot = 0;
+      this.onStateChange();
+      if (!this.adminId) this.startTimer(8, () => this.checkGameOver());
+      return;
+    }
 
     if (active.length === 0) {
-      const nePlayers = this.nonEliminatedPlayers();
-      if (nePlayers.length > 0) {
-        this.winnerId = nePlayers[0].id;
-        nePlayers[0].chips += this.pot;
-      }
-    } else if (active.length === 1) {
+      // Everyone folded - give pot to last folded player (or first contributor)
+      this.winnerId = contributors[0].id;
+      contributors[0].chips += this.pot;
+      this.pot = 0;
+      this.onStateChange();
+      if (!this.adminId) this.startTimer(8, () => this.checkGameOver());
+      return;
+    }
+
+    if (active.length === 1) {
+      // Only one active player left - they win the whole pot
       this.winnerId = active[0].id;
       active[0].chips += this.pot;
-    } else {
-      const answer = this.currentQuestion!.answer;
+      this.pot = 0;
+      this.onStateChange();
+      if (!this.adminId) this.startTimer(8, () => this.checkGameOver());
+      return;
+    }
 
-      // Rank active players by closeness to answer (best first)
-      const ranked = [...active]
+    // === SIDE POT CALCULATION ===
+    // Build side pots based on total contributions per player
+    const answer = this.currentQuestion!.answer;
+
+    // Get unique bet levels (sorted ascending)
+    const uniqueBets = [...new Set(contributors.map(p => p.totalBetThisHand))].sort((a, b) => a - b);
+
+    type SidePot = { amount: number; eligiblePlayers: Player[] };
+    const sidePots: SidePot[] = [];
+    let previousLevel = 0;
+
+    for (const level of uniqueBets) {
+      const layerSize = level - previousLevel;
+      // Everyone who contributed at least this much pays into this layer
+      const contributorsAtLevel = contributors.filter(p => p.totalBetThisHand >= level);
+      const potAmount = layerSize * contributorsAtLevel.length;
+      // Only non-folded players are eligible to win this pot
+      const eligible = contributorsAtLevel.filter(p => !p.hasFolded);
+      if (potAmount > 0 && eligible.length > 0) {
+        sidePots.push({ amount: potAmount, eligiblePlayers: eligible });
+      }
+      previousLevel = level;
+    }
+
+    // Award each side pot to the best estimator among eligible players
+    let mainWinner: Player | null = null;
+    for (const sidePot of sidePots) {
+      const ranked = [...sidePot.eligiblePlayers]
         .filter(p => p.currentEstimate !== null)
         .sort((a, b) => Math.abs(a.currentEstimate! - answer) - Math.abs(b.currentEstimate! - answer));
 
       if (ranked.length === 0) {
-        this.winnerId = active[0].id;
-        active[0].chips += this.pot;
+        // Fallback: give to first eligible
+        sidePot.eligiblePlayers[0].chips += sidePot.amount;
+        continue;
+      }
+
+      const bestDiff = Math.abs(ranked[0].currentEstimate! - answer);
+      const winners = ranked.filter(p => Math.abs(p.currentEstimate! - answer) === bestDiff);
+
+      // The winner of the largest (main) side pot is shown as the round winner
+      if (!mainWinner) mainWinner = winners[0];
+
+      if (winners.length === 1) {
+        winners[0].chips += sidePot.amount;
       } else {
-        // Handle ties (same distance)
-        const bestDiff = Math.abs(ranked[0].currentEstimate! - answer);
-        const winners = ranked.filter(p => Math.abs(p.currentEstimate! - answer) === bestDiff);
-
-        this.winnerId = winners[0].id;
-
-        if (winners.length === 1) {
-          winners[0].chips += this.pot;
-        } else {
-          // Split pot evenly among tied winners
-          const share = Math.floor(this.pot / winners.length);
-          const remainder = this.pot - share * winners.length;
-          for (let i = 0; i < winners.length; i++) {
-            winners[i].chips += share + (i === 0 ? remainder : 0);
-          }
+        // Split this side pot among tied winners
+        const share = Math.floor(sidePot.amount / winners.length);
+        const remainder = sidePot.amount - share * winners.length;
+        for (let i = 0; i < winners.length; i++) {
+          winners[i].chips += share + (i === 0 ? remainder : 0);
         }
       }
     }
 
-    this.lastPot = this.pot;
+    this.winnerId = mainWinner?.id ?? null;
     this.pot = 0;
     this.onStateChange();
 
